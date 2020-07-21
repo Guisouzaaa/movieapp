@@ -2,6 +2,7 @@ const searchButton = document.getElementById('search')
 const inputElement = document.getElementById('searchInput')
 const movieSearch = document.getElementById('movies-search')
 const moviesContainer = document.getElementById('movie-container')
+const detailsContainer = document.getElementById('movie-detail')
 
 
 //movie items
@@ -9,11 +10,14 @@ const movieSection = movie => {
     const section = document.createElement('section')
     section.classList = 'section'
 
-    movie.map((movie) =>{
+     movie.map((movie) =>{
       if(movie.poster_path){
           const img = document.createElement('img')
           img.src = IMAGE_URL + movie.poster_path
           img.setAttribute('data-movie-id', movie.id)
+          img.addEventListener('click', function() {
+              movieDetails(movie.id)
+          })
 
           section.appendChild(img)
       }
@@ -29,7 +33,6 @@ const movieContaier = (movies, title = '') => {
 
     const header = document.createElement('div')
     header.innerHTML = title
-
 
     const content = document.createElement('div')
     content.classList = 'content'
@@ -72,61 +75,33 @@ searchButton.addEventListener('click', e =>{
     inputElement.value = '';
 }) 
 
-const createIframe = video => {
-    const iframe = document.createElement('iframe')
-    iframe.src= `https://www.youtube.com/embed/${video.key}`
-    iframe.width = 350
-    iframe.height = 315
-    iframe.allowFullscreen = true
-
-    return iframe
+function movieDetails(id){
+    sessionStorage.setItem('movieId', id);
+    window.location = 'movie.html'
+    return false
 }
 
-//iframe logic
-const videoTemplate = (data, content) => {
-    console.log(data)
-    content.innerHTML = '<p id = "content-close>X</p>'
-    const videos = data.results
-    const length = videos.length > 4 ? 4 : videos.length
-    const iframeContainer = document.createElement('div')
+function getMovies(){
+    let movieId = sessionStorage.getItem('movieId');
+    const path = `/movie/${movieId}`
+    const url = dinamicUrl(path)
 
-    for (let i = 0; i < videos.length; i++){
-        const video = videos[i]
-        const iframe = createIframe(video)
-        iframeContainer.appendChild(iframe)
-        content.appendChild(iframeContainer)
-    }
-
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) =>{
+            const movie = data
+            console.log(data)
+            let output = `
+            <h1>${movie.title}</h1>
+            <img src = "${IMAGE_URL + movie.poster_path}"/>
+            <p>${movie.overview}</p>
+            <a href = "index.html">Back to home</a>
+            `
+            document.getElementById("movie-detail").innerHTML = output;
+        })
 }
 
-//display trailer
-document.onclick = e =>{
-    const target = e.target
-
-    if (target.tagName.toLowerCase() === 'img'){
-        const movieId = target.dataset.movieId
-        console.log(movieId)
-        const section = e.target.parentElement
-        const content = section.nextElementSibling
-        content.classList.add('content-display')
-
-        const path = `/movie/${movieId}/videos`
-        const url = dinamicUrl(path)
-        //fetch videos
-        fetch(url)
-           .then((res) => res.json())
-           .then((data) => videoTemplate(data, content))
-           .catch((error) => {
-              console.log(error)
-           })
-    }
-
-    if (target.id === 'content-close'){
-        const content = target.parentElement
-        content.classList.remove('content-display')
-    }
-}
-
+getMovies()
 getUpcomingMovies()
 getPopularMovies()
 getTopRated()

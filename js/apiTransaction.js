@@ -23,8 +23,6 @@ const searchMovie = value => {
     requestMovies(url, renderSearchMovies, handleError)
 }
 
-
-
 //renderMovies
 const getUpcomingMovies = () => {
     const path = '/movie/upcoming'
@@ -49,5 +47,6 @@ const getTopRated = () => {
     const render = renderMovies.bind({title: 'Top Rated Movies'})
     requestMovies(url, render, handleError)
 }
+
 
 
