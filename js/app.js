@@ -81,7 +81,8 @@ function movieDetails(id){
     return false
 }
 
-function getMovies(){
+//Movie Details
+function getDetails(){
     let movieId = sessionStorage.getItem('movieId');
     const path = `/movie/${movieId}`
     const url = dinamicUrl(path)
@@ -90,18 +91,78 @@ function getMovies(){
         .then((res) => res.json())
         .then((data) =>{
             const movie = data
-            console.log(data)
+            const genre = data.genres
+            
             let output = `
-            <h1>${movie.title}</h1>
             <img src = "${IMAGE_URL + movie.poster_path}"/>
-            <p>${movie.overview}</p>
+            <div>
+              <h1>Movie overview</h1>
+              <p>${movie.overview}</p>
+            </div>
+            <div class = "detailInfo">
+            <h1>Details</h1>
+               <ul>
+                  <li>Title: ${movie.title}</li>
+                  <li>Original Title: ${movie.original_title}</li>
+                  <li>Release Date: ${movie.release_date}</li>
+                  <li>Genre: ${genre[0].name}/${genre[1].name}/${genre[2].name}/${genre[3].name}</li>
+                  <li>Duration: ${movie.runtime}</li>
+                  <li>Rating: ${movie.vote_average}</li>
+               </ul>
+            </div>
             <a href = "index.html">Back to home</a>
             `
             document.getElementById("movie-detail").innerHTML = output;
         })
 }
 
-getMovies()
+//Movie Reviews
+function getReviews(){
+    let movieId = sessionStorage.getItem('movieId');
+    const path = `/movie/${movieId}/reviews`
+    const url = dinamicUrl(path)
+
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) =>{
+            const movie = data.results
+            movie.length = 4
+            let output = `<h2>Reviews</h2>`
+            for (let i in movie){
+                output += `
+                <h3>${movie[i].author}</h3>
+                <p>${movie[i].content}</p>
+                `
+            }
+            document.querySelector(".movie-reviews").innerHTML = output;
+        })
+}
+
+function getSimilarMovies(){
+    let movieId = sessionStorage.getItem('movieId');
+    const path = `/movie/${movieId}/recommendations`
+    const url = dinamicUrl(path)
+
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) =>{
+            const movie = data.results
+            movie.length = 5
+            console.log(movie)
+            let output = `<h2>Movies that you may like</h2>`
+            for (let i in movie){
+                output += `
+                <h3>${movie[i].title}</h3>
+                <img src = "${IMAGE_URL + movie[i].poster_path}" data-movie-id="${movie[i].id}"/>
+                `
+            }
+            document.querySelector(".similar-movies").innerHTML = output;
+        })
+}
+
+getDetails()
 getUpcomingMovies()
 getPopularMovies()
 getTopRated()
+getReviews()
+getSimilarMovies()
