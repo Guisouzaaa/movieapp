@@ -83,7 +83,7 @@ function movieDetails(id) {
 }
 
 //Movie Details
-function getDetails() {
+const getDetails = () => {
   let movieId = sessionStorage.getItem("movieId");
   const path = `/movie/${movieId}`;
   const url = dinamicUrl(path);
@@ -93,7 +93,7 @@ function getDetails() {
     .then((data) => {
       const movie = data;
       const genre = data.genres;
-      console.log(genre);
+      // console.log(genre);
 
       let output = `
             <img src = "${IMAGE_URL + movie.poster_path}"  data-movie-id="${movie.id}"/>
@@ -112,14 +112,39 @@ function getDetails() {
                   <li>Rating: ${movie.vote_average}</li>
                </ul>
             </div>
-            <a href = "index.html">Back to home</a>
+            <button class= "trailerBtn" onClick="getTrailer()">Trailer</button>
             `;
       document.getElementById("movie-detail").innerHTML = output;
     });
 }
 
+// Movie Trailer
+const getTrailer = () => {
+  document.addEventListener('click', e => {
+    if (e.target.className === 'trailerBtn'){
+      let movieId = sessionStorage.getItem("movieId");
+      const path = `/movie/${movieId}/videos`;
+      const url = dinamicUrl(path);
+   
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+           const movie = data.results;
+           console.log(movie);
+
+           let output = `
+              <iframe src = "https://www.youtube.com/embed/${movie[0].key}" width="250" height="300"></iframe>
+           `;
+           document.querySelector(".movie-trailer").innerHTML = output;
+        });
+    }
+  })
+}
+
+// getTrailer()
+
 //Movie Reviews
-function getReviews() {
+const getReviews = () => {
   let movieId = sessionStorage.getItem("movieId");
   const path = `/movie/${movieId}/reviews`;
   const url = dinamicUrl(path);
@@ -140,9 +165,9 @@ function getReviews() {
     });
 }
 
-function getSimilarMovies() {
+const getSimilarMovies = () => {
   let movieId = sessionStorage.getItem("movieId");
-  const path = `/movie/${movieId}/recommendations`;
+  const path = `/movie/${movieId}/recommendations`
   const url = dinamicUrl(path);
 
   fetch(url)
@@ -150,7 +175,7 @@ function getSimilarMovies() {
     .then((data) => {
       const movie = data.results;
       movie.length = 5;
-      console.log(movie);
+      // console.log(movie);
       let output = `<h2>Movies that you may like</h2>`;
       for (let i in movie) {
         output += `
@@ -160,6 +185,7 @@ function getSimilarMovies() {
       }
       document.querySelector(".similar-movies").innerHTML = output;
     });
+    return false
 }
 
 const showDetails = () => {
@@ -172,9 +198,17 @@ const showDetails = () => {
   });
 }
 
-getDetails();
+window.onload = function displayDetails(){
+  if (window.location.href.indexOf('movie.html') > -1){
+    getDetails()
+    getReviews()
+    getSimilarMovies()
+  }
+}
+
+// getDetails();
 getUpcomingMovies();
 getPopularMovies();
 getTopRated();
-getReviews();
-getSimilarMovies();
+// getReviews();
+// getSimilarMovies();
