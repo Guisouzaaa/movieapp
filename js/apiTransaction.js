@@ -49,5 +49,40 @@ const getTopRated = () => {
 }
 
 
+//get movie detail
+const getMovieDetails = () => {
+    let movieId = sessionStorage.getItem("movieId");
+    const path = `/movie/${movieId}`
+    const url = dinamicUrl(path);
+
+    requestMovies(url, getDetails, handleError)
+}
 
 
+// Get movie trailer
+const getMovieTrailer = () => {
+    let movieId = sessionStorage.getItem("movieId");
+    const path = `/movie/${movieId}/videos`;
+    const url = dinamicUrl(path);
+
+    requestMovies(url, getTrailer, handleError)
+}
+
+//get movie Reviews
+const getMovieReviews = () => {
+    let movieId = sessionStorage.getItem("movieId");
+    const path = `/movie/${movieId}/reviews`;
+    const url = dinamicUrl(path);
+
+    requestMovies(url, getReviews, handleError)
+}
+
+//get recommendations
+const getMovieRecommendations = () => {
+    let movieId = sessionStorage.getItem("movieId");
+    const path = `/movie/${movieId}/recommendations`
+    const url = dinamicUrl(path);
+
+    const render = getSimilarMovies.bind({title: 'Similar Movies'})
+    requestMovies(url, render, handleError)
+}

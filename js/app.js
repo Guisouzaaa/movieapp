@@ -2,7 +2,8 @@ const searchButton = document.getElementById("search");
 const inputElement = document.getElementById("searchInput");
 const movieSearch = document.getElementById("movies-search");
 const moviesContainer = document.getElementById("movie-container");
-const similarMoviesContainer = document.getElementById("similar-movies");
+const movieReviews = document.querySelector(".movie-reviews");
+const similarMovies = document.getElementById("similar-movies");
 const detailsContainer = document.getElementById("movie-detail");
 
 //movie items
@@ -16,8 +17,8 @@ const movieSection = (movie) => {
       img.src = IMAGE_URL + movie.poster_path;
       img.setAttribute("data-movie-id", movie.id);
       img.addEventListener("click", function () {
-        // movieDetails(movie.id);
-        showDetails()
+        movieDetails(movie.id);
+        showDetails();
       });
 
       section.appendChild(img);
@@ -32,20 +33,14 @@ const movieContaier = (movies, title = "") => {
   const movieElement = document.createElement("div");
   movieElement.setAttribute("class", "movie");
 
-  const header = document.createElement("div");
+  const header = document.createElement("h1");
   header.innerHTML = title;
-
-  const content = document.createElement("div");
-  content.classList = "content";
-
-  const contentClose = `<p id ="content-close">X</p>`;
-  content.innerHTML = contentClose;
 
   const section = movieSection(movies);
 
   movieElement.appendChild(header);
   movieElement.appendChild(section);
-  movieElement.appendChild(content);
+
   return movieElement;
 };
 
@@ -53,10 +48,12 @@ const movieContaier = (movies, title = "") => {
 const renderSearchMovies = (data) => {
   movieSearch.innerHTML = "";
   const movies = data.results;
+  console.log(movies);
   const movieBlock = movieContaier(movies);
   movieSearch.appendChild(movieBlock);
 };
 
+//render movies
 function renderMovies(data) {
   const movies = data.results;
   const movieBlock = movieContaier(movies, this.title);
@@ -76,6 +73,7 @@ searchButton.addEventListener("click", (e) => {
   inputElement.value = "";
 });
 
+//movie id
 function movieDetails(id) {
   sessionStorage.setItem("movieId", id);
   window.location = "movie.html";
@@ -83,19 +81,11 @@ function movieDetails(id) {
 }
 
 //Movie Details
-const getDetails = () => {
-  let movieId = sessionStorage.getItem("movieId");
-  const path = `/movie/${movieId}`;
-  const url = dinamicUrl(path);
+const getDetails = (data) => {
+  const movie = data;
+  const genre = data.genres;
 
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      const movie = data;
-      const genre = data.genres;
-      // console.log(genre);
-
-      let output = `
+  let output = `
             <img src = "${IMAGE_URL + movie.poster_path}"  data-movie-id="${movie.id}"/>
             <div>
               <h1>Movie overview</h1>
@@ -112,80 +102,69 @@ const getDetails = () => {
                   <li>Rating: ${movie.vote_average}</li>
                </ul>
             </div>
-            <button class= "trailerBtn" onClick="getTrailer()">Trailer</button>
+            <button class= "trailerBtn">Trailer</button>
             `;
-      document.getElementById("movie-detail").innerHTML = output;
-    });
-}
+  document.getElementById("movie-detail").innerHTML = output;
+};
+
+// // Movie Trailer
+// const getTrailer = (data) => {
+//   const movie = data.results
+//   // console.log(movie)
+//   document.addEventListener('click', e => {
+//     if (e.target.className === 'trailerBtn'){
+//       // let movieId = sessionStorage.getItem("movieId");
+//       // const path = `/movie/${movieId}/videos`;
+//       // const url = dinamicUrl(path);
+
+//       // fetch(url)
+//       //   .then((res) => res.json())
+//       //   .then((data) => {
+//       //      const movie = data.results;
+//       //      console.log(movie);
+
+//            let output = `
+//               <iframe src = "https://www.youtube.com/embed/${movie[0].key}" width="250" height="300"></iframe>
+//            `;
+//            document.querySelector(".movie-trailer").innerHTML = output;
+//         // });
+//     }
+//   })
+// }
 
 // Movie Trailer
-const getTrailer = () => {
-  document.addEventListener('click', e => {
-    if (e.target.className === 'trailerBtn'){
-      let movieId = sessionStorage.getItem("movieId");
-      const path = `/movie/${movieId}/videos`;
-      const url = dinamicUrl(path);
-   
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-           const movie = data.results;
-           console.log(movie);
-
-           let output = `
-              <iframe src = "https://www.youtube.com/embed/${movie[0].key}" width="250" height="300"></iframe>
-           `;
-           document.querySelector(".movie-trailer").innerHTML = output;
-        });
+const getTrailer = (data) => {
+  const movie = data.results;
+  document.addEventListener("click", e => {
+    if (e.target.className === "trailerBtn") {
+      let output = `
+          <iframe src = "https://www.youtube.com/embed/${movie[0].key}" width="250" height="300"></iframe>
+      `;
+      document.querySelector(".movie-trailer").innerHTML = output;
     }
-  })
-}
-
-// getTrailer()
+  });
+};
 
 //Movie Reviews
-const getReviews = () => {
-  let movieId = sessionStorage.getItem("movieId");
-  const path = `/movie/${movieId}/reviews`;
-  const url = dinamicUrl(path);
-
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      const movie = data.results;
-      movie.length = 4;
-      let output = `<h2>Reviews</h2>`;
-      for (let i in movie) {
-        output += `
+const getReviews = (data) => {
+  const movie = data.results;
+  movie.length = 4;
+  let output = `<h2>Reviews</h2>`;
+  for (let i in movie) {
+    output += `
             <h3>${movie[i].author}</h3>
             <p>${movie[i].content}</p>
         `;
-      }
-      document.querySelector(".movie-reviews").innerHTML = output;
-    });
-}
+  }
+  document.querySelector(".movie-reviews").innerHTML = output;
+};
 
-const getSimilarMovies = () => {
-  let movieId = sessionStorage.getItem("movieId");
-  const path = `/movie/${movieId}/recommendations`
-  const url = dinamicUrl(path);
-
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      const movie = data.results;
-      movie.length = 5;
-      // console.log(movie);
-      let output = `<h2>Movies that you may like</h2>`;
-      for (let i in movie) {
-        output += `
-          <h3>${movie[i].title}</h3>
-          <img onClick="showDetails()" class = "teste" src = "${IMAGE_URL + movie[i].poster_path}" data-movie-id="${movie[i].id}"/>
-        `;
-      }
-      document.querySelector(".similar-movies").innerHTML = output;
-    });
-    return false
+//Similar movies
+function getSimilarMovies(data) {
+  const movies = data.results;
+  movies.length = 5;
+  const movieBlock = movieContaier(movies, this.title);
+  similarMovies.appendChild(movieBlock);
 }
 
 const showDetails = () => {
@@ -196,19 +175,17 @@ const showDetails = () => {
       movieDetails(movieId);
     }
   });
+};
+
+function movieData() {
+  getMovieDetails();
+  getMovieTrailer();
+  getMovieReviews();
+  getMovieRecommendations();
 }
 
-window.onload = function displayDetails(){
-  if (window.location.href.indexOf('movie.html') > -1){
-    getDetails()
-    getReviews()
-    getSimilarMovies()
-  }
+function homeData() {
+  getUpcomingMovies();
+  getPopularMovies();
+  getTopRated();
 }
-
-// getDetails();
-getUpcomingMovies();
-getPopularMovies();
-getTopRated();
-// getReviews();
-// getSimilarMovies();

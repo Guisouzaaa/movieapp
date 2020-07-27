@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
     <title>MyMovieList</title>
+
+    <!-- <style>
+        #movie-container{
+            display: none;
+        }
+    </style> -->
 </head>
 <body>
 
@@ -17,17 +24,25 @@
         </form>
     </header>
 
-    <div id="movies-search"></div>
-    <div id="movie-detail"></div>
-    <div class="movie-trailer">
-        
-    </div>
-    <div class="movie-reviews">
-    </div>
-    <div class="similar-movies"></div>
+    <main>
+        <div id="movies-search"></div>
+        <!-- <div id="movie-container"></div> -->
+        <div id="movie-detail"></div>
+        <div class="movie-trailer">
+            
+        </div>
+        <div class="movie-reviews">
+        </div>
+        <div id="similar-movies"></div>
+
+    </main>
+   
     
 
     <script src="js/apiTransaction.js"></script>
     <script src="js/app.js"></script>
+    <script>
+        movieData()
+    </script>
 </body>
 </html>
