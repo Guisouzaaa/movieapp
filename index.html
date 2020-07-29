@@ -15,10 +15,25 @@
                 <input type="text" id="searchInput">
             </div>
             <button id="search">Search</button>
+            <button id="filter-btn">Filter</button>
+            <select name="genres" id="select-genre"></select>
+            <select name="popular" id="popular">
+                <option value="popularity.desc" selected="true">Popularity</option>
+                <!-- <option value="popularity.asc">Popularity asc</option> -->
+                <option value="revenue.desc">Revenue</option>
+                <option value="vote_count.desc">Most voted</option>
+                <option value="vote_average.desc">Top Rated</option>
+                <!-- <option value="release_date.asc">Release date asc</option> -->
+                <option value="primary_release_date.desc">Release Date</option>
+            </select>
+            <!-- <select name="genres" id="select-genre"></select> -->
+
+
         </form>
     </header>
 
-    <div id="movies-search"></div>
+    <div id="movies-filter"></div>
+    
     <div id="movie-container"></div>
 <!-- 
     <div id="movie-detail"></div>

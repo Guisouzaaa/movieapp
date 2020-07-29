@@ -1,9 +1,13 @@
 const searchButton = document.getElementById("search");
 const inputElement = document.getElementById("searchInput");
-const movieSearch = document.getElementById("movies-search");
+const movieFilter = document.getElementById("movies-filter");
 const moviesContainer = document.getElementById("movie-container");
 // const movieReviews = document.querySelector(".movie-reviews");
 const similarMovies = document.getElementById("similar-movies");
+const selectBtn = document.getElementById("select-genre");
+const popularBtn = document.getElementById("popular");
+const filterBtn = document.getElementById("filter-btn");
+const genreContainer = document.getElementById('genre-container')
 // const detailsContainer = document.getElementById("movie-detail");
 
 //movie items
@@ -43,18 +47,26 @@ const movieContaier = (movies, title = "") => {
   return movieElement;
 };
 
-//searchMovies
-const renderSearchMovies = (data) => {
-  movieSearch.innerHTML = "";
+//searchMovies/filter
+const renderFilteredMovie = (data) => {
+  movieFilter.innerHTML = "";
   const movies = data.results;
-  console.log(movies);
+  // console.log(movies);
   const movieBlock = movieContaier(movies);
-  movieSearch.appendChild(movieBlock);
+  movieFilter.appendChild(movieBlock);
+
+  filterBtn.addEventListener('click', e => {
+    e.preventDefault();
+    const genreValue = selectBtn.value
+    const popularValue = popularBtn.value
+    filterMovie(genreValue,popularValue)
+  })
 };
 
 //render movies
 function renderMovies(data) {
   const movies = data.results;
+  // console.log(movies)
   const movieBlock = movieContaier(movies, this.title);
   moviesContainer.appendChild(movieBlock);
 }
@@ -85,44 +97,27 @@ function movieDetails(id) {
 const getDetails = (data) => {
   const movie = data;
   const genre = data.genres;
-  let output2 = ``
-  genre.map(genres => {
-    console.log(genres.name)
-    output2 =`
-    <li>Genres: ${genres.name}</li>
-    `
+  const genreName = genre.map(e => `<span>${e.name}</span>`).join(", ")
 
-    document.getElementById("movie-detail2").innerHTML = output2;
-  })
-  // console.log(genre)
-
-  // let output = ` `
-  // for (let i in genre){
     let output = `
-    <img src = "${IMAGE_URL + movie.poster_path}"  data-movie-id="${movie.id}"/>
-    <div>
-      <h1>Movie overview</h1>
-      <p>${movie.overview}</p>
-    </div>
-    <div class = "detailInfo">
-    <h1>Details</h1>
-       <ul>
-          <li>Title: ${movie.title}</li>
-          <li>Original Title: ${movie.original_title}</li>
-          <li>Release Date: ${movie.release_date}</li>
-          <li>Genre: ${genre[0].name}</li>
-          <li>Duration: ${movie.runtime}</li>
-          <li>Rating: ${movie.vote_average}</li>
-       </ul>
-    </div>
-    <button class= "trailerBtn">Trailer</button>
-
+        <img src = "${IMAGE_URL + movie.poster_path}"  data-movie-id="${movie.id}"/>
+        <div>
+           <h1>Movie overview</h1>
+           <p>${movie.overview}</p>
+        </div>
+        <div class = "detailInfo">
+           <h1>Details</h1>
+           <ul>
+             <li>Title: ${movie.title}</li>
+             <li>Release Date: ${movie.release_date}</li>
+             <li>Genre: ${genreName}</li>
+             <li>Duration: ${movie.runtime}</li>
+             <li>Rating: ${movie.vote_average}</li>
+           </ul>
+        </div>
+        <button class= "trailerBtn">Trailer</button>
     `
-  // }
-          
   document.getElementById("movie-detail").innerHTML = output;
-  // document.getElementById("movie-detail").innerHTML = outpu2;
-
 };
 
 // Display movie trailer
@@ -161,16 +156,17 @@ function getSimilarMovies(data) {
   similarMovies.appendChild(movieBlock);
 }
 
-// Display movie details
-// const showDetails = () => {
-//   document.addEventListener("click", (e) => {
-//     const target = e.target;
-//     if (target.tagName === "IMG") {
-//       var movieId = target.getAttribute("data-movie-id");
-//       movieDetails(movieId);
-//     }
-//   });
-// };
+function selectGenres(data){
+  const genresSelect = data.genres
+  // console.log(genresSelect)
+  let output = `<option value = "" selected="true">All</option>`
+  for (let i in genresSelect) {
+    output += `
+         <option value="${genresSelect[i].id}">${genresSelect[i].name}</option> 
+    `;
+    document.querySelector("#select-genre").innerHTML = output;
+  }
+}
 
 function movieData() {
   getMovieDetails();
@@ -183,4 +179,6 @@ function homeData() {
   getUpcomingMovies();
   getPopularMovies();
   getTopRated();
+  getGenres()
+  filterMovie()
 }

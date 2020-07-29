@@ -20,7 +20,7 @@ const searchMovie = value => {
     const path = '/search/movie'
     const url =  `${dinamicUrl(path)}&query=${value}`
 
-    requestMovies(url, renderSearchMovies, handleError)
+    requestMovies(url, renderFilteredMovie, handleError)
 }
 
 //renderMovies
@@ -85,4 +85,21 @@ const getMovieRecommendations = () => {
 
     const render = getSimilarMovies.bind({title: 'Similar Movies'})
     requestMovies(url, render, handleError)
+}
+
+
+//get genres
+const getGenres = () => {
+    const path = '/genre/movie/list'
+    const url = dinamicUrl(path)
+
+    requestMovies(url, selectGenres, handleError)
+}
+
+const filterMovie = (genre, options) => {
+    const path = '/discover/movie'
+    const url = `  ${dinamicUrl(path)}&sort_by=${options}&with_genres=${genre}&vote_count.gte=200`
+    // console.log(url)
+
+    requestMovies(url, renderFilteredMovie, handleError)
 }
