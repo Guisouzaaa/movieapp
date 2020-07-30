@@ -28,25 +28,25 @@ const getUpcomingMovies = () => {
     const path = '/movie/upcoming'
     const url =  dinamicUrl(path)
 
-    const render = renderMovies.bind({title: 'Upcoming Movies'})
+    const render = renderUpcoming.bind({title: 'Upcoming Movies'})
     requestMovies(url, render, handleError)
 }
 
-const getPopularMovies = () => {
+const getPopularMovies = (value) => {
     const path = '/movie/popular'
-    const url =  dinamicUrl(path)
+    const url =  `${dinamicUrl(path)}&page=${value}`
 
-    const render = renderMovies.bind({title: 'Popular Movies'})
-    requestMovies(url, render, handleError)
+    // const render = renderPopular.bind({title: 'Popular Movies'})
+    requestMovies(url, renderPopular, handleError)
 }
 
-const getTopRated = () => {
-    const path = '/movie/top_rated'
-    const url =  dinamicUrl(path)
+// const getTopRated = () => {
+//     const path = '/movie/top_rated'
+//     const url =  dinamicUrl(path)
 
-    const render = renderMovies.bind({title: 'Top Rated Movies'})
-    requestMovies(url, render, handleError)
-}
+//     const render = renderMovies.bind({title: 'Top Rated Movies'})
+//     requestMovies(url, render, handleError)
+// }
 
 
 //get movie detail
@@ -96,10 +96,11 @@ const getGenres = () => {
     requestMovies(url, selectGenres, handleError)
 }
 
-const filterMovie = (genre, options) => {
+const filterMovie = (genre, options, value) => {
     const path = '/discover/movie'
-    const url = `  ${dinamicUrl(path)}&sort_by=${options}&with_genres=${genre}&vote_count.gte=200`
+    const url = `  ${dinamicUrl(path)}&sort_by=${options}&with_genres=${genre}&vote_count.gte=1000&page=${value}`
     // console.log(url)
 
+    // const render = renderFilteredMovie.bind({title: 'Similar Movies'})
     requestMovies(url, renderFilteredMovie, handleError)
 }

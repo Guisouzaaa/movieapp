@@ -19,7 +19,6 @@
             <select name="genres" id="select-genre"></select>
             <select name="popular" id="popular">
                 <option value="popularity.desc" selected="true">Popularity</option>
-                <!-- <option value="popularity.asc">Popularity asc</option> -->
                 <option value="revenue.desc">Revenue</option>
                 <option value="vote_count.desc">Most voted</option>
                 <option value="vote_average.desc">Top Rated</option>
@@ -27,14 +26,31 @@
                 <option value="primary_release_date.desc">Release Date</option>
             </select>
             <!-- <select name="genres" id="select-genre"></select> -->
-
-
+                    
+        <!-- <button id = "previous-page2">Previous</button>
+        <button id = "next-page2">Next</button> -->
         </form>
     </header>
 
-    <div id="movies-filter"></div>
-    
-    <div id="movie-container"></div>
+    <!-- <div id="movies-filter"></div> -->
+    <!-- <div id="popular-movies">
+    </div> -->
+    <div id="upcoming-movies"></div>
+
+    <div>
+        <div class="movies-filter"></div>
+        <button id = "filter-prev">Previous</button>
+        <button id = "filter-next">Next</button>
+    </div>
+
+    <div id="popular-container">
+        <h1>Popular Movies</h1>
+        <div id="popular-movies">
+        </div>
+        
+        <button id = "previous-page">Previous</button>
+        <button id = "next-page">Next</button>
+    </div>
 <!-- 
     <div id="movie-detail"></div>
     <div class="movie-trailer">
@@ -47,6 +63,7 @@
 
     <script src="js/apiTransaction.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/data.js"></script>
     <script>
         homeData()
     </script>

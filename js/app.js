@@ -1,16 +1,19 @@
 const searchButton = document.getElementById("search");
 const inputElement = document.getElementById("searchInput");
-const movieFilter = document.getElementById("movies-filter");
-const moviesContainer = document.getElementById("movie-container");
-// const movieReviews = document.querySelector(".movie-reviews");
+const movieFilter = document.querySelector(".movies-filter");
+const moviesContainer = document.getElementById("upcoming-movies");
 const similarMovies = document.getElementById("similar-movies");
 const selectBtn = document.getElementById("select-genre");
 const popularBtn = document.getElementById("popular");
 const filterBtn = document.getElementById("filter-btn");
-const genreContainer = document.getElementById('genre-container')
-// const detailsContainer = document.getElementById("movie-detail");
+const displayPopular = document.getElementById('popular-container')
+const popularContainer = document.getElementById('popular-movies')
+const prevBtn = document.getElementById('previous-page')
+const nextBtn = document.getElementById('next-page')
+const filterPrev = document.getElementById('filter-prev')
+const filterNext = document.getElementById('filter-next')
 
-//movie items
+//Display movies
 const movieSection = (movie) => {
   const section = document.createElement("section");
   section.classList = "movie-section";
@@ -22,7 +25,6 @@ const movieSection = (movie) => {
       img.setAttribute("data-movie-id", movie.id);
       img.addEventListener("click", function () {
         movieDetails(movie.id);
-        // showDetails();
       });
 
       section.appendChild(img);
@@ -31,8 +33,8 @@ const movieSection = (movie) => {
   return section;
 }
 
-//create movie container
-const movieContaier = (movies, title = "") => {
+//Movies container
+const movieContainer = (movies, title = "") => {
   const movieElement = document.createElement("div");
   movieElement.setAttribute("class", "movie");
 
@@ -51,8 +53,7 @@ const movieContaier = (movies, title = "") => {
 const renderFilteredMovie = (data) => {
   movieFilter.innerHTML = "";
   const movies = data.results;
-  // console.log(movies);
-  const movieBlock = movieContaier(movies);
+  const movieBlock = movieContainer(movies);
   movieFilter.appendChild(movieBlock);
 
   filterBtn.addEventListener('click', e => {
@@ -60,15 +61,23 @@ const renderFilteredMovie = (data) => {
     const genreValue = selectBtn.value
     const popularValue = popularBtn.value
     filterMovie(genreValue,popularValue)
+    filterNext.style.display = "block"
+    filterPrev.style.display = "block"
+    displayPopular.style.display = "none"
   })
 };
 
 //render movies
-function renderMovies(data) {
+function renderUpcoming(data) {
   const movies = data.results;
-  // console.log(movies)
-  const movieBlock = movieContaier(movies, this.title);
+  const movieBlock = movieContainer(movies, this.title);
   moviesContainer.appendChild(movieBlock);
+}
+
+function renderPopular(data) {
+  const movies = data.results;
+  const movieBlock = movieContainer(movies, this.title);
+  popularContainer.appendChild(movieBlock);
 }
 
 //Error
@@ -82,6 +91,8 @@ searchButton.addEventListener("click", (e) => {
   const value = inputElement.value;
   searchMovie(value);
 
+  displayPopular.style.display = "none"
+
   inputElement.value = "";
 });
 
@@ -91,7 +102,6 @@ function movieDetails(id) {
   window.location = "movie.html";
   return false;
 }
-
 
 //Movie Details output
 const getDetails = (data) => {
@@ -152,13 +162,13 @@ function getReviews(data) {
 function getSimilarMovies(data) {
   const movies = data.results;
   movies.length = 5;
-  const movieBlock = movieContaier(movies, this.title);
+  const movieBlock = movieContainer(movies, this.title);
   similarMovies.appendChild(movieBlock);
 }
 
+//Filter genre
 function selectGenres(data){
   const genresSelect = data.genres
-  // console.log(genresSelect)
   let output = `<option value = "" selected="true">All</option>`
   for (let i in genresSelect) {
     output += `
@@ -168,17 +178,50 @@ function selectGenres(data){
   }
 }
 
-function movieData() {
-  getMovieDetails();
-  getMovieTrailer();
-  getMovieReviews();
-  getMovieRecommendations();
+//Pagination of popular Movies
+function popularPagination(){
+  var value = 1
+  nextBtn.addEventListener('click', e =>{
+    e.preventDefault()
+    if(value < 1000){
+      value++
+      getPopularMovies(value)
+      popularContainer.innerHTML = ""
+    }
+  })
+  
+  prevBtn.addEventListener('click', e =>{
+    e.preventDefault()
+    if(value !== 1 ){
+      value--
+      getPopularMovies(value)
+      popularContainer.innerHTML = ""
+    }
+  })
 }
 
-function homeData() {
-  getUpcomingMovies();
-  getPopularMovies();
-  getTopRated();
-  getGenres()
-  filterMovie()
+//Pagination of filtered movies
+function filteredPagination(){
+  var value = 1
+  filterNext.addEventListener('click', e =>{
+    e.preventDefault()
+    if(value < 1000){
+      value++
+      const genreValue = selectBtn.value
+      const popularValue = popularBtn.value
+      filterMovie(genreValue,popularValue, value)
+      popularContainer.innerHTML = ""
+    }
+  })
+  
+  filterPrev.addEventListener('click', e =>{
+    e.preventDefault()
+    if(value !== 1 ){
+      value--
+      const genreValue = selectBtn.value
+      const popularValue = popularBtn.value
+      filterMovie(genreValue,popularValue, value)
+      popularContainer.innerHTML = ""
+    }
+  })
 }

@@ -4,4 +4,8 @@
   display: flex;
   width: 100%;
 }
+
+#filter-prev, #filter-next {
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */
