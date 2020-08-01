@@ -11,7 +11,7 @@ function movieData() {
     // getTopRated();
     getGenres()
     filterMovie()
-    popularPagination()
-    filteredPagination()
+    pagination()
+    // filteredPagination()
   }
   

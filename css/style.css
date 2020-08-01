@@ -1,3 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-color: #111016;
+  color: #ffffff;
+  width: 100%;
+  font-family: 'Mulish', sans-serif;
+}
+
+header {
+  background-color: #18171d;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 3rem 0 0.7rem 0;
+}
+
+header h1 {
+  font-family: 'Black Han Sans', sans-serif;
+  font-weight: 100;
+  color: #f7f1f7;
+  color: #773aa8;
+}
+
+header .container {
+  width: 80%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+header form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header form span {
+  color: #b5b1c7;
+}
+
+header form select {
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='rgb(241, 235, 235)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 5px;
+  background-color: #2c2b33;
+  border: solid 1px #303035;
+  color: #d4c8c8;
+  padding: 0.5rem;
+  margin: 1px;
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+}
+
+header form button {
+  cursor: pointer;
+  width: 75px;
+  padding: 0.5rem;
+  background-color: transparent;
+  color: #d4c8c8;
+  margin-left: 3px;
+  border: solid 1px #545263;
+}
+
+header form button:hover {
+  border: solid 1px #6f4194;
+  color: #f3eaea;
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
+}
+
+header .search-container {
+  position: relative;
+}
+
+header input {
+  background-color: #2c2b33;
+  border: solid 1px #303035;
+  padding: 0.6rem;
+  border-radius: 0.1rem;
+  width: 500px;
+  color: #e7dddd;
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+}
+
+header input:focus {
+  border: solid 1px #6f4194;
+}
+
+header select:focus {
+  border: solid 1px #6f4194;
+}
+
+header #search {
+  cursor: pointer;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  top: 7px;
+  right: 10px;
+  font-size: 1.2rem;
+  color: #5b5968;
+}
+
+main {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 10%;
+}
+
+#upcoming-movies {
+  margin-top: 5%;
+}
+
+#upcoming-movies h1 {
+  font-family: 'Black Han Sans', sans-serif;
+  font-family: 'Bebas Neue', cursive;
+  font-weight: 100;
+  letter-spacing: 2px;
+  font-size: 3rem;
+  border-bottom: solid 1px #331d44;
+  margin-bottom: 1rem;
+}
+
+#upcoming-movies .movie-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#popular-container {
+  margin-top: 5%;
+}
+
+#popular-container h1 {
+  font-family: 'Black Han Sans', sans-serif;
+  font-family: 'Bebas Neue', cursive;
+  font-weight: 100;
+  letter-spacing: 2px;
+  font-size: 3rem;
+  border-bottom: solid 1px #331d44;
+}
+
+#popular-container img {
+  max-width: 100%;
+  cursor: pointer;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+#popular-container img:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+#popular-container .popular-pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 2rem;
+}
+
+#popular-container .popular-pagination button {
+  cursor: pointer;
+  background-color: transparent;
+  border: solid 2px #6f4194;
+  border: solid 2px #402455;
+  font-size: 1rem;
+  margin: 0.2rem;
+  border-radius: 5rem;
+  color: #9693aa;
+  width: 35px;
+  height: 35px;
+}
+
+#popular-container .movie-section {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(240px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: 2rem;
+  grid-row-gap: 2rem;
+  margin-top: 1rem;
+}
+
+footer {
+  width: 100%;
+  height: 2.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #851a5c;
+}
+
 .movie-detail2 ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5,7 +231,21 @@
   width: 100%;
 }
 
-#filter-prev, #filter-next {
+.pagination-btn {
+  display: none;
+}
+
+.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#filtered-movies h1 {
+  display: none;
+}
+
+.hide {
   display: none;
 }
 /*# sourceMappingURL=style.css.map */

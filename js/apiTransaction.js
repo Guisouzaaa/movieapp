@@ -11,9 +11,9 @@ const dinamicUrl = path => {
 
 const requestMovies = (url, onComplete, onError) => {
     fetch(url)
-    .then((res) => res.json())
-    .then(onComplete)
-    .catch((onError))
+      .then((res) => res.json())
+      .then(onComplete)
+      .catch((onError))
 }
 
 const searchMovie = value => {
@@ -35,18 +35,10 @@ const getUpcomingMovies = () => {
 const getPopularMovies = (value) => {
     const path = '/movie/popular'
     const url =  `${dinamicUrl(path)}&page=${value}`
+    // console.log(url)
 
-    // const render = renderPopular.bind({title: 'Popular Movies'})
     requestMovies(url, renderPopular, handleError)
 }
-
-// const getTopRated = () => {
-//     const path = '/movie/top_rated'
-//     const url =  dinamicUrl(path)
-
-//     const render = renderMovies.bind({title: 'Top Rated Movies'})
-//     requestMovies(url, render, handleError)
-// }
 
 
 //get movie detail
@@ -104,3 +96,5 @@ const filterMovie = (genre, options, value) => {
     // const render = renderFilteredMovie.bind({title: 'Similar Movies'})
     requestMovies(url, renderFilteredMovie, handleError)
 }
+
+

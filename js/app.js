@@ -1,17 +1,14 @@
-const searchButton = document.getElementById("search");
+// Getting elements from the dom
 const inputElement = document.getElementById("searchInput");
 const movieFilter = document.querySelector(".movies-filter");
 const moviesContainer = document.getElementById("upcoming-movies");
 const similarMovies = document.getElementById("similar-movies");
 const selectBtn = document.getElementById("select-genre");
-const popularBtn = document.getElementById("popular");
-const filterBtn = document.getElementById("filter-btn");
+const popularSelect = document.getElementById("filter-movie");
 const displayPopular = document.getElementById('popular-container')
 const popularContainer = document.getElementById('popular-movies')
-const prevBtn = document.getElementById('previous-page')
-const nextBtn = document.getElementById('next-page')
-const filterPrev = document.getElementById('filter-prev')
-const filterNext = document.getElementById('filter-next')
+
+
 
 //Display movies
 const movieSection = (movie) => {
@@ -56,14 +53,13 @@ const renderFilteredMovie = (data) => {
   const movieBlock = movieContainer(movies);
   movieFilter.appendChild(movieBlock);
 
-  filterBtn.addEventListener('click', e => {
+  document.querySelector('.filter-btn').addEventListener('click', e => {
     e.preventDefault();
     const genreValue = selectBtn.value
-    const popularValue = popularBtn.value
+    const popularValue = popularSelect.value
     filterMovie(genreValue,popularValue)
-    filterNext.style.display = "block"
-    filterPrev.style.display = "block"
-    displayPopular.style.display = "none"
+    document.querySelector('.pagination-btn').classList.add('show')
+    displayPopular.classList.add('hide')
   })
 };
 
@@ -86,12 +82,12 @@ const handleError = (error) => {
 };
 
 //search button
-searchButton.addEventListener("click", (e) => {
+document.getElementById('search').addEventListener("click", (e) => {
   e.preventDefault();
   const value = inputElement.value;
   searchMovie(value);
 
-  displayPopular.style.display = "none"
+  displayPopular.classList.add('hide')
 
   inputElement.value = "";
 });
@@ -141,7 +137,7 @@ const getTrailer = (data) => {
       document.querySelector(".movie-trailer").innerHTML = output;
     }
   });
-};
+}
 
 //Movie Reviews
 function getReviews(data) {
@@ -168,60 +164,53 @@ function getSimilarMovies(data) {
 
 //Filter genre
 function selectGenres(data){
-  const genresSelect = data.genres
+  const genreOptions = data.genres
   let output = `<option value = "" selected="true">All</option>`
-  for (let i in genresSelect) {
+  for (let i in genreOptions) {
     output += `
-         <option value="${genresSelect[i].id}">${genresSelect[i].name}</option> 
+         <option value="${genreOptions[i].id}">${genreOptions[i].name}</option> 
     `;
     document.querySelector("#select-genre").innerHTML = output;
   }
 }
 
 //Pagination of popular Movies
-function popularPagination(){
+function pagination(){
   var value = 1
-  nextBtn.addEventListener('click', e =>{
+  document.addEventListener('click', e =>{
     e.preventDefault()
-    if(value < 1000){
-      value++
-      getPopularMovies(value)
-      popularContainer.innerHTML = ""
-    }
-  })
-  
-  prevBtn.addEventListener('click', e =>{
-    e.preventDefault()
-    if(value !== 1 ){
-      value--
-      getPopularMovies(value)
-      popularContainer.innerHTML = ""
-    }
-  })
-}
+    if(e.target.className==='next-page'){
+      if(value < 1000){
+        value++
+        getPopularMovies(value)
+        popularContainer.innerHTML = ""
+      }
 
-//Pagination of filtered movies
-function filteredPagination(){
-  var value = 1
-  filterNext.addEventListener('click', e =>{
-    e.preventDefault()
-    if(value < 1000){
-      value++
-      const genreValue = selectBtn.value
-      const popularValue = popularBtn.value
-      filterMovie(genreValue,popularValue, value)
-      popularContainer.innerHTML = ""
-    }
-  })
-  
-  filterPrev.addEventListener('click', e =>{
-    e.preventDefault()
-    if(value !== 1 ){
-      value--
-      const genreValue = selectBtn.value
-      const popularValue = popularBtn.value
-      filterMovie(genreValue,popularValue, value)
-      popularContainer.innerHTML = ""
+    } else if (e.target.className === 'previous-page'){
+      if(value !== 1 ){
+        value--
+        getPopularMovies(value)
+        popularContainer.innerHTML = ""
+      }
+
+    } else if (e.target.className === 'filter-next'){
+      if(value < 1000){
+        value++
+        // const hehe = value++
+        const genreValue = selectBtn.value
+        const popularValue = popularSelect.value
+        filterMovie(genreValue,popularValue, value)
+        popularContainer.innerHTML = ""
+      }
+
+    }else if (e.target.className === 'filter-prev'){
+      if(value !== 1 ){
+        value--
+        const genreValue = selectBtn.value
+        const popularValue = popularSelect.value
+        filterMovie(genreValue,popularValue, value)
+        popularContainer.innerHTML = ""
+      }
     }
   })
 }
