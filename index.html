@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link
-    rel="stylesheet"
-    href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-    crossorigin="anonymous"
-    />
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+
+
     <title>MyMovieList</title>
 </head>
+
 <body>
     <!-- <div id="page-container"> -->
     <header>
         <div class="container">
-        <h1>Movix</h1>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search movie">
-            <button id="search" type="submit"><i class="fas fa-search"></i></button>
-        </div>
-        <form>
-            <div class="filter-options">
-            <span>Order By:</span>
-            <select name="genres" id="select-genre"></select>
-            <select name="popular" id="filter-movie">
-                <option value="popularity.desc" selected="true">Popularity</option>
-                <option value="revenue.desc">Revenue</option>
-                <option value="vote_count.desc">Most voted</option>
-                <option value="vote_average.desc">Top Rated</option>
-                <option value="primary_release_date.desc">Release Date</option>
-            </select>
-            <button class="filter-btn">Filter</button>
+            <h1>Movix</h1>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search movie">
+                <button id="search" type="submit"><i class="fas fa-search"></i></button>
             </div>
-            <!-- <button class="filter-btn">Filter</button> -->
-            <!-- <select name="genres" id="select-genre"></select>
+            <form>
+                <div class="filter-options">
+                    <span>Order By:</span>
+                    <select name="genres" id="select-genre"></select>
+                    <select name="popular" id="filter-movie">
+                        <option value="popularity.desc" selected="true">Popularity</option>
+                        <option value="revenue.desc">Revenue</option>
+                        <option value="vote_count.desc">Most voted</option>
+                        <option value="vote_average.desc">Top Rated</option>
+                        <option value="primary_release_date.desc">Release Date</option>
+                    </select>
+                    <button class="filter-btn">Filter</button>
+                </div>
+                <!-- <button class="filter-btn">Filter</button> -->
+                <!-- <select name="genres" id="select-genre"></select>
             <select name="popular" id="filter-movie">
                 <option value="popularity.desc" selected="true">Popularity</option>
                 <option value="revenue.desc">Revenue</option>
@@ -44,46 +45,95 @@
                 <option value="vote_average.desc">Top Rated</option>
                 <option value="primary_release_date.desc">Release Date</option>
             </select> -->
-        </form>
-    </div>
+            </form>
+        </div>
     </header>
 
 
     <main>
-    <div id="upcoming-movies">
-    </div>
-
-    <div id = "filtered-movies">
-        <h1>Filtered items</h1>
-        <div class="movies-filter"></div>
-        <div class="pagination-btn">
-            <button class = "filter-prev">Previous</button>
-            <button class = "filter-next">Next</button>
+        <div id="upcoming-slide">
+            <h1>Upcoming Movies</h1>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                </div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Arrows -->
+                <div class="arrows">
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div id="popular-container">
-        <h1>Popular Movies</h1>
-        <div id="popular-movies">
-        </div>
-        
-        <div class="popular-pagination">
-            <button class = "previous-page"><i class="fas fa-chevron-left"></i></button>
-            <button class = "next-page"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </div>
-</main>
 
-<!-- <footer>
+        <div id="filtered-movies">
+            <h1>Filtered items</h1>
+            <div class="movies-filter"></div>
+            <div class="pagination-btn">
+                <button class="filter-prev">Previous</button>
+                <button class="filter-next">Next</button>
+            </div>
+        </div>
+
+        <div id="popular-container">
+            <h1>Popular Movies</h1>
+            <div id="popular-movies">
+            </div>
+
+            <div class="popular-pagination">
+                <button class="previous-page"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-page"><i class="fas fa-chevron-right"></i></button>
+                <!-- <button class="previous-page">Prec</button>
+                <button class="next-page">nect</button> -->
+            </div>
+        </div>
+    </main>
+
+    <!-- <footer>
     <h1>this is a footer</h1>
 </footer> -->
 
-<!-- </div> -->
+    </div>
     <script src="js/apiTransaction.js"></script>
     <script src="js/app.js"></script>
     <script src="js/data.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <script>
         homeData()
+        /* Swiper JS */
+        var swiper = new Swiper('.swiper-container', {
+            observer: true,
+            spaceBetween: 30,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                100: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                640: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                },
+                768: {
+                    slidesPerView: 4,
+                    spaceBetween: 10,
+                },
+                1024: {
+                    slidesPerView: 6,
+                    spaceBetween: 10,
+                },
+            }
+        });
     </script>
 </body>
+
 </html>

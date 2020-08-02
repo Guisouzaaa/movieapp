@@ -131,37 +131,103 @@ main {
   margin-bottom: 10%;
 }
 
-#upcoming-movies {
-  margin-top: 5%;
+#upcoming-slide {
+  margin-top: 10%;
+  width: 100%;
+  height: 100%;
 }
 
-#upcoming-movies h1 {
-  font-family: 'Black Han Sans', sans-serif;
+#upcoming-slide .swiper-slide {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#upcoming-slide .swiper-slide .movie-date {
+  font-weight: 100;
+  margin-top: 0.3rem;
+  color: #9d94c7;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  font-family: 'Bebas Neue', cursive;
+}
+
+#upcoming-slide h1 {
   font-family: 'Bebas Neue', cursive;
   font-weight: 100;
   letter-spacing: 2px;
   font-size: 3rem;
   border-bottom: solid 1px #331d44;
-  margin-bottom: 1rem;
+  color: #5a5a75;
+  color: #d8d2dd;
 }
 
-#upcoming-movies .movie-section {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+#upcoming-slide img {
+  max-width: 100%;
+}
+
+#upcoming-slide .swiper-container {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+#upcoming-slide .swiper-button-prev,
+#upcoming-slide .swiper-button-next {
+  color: #9e44e2;
 }
 
 #popular-container {
   margin-top: 5%;
 }
 
+#popular-container .movie-item {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 0 1rem 0;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+#popular-container .movie-item .movie-title {
+  margin-top: 0.7rem;
+  text-align: center;
+}
+
+#popular-container .movie-item .movie-rating {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(157, 68, 226, 0.671);
+  padding: 0.3rem;
+  font-weight: 100;
+  font-family: 'Bebas Neue', cursive;
+}
+
 #popular-container h1 {
-  font-family: 'Black Han Sans', sans-serif;
   font-family: 'Bebas Neue', cursive;
   font-weight: 100;
   letter-spacing: 2px;
   font-size: 3rem;
   border-bottom: solid 1px #331d44;
+  color: #ccc2ff;
+  color: #d8d2dd;
 }
 
 #popular-container img {
@@ -169,11 +235,6 @@ main {
   cursor: pointer;
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
-}
-
-#popular-container img:hover {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
 }
 
 #popular-container .popular-pagination {
@@ -193,13 +254,18 @@ main {
   border: solid 2px #402455;
   font-size: 1rem;
   margin: 0.2rem;
-  border-radius: 5rem;
-  color: #9693aa;
-  width: 35px;
-  height: 35px;
+  border-radius: 6rem;
+  color: #8178af;
+  width: 50px;
+  height: 50px;
 }
 
-#popular-container .movie-section {
+#popular-container .popular-pagination button:hover {
+  background-color: #6f4194;
+  color: white;
+}
+
+#popular-container #popular-movies {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (minmax(240px, 1fr))[auto-fit];
@@ -207,6 +273,34 @@ main {
   grid-gap: 2rem;
   grid-row-gap: 2rem;
   margin-top: 1rem;
+}
+
+.movies-filter {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(240px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: 2rem;
+  grid-row-gap: 2rem;
+  margin-top: 1rem;
+}
+
+.movies-filter img {
+  max-width: 100%;
+}
+
+.movies-filter .movie-item {
+  position: relative;
+}
+
+.movies-filter .movie-item .movie-rating {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #9e44e2;
+  padding: 0.3rem;
+  font-weight: 100;
+  font-family: 'Bebas Neue', cursive;
 }
 
 footer {

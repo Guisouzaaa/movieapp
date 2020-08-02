@@ -126,46 +126,110 @@ main{
 }
 
 //upcoming movies
-#upcoming-movies{
+#upcoming-slide{
+    // position: relative;
+    .swiper-slide{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-    margin-top: 5%;
+        .movie-date{
+            // position: absolute;
+            // top: 0;
+            // right: 0;
+            // background-color:rgba(157, 68, 226, 0.671);
+            // padding: 0.3rem;
+            font-weight: 100;
+            margin-top: 0.3rem;
+            color: rgb(157, 148, 199);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            // width: 100%;
+            // text-align: center;
+            font-family: 'Bebas Neue', cursive;
+        }
+    }
+
     h1{
-        font-family: 'Black Han Sans', sans-serif;
         font-family: 'Bebas Neue', cursive;
         font-weight: 100;
         letter-spacing: 2px;
         font-size: 3rem;
         border-bottom: solid 1px rgb(51, 29, 68);
-        margin-bottom: 1rem;
+        color: rgb(90, 90, 117);
+        color: rgb(216, 210, 221);
     }
 
-    .movie-section{
-        display: flex;
+    margin-top: 10%;
+    width: 100%;
+    height: 100%;
+    img{
+        max-width: 100%;
     }
+
+    .swiper-container {
+        width: 100%;
+        // height: 520px
+        margin-top: 1rem;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next{
+        color: rgb(158, 68, 226);
+        // margin: 250px;
+    }   
 }
+
 
 //popular movies
 #popular-container{
     margin-top: 5%;
+    .movie-item{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0 1rem 0;
+        transition: 0.3s ease;
+
+        .movie-title{
+            margin-top: 0.7rem;
+            text-align: center;
+        }
+
+        .movie-rating{
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color:rgba(157, 68, 226, 0.671);
+            padding: 0.3rem;
+            font-weight: 100;
+            font-family: 'Bebas Neue', cursive;
+
+        }
+    }
 
 
     h1{
-        font-family: 'Black Han Sans', sans-serif;
+        // font-family: 'Black Han Sans', sans-serif;
         font-family: 'Bebas Neue', cursive;
         font-weight: 100;
         letter-spacing: 2px;
         font-size: 3rem;
         border-bottom: solid 1px rgb(51, 29, 68);
+        color: rgb(204, 194, 255);
+        color: rgb(216, 210, 221);
     }
     
     img{
         max-width: 100%;
         cursor: pointer;
         transition: 0.3s ease-in-out;
-        &:hover{
-            // border: solid 1px rgb(111, 65, 148);
-            transform: scale(1.1);
-        }
+        // &:hover{
+        //     // border: solid 1px rgb(111, 65, 148);
+        //     transform: scale(1.1);
+        // }
     }
 
     .popular-pagination{
@@ -180,20 +244,51 @@ main{
             font-size: 1rem;
             // padding: 0.4rem;
             margin: 0.2rem;
-            border-radius: 5rem;
-            color: rgb(150, 147, 170);
-            width: 35px;
-            height: 35px;
+            border-radius: 6rem;
+            color: rgb(129, 120, 175);
+            width: 50px;
+            height: 50px;
+            &:hover{
+                background-color: rgb(111, 65, 148);
+                color: white;
+            }
         }
     }
 
-    .movie-section{
+    #popular-movies{
         display: grid;
         grid-template-columns: repeat(auto-fit,minmax(240px, 1fr));
         grid-gap: 2rem;
         grid-row-gap: 2rem;
         margin-top: 1rem;
         // height: 100vh;
+    }
+}
+
+//Filtered movies
+.movies-filter{
+    img{
+        max-width: 100%;
+    }
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px, 1fr));
+    grid-gap: 2rem;
+    grid-row-gap: 2rem;
+    margin-top: 1rem;
+
+    .movie-item{
+        position: relative;
+        .movie-rating{
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color:rgb(158, 68, 226);
+            padding: 0.3rem;
+            font-weight: 100;
+            font-family: 'Bebas Neue', cursive;
+
+        }
     }
 }
 
@@ -210,10 +305,6 @@ footer{
     align-items: center;
     background-color: rgb(133, 26, 92);
 }
-
-
-
-
 
 
 
@@ -240,3 +331,7 @@ footer{
 .hide{
     display: none;
 }
+
+
+
+

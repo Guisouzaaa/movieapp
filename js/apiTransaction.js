@@ -26,8 +26,7 @@ const searchMovie = value => {
 //renderMovies
 const getUpcomingMovies = () => {
     const path = '/movie/upcoming'
-    const url =  dinamicUrl(path)
-
+    const url =  `${dinamicUrl(path)}&region=US`
     const render = renderUpcoming.bind({title: 'Upcoming Movies'})
     requestMovies(url, render, handleError)
 }
