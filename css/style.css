@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -9,28 +10,34 @@
 }
 
 body {
-  background-color: #111016;
+  background-color: #0a0a0e;
   color: #ffffff;
   width: 100%;
   font-family: 'Mulish', sans-serif;
+  overflow-x: hidden;
 }
 
 header {
-  background-color: #18171d;
+  background-color: rgba(24, 23, 29, 0.863);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 3rem 0 0.7rem 0;
+  padding: 2rem 1.3rem 1.3rem 1.3rem;
+  border-radius: 0 0 0.1rem 0.1rem;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 header h1 {
   font-family: 'Black Han Sans', sans-serif;
   font-weight: 100;
   color: #f7f1f7;
-  color: #773aa8;
+  color: #9e3dee;
 }
 
 header .container {
@@ -54,24 +61,33 @@ header form {
 }
 
 header form span {
-  color: #b5b1c7;
+  color: #efeef5;
+  color: rgba(134, 130, 148, 0.863);
 }
 
 header form select {
   cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='rgb(241, 235, 235)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg fill='rgba(165, 160, 187, 0.795)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
   background-repeat: no-repeat;
   background-position-x: 100%;
   background-position-y: 5px;
   background-color: #2c2b33;
-  border: solid 1px #303035;
-  color: #d4c8c8;
+  background-color: rgba(24, 23, 29, 0.89);
+  border: solid 1px rgba(53, 50, 66, 0.863);
+  color: rgba(165, 160, 187, 0.795);
   padding: 0.5rem;
   margin: 1px;
   -webkit-transition: 0.1s ease-in-out;
   transition: 0.1s ease-in-out;
+}
+
+header form select:hover {
+  border: solid 1px #6f4194;
+  color: #f3eaea;
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
 }
 
 header form button {
@@ -79,9 +95,9 @@ header form button {
   width: 75px;
   padding: 0.5rem;
   background-color: transparent;
-  color: #d4c8c8;
+  color: rgba(241, 241, 241, 0.664);
   margin-left: 3px;
-  border: solid 1px #545263;
+  border: solid 1px rgba(53, 50, 66, 0.863);
 }
 
 header form button:hover {
@@ -97,21 +113,19 @@ header .search-container {
 
 header input {
   background-color: #2c2b33;
-  border: solid 1px #303035;
+  background-color: transparent;
+  border: solid 1px rgba(53, 50, 66, 0.863);
   padding: 0.6rem;
   border-radius: 0.1rem;
   width: 500px;
-  color: #e7dddd;
+  color: #f7f2f2;
+  color: rgba(222, 220, 231, 0.849);
   -webkit-transition: 0.1s ease-in-out;
   transition: 0.1s ease-in-out;
 }
 
 header input:focus {
-  border: solid 1px #6f4194;
-}
-
-header select:focus {
-  border: solid 1px #6f4194;
+  border: solid 1px rgba(158, 61, 238, 0.658);
 }
 
 header #search {
@@ -123,18 +137,88 @@ header #search {
   right: 10px;
   font-size: 1.2rem;
   color: #5b5968;
+  color: rgba(78, 69, 85, 0.644);
+}
+
+#landing-page {
+  width: 100vw;
+  margin: 0 auto;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 33, 33, 0.733)), to(rgba(113, 34, 165, 0.329))), url("https://image.tmdb.org/t/p/original/orjiB3oUIsyz60hoEqkiGpy5CeO.jpg");
+  background: linear-gradient(rgba(34, 33, 33, 0.733), rgba(113, 34, 165, 0.329)), url("https://image.tmdb.org/t/p/original/orjiB3oUIsyz60hoEqkiGpy5CeO.jpg");
+  background-position: top;
+  background-size: 100%;
+  height: 70vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  border-bottom: solid 1px #9e3dee;
+}
+
+#landing-page .landing-txt {
+  width: 500px;
+  border-radius: 0.1rem;
+  position: absolute;
+  top: 40%;
+}
+
+#landing-page .landing-txt h2 {
+  text-transform: uppercase;
+  font-weight: 100;
+  letter-spacing: 1px;
+  font-family: 'Anton', sans-serif;
+  color: #eee1f8;
+  font-size: 2.4rem;
+}
+
+#landing-page .landing-txt p {
+  color: #e2c0f8;
+}
+
+#landing-page .container {
+  width: 80%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 main {
   width: 80%;
   margin: 0 auto;
   margin-bottom: 10%;
+  margin-top: -6%;
 }
 
 #upcoming-slide {
   margin-top: 10%;
   width: 100%;
   height: 100%;
+}
+
+#upcoming-slide .title-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: solid 1px rgba(38, 38, 48, 0.37);
+}
+
+#upcoming-slide .title-section span {
+  background-color: #9d44e2;
+  width: 5px;
+  height: 35px;
+  border: solid 1px #9d44e2;
+  margin-right: 0.4rem;
 }
 
 #upcoming-slide .swiper-slide {
@@ -155,9 +239,10 @@ main {
   font-weight: 100;
   margin-top: 0.3rem;
   color: #9d94c7;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   letter-spacing: 1px;
-  font-family: 'Bebas Neue', cursive;
+  color: #eee1f8;
+  color: #e6cff5;
 }
 
 #upcoming-slide h1 {
@@ -165,9 +250,8 @@ main {
   font-weight: 100;
   letter-spacing: 2px;
   font-size: 3rem;
-  border-bottom: solid 1px #331d44;
-  color: #5a5a75;
-  color: #d8d2dd;
+  color: #eee1f8;
+  font-size: 2rem;
 }
 
 #upcoming-slide img {
@@ -197,27 +281,57 @@ main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   padding: 0 0 1rem 0;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
 }
 
 #popular-container .movie-item .movie-title {
-  margin-top: 0.7rem;
+  margin-top: 0.5rem;
   text-align: center;
+  color: rgba(226, 192, 248, 0.836);
+}
+
+#popular-container .movie-item .movie-stars {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 #popular-container .movie-item .movie-rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
-  background-color: rgba(157, 68, 226, 0.671);
+  background-color: rgba(157, 68, 226, 0.836);
   padding: 0.3rem;
-  font-weight: 100;
-  font-family: 'Bebas Neue', cursive;
+  color: #f3ecec;
+}
+
+#popular-container .movie-item .movie-rating p {
+  font-size: 0.8rem;
+}
+
+#popular-container .movie-item .movie-rating i {
+  margin-right: 0.3rem;
+  font-size: 0.8rem;
+}
+
+#popular-container .title-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: solid 1px rgba(38, 38, 48, 0.37);
+}
+
+#popular-container .title-section span {
+  background-color: #9d44e2;
+  width: 5px;
+  height: 35px;
+  border: solid 1px #9d44e2;
+  margin-right: 0.4rem;
 }
 
 #popular-container h1 {
@@ -225,9 +339,8 @@ main {
   font-weight: 100;
   letter-spacing: 2px;
   font-size: 3rem;
-  border-bottom: solid 1px #331d44;
-  color: #ccc2ff;
-  color: #d8d2dd;
+  color: #eee1f8;
+  font-size: 2rem;
 }
 
 #popular-container img {
@@ -250,26 +363,27 @@ main {
 #popular-container .popular-pagination button {
   cursor: pointer;
   background-color: transparent;
-  border: solid 2px #6f4194;
-  border: solid 2px #402455;
+  border: solid 2px rgba(168, 83, 224, 0.233);
   font-size: 1rem;
   margin: 0.2rem;
   border-radius: 6rem;
   color: #8178af;
-  width: 50px;
-  height: 50px;
+  color: rgba(226, 192, 248, 0.692);
+  font-size: 0.8rem;
+  width: 40px;
+  height: 40px;
 }
 
 #popular-container .popular-pagination button:hover {
-  background-color: #6f4194;
-  color: white;
+  background-color: rgba(168, 83, 224, 0.233);
+  color: #f0e9e9;
 }
 
 #popular-container #popular-movies {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(240px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  -ms-grid-columns: (minmax(200px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 2rem;
   grid-row-gap: 2rem;
   margin-top: 1rem;

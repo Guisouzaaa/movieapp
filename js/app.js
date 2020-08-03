@@ -102,14 +102,18 @@ document.addEventListener('click', e => {
 
 function renderPopular(data) {
   const movies = data.results;
-  // console.log(movies)
+  console.log(movies)
   let output = ``
   for (let i in movies){
      output += `
         <div class="movie-item">
-           <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
-           <span class="movie-title">${movies[i].title}</span>
-           <span class="movie-rating"><p>IMDB: ${movies[i].vote_average}</p></span>
+           <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
+           
+             <span class="movie-title">${movies[i].title}</span>
+             <div class ="movie-rating">
+             <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
+             </div>
+           
         </div>  
      `
   }

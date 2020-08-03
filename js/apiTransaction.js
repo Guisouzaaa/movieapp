@@ -33,7 +33,7 @@ const getUpcomingMovies = () => {
 
 const getPopularMovies = (value) => {
     const path = '/movie/popular'
-    const url =  `${dinamicUrl(path)}&page=${value}`
+    const url =  `${dinamicUrl(path)}&page=${value}&region=US`
     // console.log(url)
 
     requestMovies(url, renderPopular, handleError)
