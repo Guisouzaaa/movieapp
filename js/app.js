@@ -49,14 +49,17 @@ const popularContainer = document.getElementById('popular-movies')
 //searchMovies/filter
 const renderFilteredMovie = (data) => {
   movieFilter.innerHTML = "";
+  const hehe = inputElement.value
   const movies = data.results;
-  let output = ``
+  let output = `<h1>poasiaosias</h1>`
   for (let i in movies){
     output += `
       <div class="movie-item">
         <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
-        <span>${movies[i].title}</span>
-        <span class="movie-rating"><p>IMDB: ${movies[i].vote_average}</p></span>
+        <span class="movie-title">${movies[i].title}</span>
+        <div class ="movie-rating">
+           <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
+        </div>
       </div>
     `
     document.querySelector(".movies-filter").innerHTML = output;
@@ -71,7 +74,7 @@ document.querySelector('.filter-btn').addEventListener('click', e => {
   const genreValue = selectBtn.value
   const popularValue = popularSelect.value
   filterMovie(genreValue,popularValue)
-  document.querySelector('.pagination-btn').classList.add('show')
+  document.querySelector('.pagination-btn').classList.add('show', 'pagination')
   displayPopular.classList.add('hide')
 })
 };
@@ -107,12 +110,20 @@ function renderPopular(data) {
   for (let i in movies){
      output += `
         <div class="movie-item">
-           <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
+         <div class ="img-container">
+            <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
+         <div class="details-btn">
+            <button>View Details</button>
+          </div>
+         </div>
+          
            
-             <span class="movie-title">${movies[i].title}</span>
-             <div class ="movie-rating">
-             <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
-             </div>
+           <span class="movie-title">${movies[i].title}</span>
+             
+          <div class ="movie-rating">
+            <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
+          </div>
+             
            
         </div>  
      `
@@ -153,21 +164,28 @@ const getDetails = (data) => {
 
     let output = `
         <img src = "${IMAGE_URL + movie.poster_path}"/>
-        <div>
-           <h1>Movie overview</h1>
-           <p>${movie.overview}</p>
+        <div class= "details-container">
+        <div class = "overview">
+            <h1>Movie overview</h1>
+            <p>${movie.overview}</p>
         </div>
-        <div class = "detailInfo">
+        <div class = "detail-info">
            <h1>Details</h1>
            <ul>
-             <li>Title: ${movie.title}</li>
-             <li>Release Date: ${movie.release_date}</li>
-             <li>Genre: ${genreName}</li>
-             <li>Duration: ${movie.runtime}</li>
-             <li>Rating: ${movie.vote_average}</li>
+             <li><span class="contrast">Title:</span> ${movie.title}</li>
+             <li><span class="contrast">Release Date:</span> ${movie.release_date}</li>
+             <li><span class="contrast">Genre:</span> ${genreName}</li>
+             <li><span class="contrast">Duration:</span> ${movie.runtime}</li>
+             <li><span class="contrast">Rating</span> ${movie.vote_average}</li>
            </ul>
+           <button class= "trailerBtn">Trailer</button>
         </div>
-        <button class= "trailerBtn">Trailer</button>
+
+        <h1 class="similar-title">Similar Movies</h1>
+        <div class="similar-movies">
+           <h1>Similar Movies</h1>
+        </div>
+        </div>
     `
   document.getElementById("movie-detail").innerHTML = output;
 };
@@ -189,30 +207,36 @@ const getTrailer = (data) => {
 function getReviews(data) {
   const movie = data.results;
   movie.length = 4;
-  let output = `<h2>Reviews</h2>`;
+  let output = `<h1>Reviews</h1>`;
   for (let i in movie) {
     output += `
-        <h3>${movie[i].author}</h3>
+    <div>
+        <h3>By: ${movie[i].author}</h3>
         <p>${movie[i].content}</p>
-        <a href = "${movie[i].url}">Link</a>
+        <a href = "${movie[i].url}">See the post</a>
+    </div>
     `;
   }
   document.querySelector(".movie-reviews").innerHTML = output;
 }
+/*    <div>
+           <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
+        </div>  */
 
 //Similar movies
 function getSimilarMovies(data) {
   const movies = data.results;
-  movies.length = 5;
+  movies.length = 3;
   let output = ``
   for (let i in movies){
      output += `
         <div>
            <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
-        </div>  
+        </div>
      `
   }
-  document.getElementById("similar-movies").innerHTML = output;
+  // document.getElementById("similar-movies").innerHTML = output;
+  document.querySelector(".similar-movies").innerHTML=output
   // const movieBlock = movieContainer(movies, this.title);
   // similarMovies.appendChild(movieBlock);
 }

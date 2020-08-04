@@ -11,9 +11,9 @@
 
 body {
   background-color: #0a0a0e;
-  color: #ffffff;
+  color: rgba(226, 192, 248, 0.836);
   width: 100%;
-  font-family: 'Mulish', sans-serif;
+  font-family: "Mulish", sans-serif;
   overflow-x: hidden;
 }
 
@@ -34,9 +34,8 @@ header {
 }
 
 header h1 {
-  font-family: 'Black Han Sans', sans-serif;
+  font-family: "Black Han Sans", sans-serif;
   font-weight: 100;
-  color: #f7f1f7;
   color: #9e3dee;
 }
 
@@ -61,7 +60,6 @@ header form {
 }
 
 header form span {
-  color: #efeef5;
   color: rgba(134, 130, 148, 0.863);
 }
 
@@ -73,7 +71,6 @@ header form select {
   background-repeat: no-repeat;
   background-position-x: 100%;
   background-position-y: 5px;
-  background-color: #2c2b33;
   background-color: rgba(24, 23, 29, 0.89);
   border: solid 1px rgba(53, 50, 66, 0.863);
   color: rgba(165, 160, 187, 0.795);
@@ -118,7 +115,6 @@ header input {
   padding: 0.6rem;
   border-radius: 0.1rem;
   width: 500px;
-  color: #f7f2f2;
   color: rgba(222, 220, 231, 0.849);
   -webkit-transition: 0.1s ease-in-out;
   transition: 0.1s ease-in-out;
@@ -136,7 +132,6 @@ header #search {
   top: 7px;
   right: 10px;
   font-size: 1.2rem;
-  color: #5b5968;
   color: rgba(78, 69, 85, 0.644);
 }
 
@@ -159,7 +154,8 @@ header #search {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  border-bottom: solid 1px #9e3dee;
+  border-bottom: solid 1px rgba(158, 61, 238, 0.5);
+  z-index: -1;
 }
 
 #landing-page .landing-txt {
@@ -173,7 +169,7 @@ header #search {
   text-transform: uppercase;
   font-weight: 100;
   letter-spacing: 1px;
-  font-family: 'Anton', sans-serif;
+  font-family: "Anton", sans-serif;
   color: #eee1f8;
   font-size: 2.4rem;
 }
@@ -200,20 +196,19 @@ main {
   margin-top: -6%;
 }
 
-#upcoming-slide {
-  margin-top: 10%;
-  width: 100%;
-  height: 100%;
+main img {
+  max-width: 100%;
+  cursor: pointer;
 }
 
-#upcoming-slide .title-section {
+main .title-section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   border-bottom: solid 1px rgba(38, 38, 48, 0.37);
 }
 
-#upcoming-slide .title-section span {
+main .title-section span {
   background-color: #9d44e2;
   width: 5px;
   height: 35px;
@@ -221,8 +216,67 @@ main {
   margin-right: 0.4rem;
 }
 
-#upcoming-slide .swiper-slide {
+main h1 {
+  font-family: "Bebas Neue", cursive;
+  font-weight: 100;
+  letter-spacing: 2px;
+  font-size: 3rem;
+  color: #eee1f8;
+  font-size: 2rem;
+}
+
+main .pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 2rem;
+}
+
+main .pagination button {
+  cursor: pointer;
+  background-color: transparent;
+  border: solid 2px rgba(168, 83, 224, 0.233);
+  font-size: 1rem;
+  margin: 0.2rem;
+  border-radius: 6rem;
+  color: rgba(226, 192, 248, 0.692);
+  font-size: 0.8rem;
+  width: 40px;
+  height: 40px;
+}
+
+main .pagination button:hover {
+  background-color: rgba(168, 83, 224, 0.233);
+  color: #f0e9e9;
+}
+
+main .movies-filter,
+main #popular-movies {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(200px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 2rem;
+  grid-row-gap: 2rem;
+  margin-top: 1rem;
+}
+
+main .img-container {
   position: relative;
+}
+
+main .img-container .details-btn {
+  background-color: rgba(158, 61, 238, 0.096);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(54, 51, 51, 0.068)), to(rgba(113, 34, 165, 0.281)));
+  background-image: linear-gradient(rgba(54, 51, 51, 0.068), rgba(113, 34, 165, 0.281));
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 98.5%;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -233,46 +287,28 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
 }
 
-#upcoming-slide .swiper-slide .movie-date {
-  font-weight: 100;
-  margin-top: 0.3rem;
-  color: #9d94c7;
-  font-size: 0.8rem;
+main .img-container .details-btn button {
+  background-color: rgba(158, 61, 238, 0.979);
+  border: none;
+  padding: 0.8rem;
+  position: absolute;
+  bottom: 25px;
+  color: #eee1f8;
   letter-spacing: 1px;
-  color: #eee1f8;
-  color: #e6cff5;
+  border-radius: 0.2rem;
 }
 
-#upcoming-slide h1 {
-  font-family: 'Bebas Neue', cursive;
-  font-weight: 100;
-  letter-spacing: 2px;
-  font-size: 3rem;
-  color: #eee1f8;
-  font-size: 2rem;
+main .img-container:hover .details-btn {
+  opacity: 1;
 }
 
-#upcoming-slide img {
-  max-width: 100%;
-}
-
-#upcoming-slide .swiper-container {
-  width: 100%;
-  margin-top: 1rem;
-}
-
-#upcoming-slide .swiper-button-prev,
-#upcoming-slide .swiper-button-next {
-  color: #9e44e2;
-}
-
-#popular-container {
-  margin-top: 5%;
-}
-
-#popular-container .movie-item {
+main .movie-item {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -286,19 +322,13 @@ main {
   transition: 0.3s ease;
 }
 
-#popular-container .movie-item .movie-title {
+main .movie-item .movie-title {
   margin-top: 0.5rem;
   text-align: center;
   color: rgba(226, 192, 248, 0.836);
 }
 
-#popular-container .movie-item .movie-stars {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-#popular-container .movie-item .movie-rating {
+main .movie-item .movie-rating {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -310,116 +340,159 @@ main {
   color: #f3ecec;
 }
 
-#popular-container .movie-item .movie-rating p {
+main .movie-item .movie-rating p {
   font-size: 0.8rem;
 }
 
-#popular-container .movie-item .movie-rating i {
+main .movie-item .movie-rating i {
   margin-right: 0.3rem;
   font-size: 0.8rem;
 }
 
-#popular-container .title-section {
+main #upcoming-slide {
+  margin-top: 10%;
+  width: 100%;
+  height: 100%;
+}
+
+main #upcoming-slide .swiper-slide {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: solid 1px rgba(38, 38, 48, 0.37);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-#popular-container .title-section span {
-  background-color: #9d44e2;
-  width: 5px;
-  height: 35px;
-  border: solid 1px #9d44e2;
-  margin-right: 0.4rem;
-}
-
-#popular-container h1 {
-  font-family: 'Bebas Neue', cursive;
+main #upcoming-slide .swiper-slide .movie-date {
   font-weight: 100;
-  letter-spacing: 2px;
-  font-size: 3rem;
-  color: #eee1f8;
-  font-size: 2rem;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: #e6cff5;
 }
 
-#popular-container img {
-  max-width: 100%;
-  cursor: pointer;
-  -webkit-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
+main #upcoming-slide .swiper-container {
+  width: 100%;
+  margin-top: 1rem;
 }
 
-#popular-container .popular-pagination {
+main #upcoming-slide .swiper-button-prev,
+main #upcoming-slide .swiper-button-next {
+  color: #9e44e2;
+}
+
+main #popular-container {
+  margin-top: 5%;
+}
+
+main #filtered-movies .title-section {
+  display: none;
+}
+
+main .movies-filter {
+  margin-top: 5%;
+}
+
+#movie-detail {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin-top: 2rem;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-#popular-container .popular-pagination button {
+#movie-detail ul {
+  list-style: none;
+}
+
+#movie-detail .details-container {
+  margin-top: 10%;
+}
+
+#movie-detail .details-container .similar-title {
+  margin-top: 3rem;
+  margin-bottom: -0.5rem;
+}
+
+#movie-detail .details-container .overview p {
+  width: 520px;
+  line-height: 1.3rem;
+}
+
+#movie-detail .details-container .detail-info {
+  margin-top: 1rem;
+}
+
+#movie-detail .details-container .detail-info li .contrast {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #eee1f8;
+}
+
+#movie-detail .details-container button {
   cursor: pointer;
   background-color: transparent;
-  border: solid 2px rgba(168, 83, 224, 0.233);
-  font-size: 1rem;
-  margin: 0.2rem;
-  border-radius: 6rem;
-  color: #8178af;
-  color: rgba(226, 192, 248, 0.692);
-  font-size: 0.8rem;
-  width: 40px;
-  height: 40px;
+  color: #eee1f8;
+  padding: 0.6rem 2rem;
+  border: solid 2px rgba(158, 61, 238, 0.87);
+  margin-top: 1rem;
+  letter-spacing: 1px;
 }
 
-#popular-container .popular-pagination button:hover {
-  background-color: rgba(168, 83, 224, 0.233);
-  color: #f0e9e9;
-}
-
-#popular-container #popular-movies {
+#movie-detail .details-container .similar-movies {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(200px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  -ms-grid-columns: (minmax(100px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   grid-gap: 2rem;
-  grid-row-gap: 2rem;
+  width: 520px;
   margin-top: 1rem;
 }
 
-.movies-filter {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (minmax(240px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  grid-gap: 2rem;
-  grid-row-gap: 2rem;
-  margin-top: 1rem;
+.movie-reviews {
+  background-color: #0e0e11;
+  border: solid 1px #121218;
+  padding: 4rem;
+  margin-top: 5rem;
 }
 
-.movies-filter img {
-  max-width: 100%;
+.movie-reviews h1 {
+  margin-bottom: 1rem;
 }
 
-.movies-filter .movie-item {
-  position: relative;
+.movie-reviews h3 {
+  margin-bottom: 0.5rem;
+  color: #eee1f8;
 }
 
-.movies-filter .movie-item .movie-rating {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #9e44e2;
-  padding: 0.3rem;
-  font-weight: 100;
-  font-family: 'Bebas Neue', cursive;
+.movie-reviews p {
+  margin-bottom: 1.2rem;
+}
+
+.movie-reviews a {
+  text-decoration: none;
+  color: #eee1f8;
+  border: solid 2px rgba(158, 61, 238, 0.63);
+  padding: 0.5rem 2rem;
+  margin-top: 5rem;
+}
+
+.movie-reviews div {
+  margin-top: 2rem;
 }
 
 footer {
   width: 100%;
-  height: 2.5rem;
+  height: 10rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -429,7 +502,10 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #851a5c;
+  background-image: -webkit-gradient(linear, left top, right top, from(#0a0a0e), to(#151118));
+  background-image: linear-gradient(to right, #0a0a0e, #151118);
+  border-top: solid 1px #1b161f;
+  color: #7a5f8d;
 }
 
 .movie-detail2 ul {

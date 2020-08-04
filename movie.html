@@ -14,30 +14,66 @@
     </style> -->
 </head>
 <body>
-
-    <header>
+    <div id="landing-page">
+        <div class="container">
+<header>
+    <!-- <div class="container"> -->
+        <h1>Movix</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search movie">
+            <button id="search" type="submit"><i class="fas fa-search"></i></button>
+        </div>
         <form>
-            <div>
-                <input type="text" id="searchInput">
+            <div class="filter-options">
+                <span>Order By:</span>
+                <select name="genres" id="select-genre"></select>
+                <select name="popular" id="filter-movie">
+                    <option value="popularity.desc" selected="true">Popularity</option>
+                    <option value="revenue.desc">Revenue</option>
+                    <option value="vote_count.desc">Most voted</option>
+                    <option value="vote_average.desc">Top Rated</option>
+                    <option value="primary_release_date.desc">Release Date</option>
+                </select>
+                <button class="filter-btn">Filter</button>
             </div>
-            <button id="search">Search</button>
-            <!-- <select name="genres" id="select-genre"></select> -->
+            <!-- <button class="filter-btn">Filter</button> -->
+            <!-- <select name="genres" id="select-genre"></select>
+        <select name="popular" id="filter-movie">
+            <option value="popularity.desc" selected="true">Popularity</option>
+            <option value="revenue.desc">Revenue</option>
+            <option value="vote_count.desc">Most voted</option>
+            <option value="vote_average.desc">Top Rated</option>
+            <option value="primary_release_date.desc">Release Date</option>
+        </select> -->
         </form>
-    </header>
+
+    <!-- </div> -->
+</header>
+</div>
+<!-- <div class="container2"> -->
+
+</div>
+
 
     <main>
         <div id="movies-filter"></div>
         <!-- <div id="movie-container"></div> -->
-        <div id="movie-detail"></div>
+        <div id="movie-detail">
+
+        </div>
         <!-- <div id="movie-detail2"></div> -->
         <div class="movie-trailer">
             
         </div>
         <div class="movie-reviews">
         </div>
-        <div id="similar-movies"></div>
+        <!-- <div id="similar-movies"></div> -->
 
     </main>
+
+    <footer>
+        <p><span>Movix</span> &copy 2020</p> 
+    </footer>
    
     
 
@@ -47,5 +83,6 @@
     <script>
         movieData()
     </script>
+
 </body>
 </html>
