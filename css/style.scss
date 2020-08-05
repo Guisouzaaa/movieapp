@@ -19,6 +19,14 @@ body {
   overflow-x: hidden;
 }
 
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
 //header
 header {
   background-color: rgba(24, 23, 29, 0.863);
@@ -28,6 +36,7 @@ header {
   border-radius: 0 0 0.1rem 0.1rem;
   width: 100%;
   justify-content: space-between;
+  // z-index: 100;
 
   h1 {
     font-family: "Black Han Sans", sans-serif;
@@ -35,18 +44,12 @@ header {
     color: rgb(158, 61, 238);
   }
 
-  .container {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-  }
-
   form {
     display: flex;
     align-items: center;
     span {
-      color: rgba(134, 130, 148, 0.863);
+      color: rgba(230, 207, 245, 0.658);
+      letter-spacing: 1px;
     }
 
     select {
@@ -59,13 +62,14 @@ header {
       background-position-y: 5px;
       background-color: rgba(24, 23, 29, 0.89);
       border: solid 1px rgba(53, 50, 66, 0.863);
-      color: rgba(165, 160, 187, 0.795);
+      letter-spacing: 1px;
+      color: rgba(230, 207, 245, 0.644);
       padding: 0.5rem;
       margin: 1px;
       transition: 0.1s ease-in-out;
       &:hover {
         border: solid 1px rgb(111, 65, 148);
-        color: #f3eaea;
+        color: rgba(226, 192, 248, 0.959);
         transition: 0.2s ease;
       }
     }
@@ -75,12 +79,13 @@ header {
       width: 75px;
       padding: 0.5rem;
       background-color: transparent;
-      color: rgba(241, 241, 241, 0.664);
+      color: rgba(230, 207, 245, 0.644);
+      letter-spacing: 1px;
       margin-left: 3px;
       border: solid 1px rgba(53, 50, 66, 0.863);
       &:hover {
-        border: solid 1px rgb(111, 65, 148);
-        color: #f3eaea;
+        border: solid 1px rgba(179, 95, 235, 0.582);
+        color: rgba(226, 192, 248, 0.959);
         transition: 0.2s ease;
       }
     }
@@ -117,12 +122,13 @@ header {
   }
 }
 
+//rgba(34, 33, 33, 0.733),rgba(113, 34, 165, 0.329)),
 //home banner
 #landing-page {
   // width: 80%;
   width: 100vw;
   margin: 0 auto;
-  background: linear-gradient(rgba(34, 33, 33, 0.733),rgba(113, 34, 165, 0.329)),url("https://image.tmdb.org/t/p/original/orjiB3oUIsyz60hoEqkiGpy5CeO.jpg");
+  background: linear-gradient(rgba(34, 33, 33, 0.733),rgba(116, 44, 163, 0.329)),url("https://image.tmdb.org/t/p/original/orjiB3oUIsyz60hoEqkiGpy5CeO.jpg");
   background-position: top;
   background-size: 100%;
   height: 70vh;
@@ -130,8 +136,8 @@ header {
   flex-direction: column;
   align-items: center;
   position: relative;
-  border-bottom: solid 1px rgba(158, 61, 238, 0.5);
-  z-index: -1;
+  border-bottom: solid 1px rgba(158, 61, 238, 0.164);
+  // z-index: ;
 
   .landing-txt {
     width: 500px;
@@ -150,13 +156,6 @@ header {
     p {
       color: rgb(226, 192, 248);
     }
-  }
-
-  .container {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
   }
 }
 
@@ -354,26 +353,78 @@ main {
 }
 
 //DETAILS SECTION
+#movie-banner {
+  width: 100vw;
+  margin: 0 auto;
+  background-position: top;
+  background-size: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  
+#searchInput,
+#search{
+  display: none;
+}
+
+a{
+  text-decoration: none;
+  color: rgba(230, 207, 245, 0.911);
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  background-color: transparent;
+  border: solid 1px rgba(53, 50, 66, 0.863);
+  padding: 0.5rem 1rem;
+}
+}
+
 #movie-detail{
-  // height: 100vh;
-  // margin-top: 50%;
-  // z-index: 100;
+  margin-top: 10%;
+  z-index: 10;
+  position: relative;
 
   ul{
     list-style: none;
   }
 
-  // img{
-  //   max-width: 100%;
-  //   // margin-top: -20%;
-  // }
+  .poster-movie{
+    position: relative;
+    width: 100%;
+    span{
+      position: absolute;
+      bottom: 5rem;
+      right: 50%;
+    }
+
+    img{
+      max-width: 80%;
+      margin-top: -35%;
+    }
+    .bgimg{
+      position: absolute;
+      right: 105px;
+      top: -155px;
+      background-color: rgb(158, 61, 238);
+      border-radius: 0.1rem;
+      // border-radius: 2rem;
+      // background-image:  linear-gradient(to bottom right, rgb(160, 63, 240), rgba(84, 29, 139, 0.788));
+      background-image:  linear-gradient(to bottom right, rgba(167, 70, 247, 0.856), rgb(60, 16, 104));
+      width: 490px;
+      // width: 100%;
+      height: 700px;
+      z-index: -1;
+    }
+  }
+
   display: flex;
   width: 100%;
   justify-content: space-between;
   
 
   .details-container{
-    margin-top: 10%;
+    // margin-top: 10%;
 
     .similar-title{
       margin-top: 3rem;
@@ -381,15 +432,18 @@ main {
     }
 
     .overview{
+      width: 100%;
       p{
         width: 520px;
-        // color: rgba(226, 192, 248, 0.836);
+        // width: 100%;
         line-height: 1.3rem;
+
       }
     }
 
     .detail-info{
       margin-top: 1rem;
+      margin-bottom: 1rem;
       li{
         .contrast{
           text-transform: uppercase;
@@ -405,9 +459,14 @@ main {
       background-color: transparent;
       color: rgb(238, 225, 248);
       padding: 0.6rem 2rem;
-      border: solid 2px rgba(158, 61, 238, 0.87);
+      border: none;
       margin-top: 1rem;
       letter-spacing: 1px;
+      color: rgb(230, 207, 245);
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+      // background-color: rgb(158, 61, 238);
+      background-image:  linear-gradient(to bottom right, rgb(160, 63, 240), rgba(84, 29, 139, 0.788));
     }
 
     .similar-movies{
@@ -415,15 +474,36 @@ main {
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       grid-gap: 2rem;
       width: 520px;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       div{
         img{
-          // max-width: 100%;
+          width: 150px;
         }
       }
     }
+
+
   }
 }
+//similar-movies
+// .similar-container{
+//   margin-top: 5%;
+//   width: 100%;
+
+// }
+// .similar-movies{
+//   display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+//   grid-gap: 2rem;
+//   width: 520px;
+//   margin-top: 1rem;
+//   div{
+//     img{
+//       width: 170px;
+//     }
+//   }
+// }
+
 
 
 //movie reviews
@@ -445,13 +525,14 @@ main {
   a{
     text-decoration: none;
     color: rgb(238, 225, 248);
-    border: solid 2px rgba(158, 61, 238, 0.63);
+    // border: solid 2px rgba(158, 61, 238, 0.63);
+    background-image:  linear-gradient(to bottom right, rgb(160, 63, 240), rgba(84, 29, 139, 0.788));
     padding: 0.5rem 2rem;
     margin-top: 5rem;
   }
   
   div{
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
 }
 
@@ -509,3 +590,4 @@ footer {
 .hide {
   display: none;
 }
+

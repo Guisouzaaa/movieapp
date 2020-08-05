@@ -8,6 +8,8 @@ const popularSelect = document.getElementById("filter-movie");
 const displayPopular = document.getElementById('popular-container')
 const popularContainer = document.getElementById('popular-movies')
 
+// const bannerMovie = document.getElementById('movie-banner')
+
 
 
 // //Display movies
@@ -49,7 +51,6 @@ const popularContainer = document.getElementById('popular-movies')
 //searchMovies/filter
 const renderFilteredMovie = (data) => {
   movieFilter.innerHTML = "";
-  const hehe = inputElement.value
   const movies = data.results;
   let output = `<h1>poasiaosias</h1>`
   for (let i in movies){
@@ -65,18 +66,16 @@ const renderFilteredMovie = (data) => {
     document.querySelector(".movies-filter").innerHTML = output;
   }
 
-  // const movieBlock = movieContainer(movies);
-  // movieFilter.appendChild(movieBlock);
 
-//Filter Btn
-document.querySelector('.filter-btn').addEventListener('click', e => {
-  e.preventDefault();
-  const genreValue = selectBtn.value
-  const popularValue = popularSelect.value
-  filterMovie(genreValue,popularValue)
-  document.querySelector('.pagination-btn').classList.add('show', 'pagination')
-  displayPopular.classList.add('hide')
-})
+  document.querySelector('.filter-btn').addEventListener('click', e => {
+    e.preventDefault();
+    const genreValue = selectBtn.value
+    const popularValue = popularSelect.value
+    filterMovie(genreValue,popularValue)
+    document.querySelector('.pagination-btn').classList.add('show', 'pagination')
+    displayPopular.classList.add('hide')
+  })
+  
 };
 
 
@@ -129,8 +128,6 @@ function renderPopular(data) {
      `
   }
   document.getElementById("popular-movies").innerHTML = output;
-  // const movieBlock = movieContainer(movies, this.title);
-  // popularContainer.appendChild(movieBlock);
 }
 
 //Error
@@ -156,14 +153,27 @@ function movieDetails(id) {
   return false;
 }
 
+function getImages(data) {
+  const img = data.backdrops
+  document.getElementById('movie-banner').style.backgroundImage = `
+                linear-gradient(rgba(34, 33, 33, 0.425),
+                rgba(30, 18, 37, 0.329)),
+                url('${'https://image.tmdb.org/t/p/original' + img[0].file_path}')`
+}
+
 //Movie Details output
 const getDetails = (data) => {
   const movie = data;
+  console.log(movie)
   const genre = data.genres;
   const genreName = genre.map(e => `<span>${e.name}</span>`).join(", ")
 
+
     let output = `
+        <div class = "poster-movie">
         <img src = "${IMAGE_URL + movie.poster_path}"/>
+        <div class="bgimg"></div>
+        </div>
         <div class= "details-container">
         <div class = "overview">
             <h1>Movie overview</h1>
@@ -175,17 +185,20 @@ const getDetails = (data) => {
              <li><span class="contrast">Title:</span> ${movie.title}</li>
              <li><span class="contrast">Release Date:</span> ${movie.release_date}</li>
              <li><span class="contrast">Genre:</span> ${genreName}</li>
-             <li><span class="contrast">Duration:</span> ${movie.runtime}</li>
+             <li><span class="contrast">Duration:</span> ${movie.runtime} min</li>
              <li><span class="contrast">Rating</span> ${movie.vote_average}</li>
            </ul>
            <button class= "trailerBtn">Trailer</button>
         </div>
 
-        <h1 class="similar-title">Similar Movies</h1>
+        <h1>Similar Movies</h1>
         <div class="similar-movies">
-           <h1>Similar Movies</h1>
         </div>
+
         </div>
+
+
+
     `
   document.getElementById("movie-detail").innerHTML = output;
 };
@@ -218,27 +231,24 @@ function getReviews(data) {
     `;
   }
   document.querySelector(".movie-reviews").innerHTML = output;
+  // document.querySelector('.swiper-wrapper').innerHTML = output;
 }
-/*    <div>
-           <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
-        </div>  */
 
 //Similar movies
-function getSimilarMovies(data) {
+async function getSimilarMovies(data) {
   const movies = data.results;
   movies.length = 3;
   let output = ``
   for (let i in movies){
      output += `
-        <div>
-           <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
-        </div>
+     
+
+         <div>
+            <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
+         </div>
      `
   }
-  // document.getElementById("similar-movies").innerHTML = output;
   document.querySelector(".similar-movies").innerHTML=output
-  // const movieBlock = movieContainer(movies, this.title);
-  // similarMovies.appendChild(movieBlock);
 }
 
 //Filter genre
@@ -275,7 +285,6 @@ function pagination(){
     } else if (e.target.className === 'filter-next'){
       if(value < 1000){
         value++
-        // const hehe = value++
         const genreValue = selectBtn.value
         const popularValue = popularSelect.value
         filterMovie(genreValue,popularValue, value)

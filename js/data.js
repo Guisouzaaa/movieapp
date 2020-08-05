@@ -3,6 +3,9 @@ function movieData() {
     getMovieTrailer();
     getMovieReviews();
     getMovieRecommendations();
+    getMovieImages()
+    // getGenres()
+
   }
   
   function homeData() {
@@ -13,5 +16,6 @@ function movieData() {
     filterMovie()
     pagination()
     // filteredPagination()
+
   }
   

@@ -96,4 +96,11 @@ const filterMovie = (genre, options, value) => {
     requestMovies(url, renderFilteredMovie, handleError)
 }
 
+//get movie detail
+const getMovieImages = () => {
+    let movieId = sessionStorage.getItem("movieId");
+    const path = `/movie/${movieId}/images`
+    const url = dinamicUrl(path);
 
+    requestMovies(url, getImages, handleError)
+}
