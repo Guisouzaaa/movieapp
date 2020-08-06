@@ -7,63 +7,36 @@ const selectBtn = document.getElementById("select-genre");
 const popularSelect = document.getElementById("filter-movie");
 const displayPopular = document.getElementById('popular-container')
 const popularContainer = document.getElementById('popular-movies')
-
-// const bannerMovie = document.getElementById('movie-banner')
-
-
-
-// //Display movies
-// const movieSection = (movie) => {
-//   const section = document.createElement("section");
-//   section.classList = "movie-section";
-
-//   movie.map((movie) => {
-//     if (movie.poster_path) {
-//       const img = document.createElement("img");
-//       img.src = IMAGE_URL + movie.poster_path;
-//       img.setAttribute("data-movie-id", movie.id);
-//       img.addEventListener("click", function () {
-//         movieDetails(movie.id);
-//       });
-
-//       section.appendChild(img);
-//     }
-//   });
-//   return section;
-// }
-
-// //Movies container
-// const movieContainer = (movies, title = "") => {
-//   const movieElement = document.createElement("div");
-//   movieElement.setAttribute("class", "movie");
-
-//   const header = document.createElement("h1");
-//   header.innerHTML = title;
-
-//   const section = movieSection(movies);
-
-//   movieElement.appendChild(header);
-//   movieElement.appendChild(section);
-
-//   return movieElement;
-// };
+const filterSelect = document.getElementById('filter-movie')
 
 //searchMovies/filter
 const renderFilteredMovie = (data) => {
   movieFilter.innerHTML = "";
   const movies = data.results;
-  let output = `<h1>poasiaosias</h1>`
+  console.log(movies)
+  let output = ``
   for (let i in movies){
-    output += `
+    if (movies[i].poster_path){
+      output += `
       <div class="movie-item">
-        <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
-        <span class="movie-title">${movies[i].title}</span>
-        <div class ="movie-rating">
-           <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
-        </div>
+      <div class ="img-container">
+         <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
+      <div class="details-btn">
+         <button>Details</button>
+       </div>
       </div>
+       
+        
+        <span class="movie-title">${movies[i].title}</span>
+          
+       <div class ="movie-rating">
+         <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
+       </div>
+     </div>  
     `
     document.querySelector(".movies-filter").innerHTML = output;
+
+    }
   }
 
 
@@ -71,7 +44,16 @@ const renderFilteredMovie = (data) => {
     e.preventDefault();
     const genreValue = selectBtn.value
     const popularValue = popularSelect.value
+    const genreTxt = selectBtn.options[selectBtn.selectedIndex].text;
+    const filterTxt = filterSelect.options[filterSelect.selectedIndex].text;
+
     filterMovie(genreValue,popularValue)
+
+    document.querySelector('.name-value').style.display = "none"
+    document.querySelector('.item-searched').style.display = "flex"
+    document.getElementById("genre").innerHTML = genreTxt;
+    document.getElementById("filter").innerHTML = filterTxt;
+
     document.querySelector('.pagination-btn').classList.add('show', 'pagination')
     displayPopular.classList.add('hide')
   })
@@ -84,14 +66,16 @@ function renderUpcoming(data) {
   const movies = data.results;
   let output = ``
   for (let i in movies){
-    output += `
-       <div class ="swiper-slide">
-          <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
-          <span class="movie-date">${movies[i].release_date}</span>
-       </div>
-    `
+    if(movies[i].poster_path){
+      output += `
+      <div class ="swiper-slide">
+         <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
+         <span class="movie-date">${movies[i].release_date}</span>
+      </div>
+   `
+    document.querySelector(".swiper-wrapper").innerHTML = output;
+    }
   }
-  document.querySelector(".swiper-wrapper").innerHTML = output;
 }
 
 //Movie Details
@@ -104,15 +88,16 @@ document.addEventListener('click', e => {
 
 function renderPopular(data) {
   const movies = data.results;
-  console.log(movies)
+  // console.log(movies)
   let output = ``
   for (let i in movies){
-     output += `
+    if(movies[i].poster_path){
+      output += `
         <div class="movie-item">
          <div class ="img-container">
             <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
          <div class="details-btn">
-            <button>View Details</button>
+            <button>Details</button>
           </div>
          </div>
           
@@ -122,12 +107,11 @@ function renderPopular(data) {
           <div class ="movie-rating">
             <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
           </div>
-             
-           
         </div>  
      `
+     document.getElementById("popular-movies").innerHTML = output;
+    }
   }
-  document.getElementById("popular-movies").innerHTML = output;
 }
 
 //Error
@@ -138,12 +122,18 @@ const handleError = (error) => {
 //search button
 document.getElementById('search').addEventListener("click", (e) => {
   e.preventDefault();
-  const value = inputElement.value;
-  searchMovie(value);
 
-  displayPopular.classList.add('hide')
-
-  inputElement.value = "";
+  if(inputElement.value){
+    const value = inputElement.value;
+    searchMovie(value);
+  
+    document.querySelector('.item-searched').style.display = 'none'
+    document.querySelector('.name-value').style.display = "flex"
+    document.getElementById("movie-name").innerHTML = value;
+    displayPopular.classList.add('hide')
+  
+    inputElement.value = "";
+  }
 });
 
 //get movies id
@@ -220,35 +210,36 @@ const getTrailer = (data) => {
 function getReviews(data) {
   const movie = data.results;
   movie.length = 4;
-  let output = `<h1>Reviews</h1>`;
+  let output = ``;
   for (let i in movie) {
-    output += `
-    <div>
-        <h3>By: ${movie[i].author}</h3>
-        <p>${movie[i].content}</p>
-        <a href = "${movie[i].url}">See the post</a>
-    </div>
-    `;
+    if(movie[i].content){
+      output += `
+      <div>
+          <h3>By: ${movie[i].author}</h3>
+          <p>${movie[i].content}</p>
+          <a href = "${movie[i].url}">See the post</a>
+      </div>
+      `;
+      document.querySelector(".movie-reviews").innerHTML = output;
+    }
   }
-  document.querySelector(".movie-reviews").innerHTML = output;
-  // document.querySelector('.swiper-wrapper').innerHTML = output;
 }
 
 //Similar movies
 async function getSimilarMovies(data) {
   const movies = data.results;
-  movies.length = 3;
+  movies.length = 4;
   let output = ``
   for (let i in movies){
-     output += `
-     
-
-         <div>
-            <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
-         </div>
-     `
+    if(movies[i].poster_path){
+      output += `
+        <div>
+           <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
+        </div>
+      `
+    document.querySelector(".similar-movies").innerHTML=output
+    }
   }
-  document.querySelector(".similar-movies").innerHTML=output
 }
 
 //Filter genre

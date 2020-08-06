@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 
 
-    <title>MyMovieList</title>
+    <title>Movix</title>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
                         <option value="vote_average.desc">Top Rated</option>
                         <option value="primary_release_date.desc">Release Date</option>
                     </select>
-                    <button class="filter-btn">Filter</button>
+                    <button class="filter-btn">Search</button>
                 </div>
                 <!-- <button class="filter-btn">Filter</button> -->
                 <!-- <select name="genres" id="select-genre"></select>
@@ -91,6 +91,33 @@
 
 
         <div id="filtered-movies">
+            <div class="item-searched">
+                <div class="title-section">
+                    <span></span>
+                    <h1>Popular Movies</h1>
+                </div>
+                <span class="title-searched">You searched for: </span>
+                <div class="texts">
+                    <span id="genre"></span>
+                    <span id="filter"></span>
+                </div>
+                <!-- <span id="genre"></span>
+                <span id="filter"></span> -->
+            </div>
+            <div class="name-value">
+                <div class="title-section">
+                    <span></span>
+                    <h1>Popular Movies</h1>
+                </div>
+                <span class="title-searched">You searched for: </span>
+                <div class="texts">
+                    <span id="movie-name"></div>
+                </div>
+                
+            </div>
+            <!-- <span id="genre"></span>
+            <span id="filter"></span> -->
+            <!-- <h1 class="search-name"></h1> -->
             <div class="movies-filter"></div>
             <div class="pagination-btn">
                 <button class="filter-prev"><i class="fas fa-chevron-left"></i></button>
@@ -153,7 +180,7 @@
                     spaceBetween: 10,
                 },
                 1024: {
-                    slidesPerView: 6,
+                    slidesPerView: 7,
                     spaceBetween: 10,
                 },
             }
