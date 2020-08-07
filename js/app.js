@@ -13,7 +13,7 @@ const filterSelect = document.getElementById('filter-movie')
 const renderFilteredMovie = (data) => {
   movieFilter.innerHTML = "";
   const movies = data.results;
-  console.log(movies)
+  // console.log(movies)
   let output = ``
   for (let i in movies){
     if (movies[i].poster_path){
@@ -43,6 +43,7 @@ const renderFilteredMovie = (data) => {
   document.querySelector('.filter-btn').addEventListener('click', e => {
     e.preventDefault();
     const genreValue = selectBtn.value
+    // console.log(genreValue)
     const popularValue = popularSelect.value
     const genreTxt = selectBtn.options[selectBtn.selectedIndex].text;
     const filterTxt = filterSelect.options[filterSelect.selectedIndex].text;
@@ -154,7 +155,7 @@ function getImages(data) {
 //Movie Details output
 const getDetails = (data) => {
   const movie = data;
-  console.log(movie)
+  // console.log(movie)
   const genre = data.genres;
   const genreName = genre.map(e => `<span>${e.name}</span>`).join(", ")
 
@@ -170,7 +171,9 @@ const getDetails = (data) => {
             <p>${movie.overview}</p>
         </div>
         <div class = "detail-info">
-           <h1>Details</h1>
+        <h1>Details</h1>
+    
+           
            <ul>
              <li><span class="contrast">Title:</span> ${movie.title}</li>
              <li><span class="contrast">Release Date:</span> ${movie.release_date}</li>
@@ -178,13 +181,18 @@ const getDetails = (data) => {
              <li><span class="contrast">Duration:</span> ${movie.runtime} min</li>
              <li><span class="contrast">Rating</span> ${movie.vote_average}</li>
            </ul>
-           <button class= "trailerBtn">Trailer</button>
-        </div>
+      
 
-        <h1>Similar Movies</h1>
-        <div class="similar-movies">
         </div>
+        <div class = "movie-trailer">
+        </div>
+        
 
+        <div class="title-section">
+           <span></span>
+           <h1>Similar Movies</h1>
+        </div>
+        <div class="similar-movies"></div>
         </div>
 
 
@@ -193,40 +201,43 @@ const getDetails = (data) => {
   document.getElementById("movie-detail").innerHTML = output;
 };
 
+
 // Display movie trailer
 const getTrailer = (data) => {
   const movie = data.results;
-  document.addEventListener("click", e => {
-    if (e.target.className === "trailerBtn") {
-      let output = `
-          <iframe src = "https://www.youtube.com/embed/${movie[0].key}" width="250" height="300"></iframe>
-      `;
-      document.querySelector(".movie-trailer").innerHTML = output;
-    }
-  });
+  // console.log(movie)
+  let output = `
+      <a class="popup-youtube" href="https://www.youtube.com/watch?v=${movie[0].key}">Trailer</a>
+  `;
+  document.querySelector(".movie-trailer").innerHTML = output;
 }
 
 //Movie Reviews
 function getReviews(data) {
   const movie = data.results;
-  movie.length = 4;
+  console.log(movie)
   let output = ``;
-  for (let i in movie) {
-    if(movie[i].content){
-      output += `
-      <div>
-          <h3>By: ${movie[i].author}</h3>
-          <p>${movie[i].content}</p>
-          <a href = "${movie[i].url}">See the post</a>
-      </div>
-      `;
-      document.querySelector(".movie-reviews").innerHTML = output;
+  if(movie.length === 0){
+    document.querySelector(".reviews-section").style.display = "none"
+
+  }else{
+    for (let i in movie) {
+      if(movie[i].content){
+        output += `
+        <div>
+            <h3>By: ${movie[i].author}</h3>
+            <p>${movie[i].content}</p>
+            <a href = "${movie[i].url}">See the post</a>
+        </div>
+        `;
+      }
     }
   }
+  document.querySelector(".movie-reviews").innerHTML = output;
 }
 
 //Similar movies
-async function getSimilarMovies(data) {
+function getSimilarMovies(data) {
   const movies = data.results;
   movies.length = 4;
   let output = ``
@@ -235,6 +246,7 @@ async function getSimilarMovies(data) {
       output += `
         <div>
            <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
+           <p>${movies[i].title}</p>
         </div>
       `
     document.querySelector(".similar-movies").innerHTML=output
@@ -248,9 +260,9 @@ function selectGenres(data){
   let output = `<option value = "" selected="true">All</option>`
   for (let i in genreOptions) {
     output += `
-         <option value="${genreOptions[i].id}">${genreOptions[i].name}</option> 
+         <option value="${genreOptions[i].id}">${genreOptions[i].name}</option>
     `;
-    document.querySelector("#select-genre").innerHTML = output;
+    document.getElementById("select-genre").innerHTML = output;
   }
 }
 
