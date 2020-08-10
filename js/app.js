@@ -50,6 +50,9 @@ const renderFilteredMovie = (data) => {
 
     filterMovie(genreValue,popularValue)
 
+
+    document.querySelector('form').classList.remove('nav-active')
+    // document.querySelector('.burger').classList.toggle('burgerToggle')
     document.querySelector('.name-value').style.display = "none"
     document.querySelector('.item-searched').style.display = "flex"
     document.getElementById("genre").innerHTML = genreTxt;
@@ -305,3 +308,6 @@ function pagination(){
     }
   })
 }
+
+
+

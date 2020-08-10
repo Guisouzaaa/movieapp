@@ -22,12 +22,18 @@
         <div id="landing-page">
             <div class="container">
     <header>
-            <h1>Movix</h1>
+            <!-- <h1>Movix</h1> -->
             <div class="search-container">
+                <h1>Movix</h1>
                 <input type="text" id="searchInput" placeholder="Search movie">
                 <button id="search" type="submit"><i class="fas fa-search"></i></button>
             </div>
             <form>
+                <div class="close-nav">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
                 <div class="filter-options">
                     <span>Order By:</span>
                         <select name="genres" id="select-genre">
@@ -42,17 +48,31 @@
                     </select>
 
                     <button class="filter-btn">Search</button>
+
+                    <!-- <div class="burger nav">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                    </div> -->
                 </div>
             </form>
+
+            <div class="burger nav">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
 
     </header>
 </div>
 
 
     
+
+
     <div class="container">
         <div class="landing-txt">
-            <h2>Browse your favorite movies</h2>
+            <h2>Browse your favorite movie</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
              Nam consequuntur reprehenderit ex a, modi perspiciatis repellat ad quae ea cumque.</p>
         </div>
@@ -134,6 +154,7 @@
     <script src="js/apiTransaction.js"></script>
     <script src="js/app.js"></script>
     <script src="js/data.js"></script>
+    <script src="js/effects.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <script>

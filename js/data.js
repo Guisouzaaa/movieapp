@@ -16,6 +16,8 @@ function movieData() {
     filterMovie()
     pagination()
     // filteredPagination()
+    // navShow();
+    // closeNav();
 
   }
   

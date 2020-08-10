@@ -3,22 +3,72 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 
-
-
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 $bgcolor: rgb(10, 10, 14);
 $contrastColor: rgb(14, 14, 17);
 
-$background: #e74c3c;
+// $background: #e74c3c;
 $select-color: #fff;
 $select-background: rgba(24, 23, 29, 0.89);
 $select-width: 140px;
-$select-height:  40px;
+$select-height: 40px;
+
+//Variables
+$small-desktop: 1150px;
+$xs-desktop: 930px;
+$tablet: 780px;
+$xs-tablet: 705px;
+$mobile: 625px;
+$sm-mobile: 565px;
+$xs-mobile: 380px;
+
+//Media Queries
+@mixin small-desktop {
+  @media (max-width: #{$small-desktop}) {
+    @content;
+  }
+}
+
+@mixin xs-desktop {
+  @media (max-width: #{$xs-desktop}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin xs-tablet {
+  @media (max-width: #{$xs-tablet}) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$mobile}) {
+    @content;
+  }
+}
+
+@mixin sm-mobile {
+  @media (max-width: #{$sm-mobile}) {
+    @content;
+  }
+}
+
+@mixin xs-mobile {
+  @media (max-width: #{$xs-mobile}) {
+    @content;
+  }
+}
 
 body {
   background-color: $bgcolor;
@@ -28,12 +78,17 @@ body {
   overflow-x: hidden;
 }
 
-
 .container {
-  width: 80%;
+  width: 85%;
+  // width: 1200px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+  // white-space: nowrap;
+  // white-space: nowrap;
+  // overflow: hidden;
+
+  // display: flex;
+  // justify-content: space-between;
+  // flex-direction: column;
 }
 
 //header
@@ -46,6 +101,8 @@ header {
   width: 100%;
   justify-content: space-between;
   // z-index: 100;
+  position: relative;
+
 
   h1 {
     font-family: "Black Han Sans", sans-serif;
@@ -59,6 +116,20 @@ header {
     span {
       color: rgba(230, 207, 245, 0.658);
       letter-spacing: 1px;
+      @include small-desktop {
+        width: 120px;
+        font-size: 0.8rem;
+      }
+
+      @include xs-desktop{
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        margin: 0 auto;
+      }
+    }
+
+    @include xs-desktop {
+      display: none;
     }
 
     select {
@@ -84,6 +155,16 @@ header {
         color: rgba(226, 192, 248, 0.959);
         transition: 0.2s ease;
       }
+      @include small-desktop {
+        width: 120px;
+        font-size: 0.7rem;
+      }
+      @include xs-desktop{
+        width: 80%;
+        margin: 0;
+        margin-top: 0.7rem;
+        font-size: .9rem;
+      }
     }
 
     button {
@@ -103,12 +184,74 @@ header {
       // font-size: 0.8rem;
       font-size: 1.1rem;
       font-family: "Bebas Neue", cursive;
-      background-image:  linear-gradient(to bottom right, rgb(160, 63, 240), rgba(84, 29, 139, 0.788));
+      background-image: linear-gradient(
+        to bottom right,
+        rgb(160, 63, 240),
+        rgba(84, 29, 139, 0.788)
+      );
+      @include xs-desktop{
+        margin-top: 0.7rem;
+        width: 40%;
+      }
     }
+
+    //responsive menu
+    @include xs-desktop {
+      position: fixed;
+      right: 0px;
+      height: 100vh;
+      width: 50%;
+      top: 0;
+      display: flex;
+      // flex-direction: column;
+      // justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform 0.5s ease-in;
+      background-color: rgba(24, 23, 29, 0.925);
+      color: rgb(139, 136, 136);
+      // overflow-y: none;
+    }
+
+    @include tablet{
+      width: 70%;
+    }
+
+    @include sm-mobile{
+      width: 100%;
+    }
+
+    .filter-options {
+      position: relative;
+      @include xs-desktop {
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        margin: 0 auto;
+
+        justify-content: center;
+        align-items: center;;
+      }
+    }
+
   }
 
   .search-container {
+    display: flex;
     position: relative;
+    width: 50%;
+    @include small-desktop {
+      width: 45%;
+    }
+    @include xs-desktop {
+      width: 80%;
+      justify-content: space-between;
+    }
+    @include mobile{
+      flex-direction: column;
+      width: 100%;
+    }
   }
 
   input {
@@ -117,10 +260,19 @@ header {
     border: solid 1px rgba(53, 50, 66, 0.863);
     padding: 0.6rem;
     border-radius: 0.1rem;
-    width: 500px;
+    width: 100%;
     color: rgba(222, 220, 231, 0.849);
     transition: 0.1s ease-in-out;
     height: 40px;
+    margin-left: 1.2rem;
+    @include xs-desktop {
+      height: 100%;
+      margin-left: 3.5rem;
+    }
+    @include mobile{
+      margin-top: 0.3rem;
+      margin-left: 0;
+    }
   }
 
   input:focus {
@@ -134,37 +286,119 @@ header {
     border: none;
     top: 7px;
     right: 10px;
+    // left: 0;
     font-size: 1.2rem;
     color: rgba(78, 69, 85, 0.644);
+    @include mobile{
+      top: 51px;
+    }
   }
 
+  //burgers
+  .close-nav,
+  .burger {
+    cursor: pointer;
+    display: none;
+    // z-index: 100;
+    // margin-top: 0.7rem;
+    position: absolute;
+    right: 1rem;
+    @include xs-desktop {
+      display: block;
+    }
+    @include mobile{
+      margin-top: -2.6rem;
+    }
+  }
 
+  .close-nav {
+    @include mobile{
+      margin-top: 0;
+    }
+  }
+  // .burger{
+  //   z-index: 100;
+  //   @include mobile{
+  //     position: absolute;
+  //     top: 0;
+  //     right: 10px;
+  //     background-color: red;
+  //   }
+  // }
 
-  
+  .burger div {
+    width: 30px;
+    height: 2px;
+    background-color: rgb(158, 61, 238);
+    margin: 5px;
+    // transition: all 0.3s ease;
+  }
+
+  .close-nav {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    .line1 {
+      transform: rotate(-45deg) translate(-5px, 5px);
+    }
+    .line2 {
+      opacity: 0;
+    }
+    .line3 {
+      transform: rotate(45deg) translate(-5px, -5px);
+    }
+  }
+
+  .close-nav div {
+    width: 30px;
+    height: 2px;
+    background-color: rgb(158, 61, 238);
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-active {
+    transform: translateX(0%) !important;
+    z-index: 100;
+    opacity: 1;
+  }
 }
 
-//rgba(34, 33, 33, 0.733),rgba(113, 34, 165, 0.329)),
 //home banner
 #landing-page {
-  // width: 80%;
-  width: 100vw;
   margin: 0 auto;
-  background: linear-gradient(rgba(34, 33, 33, 0.733),rgba(116, 44, 163, 0.329)),url("https://image.tmdb.org/t/p/original/orjiB3oUIsyz60hoEqkiGpy5CeO.jpg");
+  background: linear-gradient(
+      rgba(34, 33, 33, 0.733),
+      rgba(116, 44, 163, 0.329)
+    ),
+    url("https://image.tmdb.org/t/p/original/orjiB3oUIsyz60hoEqkiGpy5CeO.jpg")
+      no-repeat;
   background-position: top;
-  background-size: 100%;
-  height: 70vh;
+  background-size: cover;
+  min-height: 50vh;
+  // height: 500px;
+  // height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative;
+  // align-items: center;
+  // justify-content: center;
+  // position: relative;
   border-bottom: solid 1px rgba(158, 61, 238, 0.164);
-  // z-index: ;
+  margin-bottom: 8%;
 
   .landing-txt {
     width: 500px;
     border-radius: 0.1rem;
-    position: absolute;
-    top: 40%;
+    padding: 7rem 0;
+
+    @include tablet{
+      width: 90%;
+    }
+
+    @include mobile{
+      width: 100%;
+    }
+
     h2 {
       text-transform: uppercase;
       font-weight: 100;
@@ -172,28 +406,43 @@ header {
       font-family: "Anton", sans-serif;
       color: rgb(238, 225, 248);
       font-size: 2.4rem;
+      @include tablet{
+        font-size: 2rem;
+      }
+
+      @include mobile{
+        font-size: 1.7rem;
+      }
     }
 
     p {
       color: rgb(226, 192, 248);
+      font-size: 1.3rem;
+      line-height: 2rem;
+      @include tablet{
+        font-size: 1.1rem;
+        line-height: 1.5rem;
+      }
+
+      @include mobile{
+        font-size: 1rem;
+      }
     }
   }
 }
 
 //Main content
 main {
-  width: 80%;
+  width: 85%;
+  // width: 1200px;
   margin: 0 auto;
   margin-bottom: 10%;
   margin-top: -6%;
-
-
 
   //movie imgs
   img {
     max-width: 100%;
     cursor: pointer;
-    
   }
 
   //section titles
@@ -255,13 +504,16 @@ main {
     // }
   }
 
-  .img-container{
+  .img-container {
     position: relative;
     // width: 100px;
-    
-    .details-btn{
+
+    .details-btn {
       background-color: rgba(158, 61, 238, 0.096);
-      background-image: linear-gradient(rgba(27, 24, 29, 0.342),rgba(30, 25, 32, 0.555));
+      background-image: linear-gradient(
+        rgba(27, 24, 29, 0.342),
+        rgba(30, 25, 32, 0.555)
+      );
       position: absolute;
       top: 0;
       bottom: 0;
@@ -277,9 +529,13 @@ main {
       pointer-events: none;
       transition: 0.3s ease;
 
-      button{
+      button {
         background-color: rgb(157, 68, 226);
-        background-image:  linear-gradient(to bottom right, rgb(160, 63, 240), rgba(84, 29, 139, 0.788));
+        background-image: linear-gradient(
+          to bottom right,
+          rgb(160, 63, 240),
+          rgba(84, 29, 139, 0.788)
+        );
         border: none;
         padding: 0.8rem 2rem;
         position: absolute;
@@ -294,11 +550,11 @@ main {
       }
     }
 
-    &:hover .details-btn{
+    &:hover .details-btn {
       opacity: 1;
-    }    
+    }
 
-    &:hover button{
+    &:hover button {
       opacity: 1;
       bottom: 25px;
     }
@@ -340,12 +596,12 @@ main {
     }
   }
 
-
   //upcoming movies
   #upcoming-slide {
     margin-top: 10%;
     width: 100%;
-    height: 100%;
+    // height: 100%;
+    // min-height: 100vh;
 
     .swiper-slide {
       position: relative;
@@ -379,21 +635,20 @@ main {
   }
 
   //Filtered movies
-  #filtered-movies{
+  #filtered-movies {
     margin-top: 10%;
 
-
-    #genre{
+    #genre {
       margin-right: 0.1rem;
     }
 
     .name-value,
-    .item-searched{
+    .item-searched {
       position: relative;
       width: 100%;
       display: none;
       border-bottom: solid 1px rgba(38, 38, 48, 0.37);
-      .title-searched{
+      .title-searched {
         font-family: "Bebas Neue", cursive;
         color: rgb(238, 225, 248);
         letter-spacing: 1pxs;
@@ -401,29 +656,32 @@ main {
         margin-right: 10px;
       }
 
-      .texts{
+      .texts {
         position: absolute;
         left: 215px;
         bottom: 15px;
       }
     }
 
-
     #genre,
     #filter,
-    #movie-name{
+    #movie-name {
       // background-color: red;
       // border: solid 2px rgb(157, 68, 226);
       // font-family: "Bebas Neue", cursive;
       // letter-spacing: 0.1rem;
       padding: 0.5rem 1rem;
       border-radius: 3rem;
-      color:rgb(238, 225, 248);
+      color: rgb(238, 225, 248);
       font-size: 0.9rem;
       // font-size: 1rem;
-      background-image:  linear-gradient(to bottom right, rgb(160, 63, 240), rgba(84, 29, 139, 0.788));
+      background-image: linear-gradient(
+        to bottom right,
+        rgb(160, 63, 240),
+        rgba(84, 29, 139, 0.788)
+      );
     }
-  
+
     // .title-section{
     //   display: none;
     // }
@@ -434,9 +692,9 @@ main {
 }
 
 //DETAILS SECTION
-.movie-trailer{
+.movie-trailer {
   margin-bottom: 1.5rem;
-  a{
+  a {
     cursor: pointer;
     background-color: transparent;
     color: rgb(238, 225, 248);
@@ -449,7 +707,11 @@ main {
     font-family: "Bebas Neue", cursive;
     font-size: 1.3rem;
     // background-color: rgb(158, 61, 238);
-    background-image:  linear-gradient(to bottom right, rgb(160, 63, 240), rgba(84, 29, 139, 0.788));
+    background-image: linear-gradient(
+      to bottom right,
+      rgb(160, 63, 240),
+      rgba(84, 29, 139, 0.788)
+    );
   }
 }
 
@@ -463,15 +725,14 @@ main {
   flex-direction: column;
   align-items: center;
   position: relative;
-  
-#searchInput,
-#search{
-  display: none;
+
+  #searchInput,
+  #search {
+    display: none;
+  }
 }
 
-}
-
-a{
+a {
   text-decoration: none;
   color: rgba(230, 207, 245, 0.911);
   letter-spacing: 1px;
@@ -479,11 +740,15 @@ a{
   font-size: 1.3rem;
   background-color: transparent;
   // border: solid 1px rgba(53, 50, 66, 0.863);
-  background-image:  linear-gradient(to bottom right, rgb(160, 63, 240), rgba(84, 29, 139, 0.788));
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(160, 63, 240),
+    rgba(84, 29, 139, 0.788)
+  );
   padding: 0.5rem 1rem;
 }
 
-#movie-detail{
+#movie-detail {
   margin-top: 10%;
   height: 100vh;
   z-index: 10;
@@ -491,19 +756,19 @@ a{
   display: flex;
   width: 100%;
   justify-content: space-between;
-  ul{
+  ul {
     list-style: none;
   }
 
-  .poster-movie{
+  .poster-movie {
     width: 100%;
-    span{
+    span {
       position: absolute;
       bottom: 5rem;
       right: 50%;
     }
 
-    img{
+    img {
       max-width: 80%;
       width: 500px;
       // margin-top: -35%;
@@ -511,7 +776,7 @@ a{
       top: -80px;
     }
 
-    .bgimg{
+    .bgimg {
       position: absolute;
       right: 105px;
       left: 35px;
@@ -519,36 +784,39 @@ a{
       top: -6px;
       background-color: rgb(158, 61, 238);
       border-radius: 0.1rem;
-      background-image:  linear-gradient(to bottom right, rgba(167, 70, 247, 0.856), rgb(60, 16, 104));
+      background-image: linear-gradient(
+        to bottom right,
+        rgba(167, 70, 247, 0.856),
+        rgb(60, 16, 104)
+      );
       width: 490px;
       height: 700px;
       z-index: -1;
     }
   }
 
-  .details-container{
+  .details-container {
     // margin-top: 10%;
 
-    .similar-title{
+    .similar-title {
       margin-top: 3rem;
       margin-bottom: -0.5rem;
     }
 
-    .overview{
+    .overview {
       width: 100%;
-      p{
+      p {
         width: 520px;
         // width: 100%;
         line-height: 1.3rem;
-
       }
     }
 
-    .detail-info{
+    .detail-info {
       margin-top: 1.5rem;
       margin-bottom: 1rem;
-      li{
-        .contrast{
+      li {
+        .contrast {
           text-transform: uppercase;
           font-weight: bold;
           letter-spacing: 1px;
@@ -562,40 +830,45 @@ a{
       margin-top: 3rem;
     }
 
-    .similar-movies{
+    .similar-movies {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
       grid-gap: 2rem;
       width: 520px;
       margin-top: 0.5rem;
-      div{
-        p{
+      div {
+        p {
           font-size: 0.8rem;
           text-align: center;
         }
-        img{
+        img {
           width: 180px;
         }
       }
     }
-
-
   }
 }
 
-
 //movie reviews
-.reviews-section{
-  .title-section{
+.reviews-section {
+  .title-section {
     border-bottom: none;
   }
 }
 
-.movie-reviews{
+.movie-reviews {
   background-color: rgb(30, 30, 61);
-  background-image:  linear-gradient(to bottom right, rgb(19, 12, 22), rgba(46, 18, 80, 0.788));
-  background-image:  linear-gradient(to bottom right, rgb(13, 13, 19), rgba(20, 14, 22, 0.884));
-  border: solid 1px rgb(18, 18, 24);;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(19, 12, 22),
+    rgba(46, 18, 80, 0.788)
+  );
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(13, 13, 19),
+    rgba(20, 14, 22, 0.884)
+  );
+  border: solid 1px rgb(18, 18, 24);
   padding: 1rem 2rem;
   margin-top: 1rem;
   height: 500px;
@@ -606,28 +879,31 @@ a{
   flex-direction: column;
   // align-items: center;
 
-
-  h1{
+  h1 {
     margin-bottom: 1rem;
   }
-  h3{
+  h3 {
     margin-bottom: 0.5rem;
-    color: rgb(238, 225, 248);;
+    color: rgb(238, 225, 248);
   }
-  p{
+  p {
     margin-bottom: 1.2rem;
   }
-  a{
+  a {
     text-decoration: none;
     color: rgb(238, 225, 248);
     // border: solid 2px rgba(158, 61, 238, 0.63);
-    background-image:  linear-gradient(to bottom right, rgb(160, 63, 240), rgba(84, 29, 139, 0.788));
+    background-image: linear-gradient(
+      to bottom right,
+      rgb(160, 63, 240),
+      rgba(84, 29, 139, 0.788)
+    );
     padding: 0.5rem 2rem;
     margin-top: 5rem;
     // margin-bottom: 1rem;
   }
-  
-  div{
+
+  div {
     margin-top: 0rem;
     // margin-bottom: 30rem;
     padding: 2rem 0;
@@ -638,59 +914,41 @@ a{
 .movie-reviews::-webkit-scrollbar {
   width: 10px;
 }
- 
+
 .movie-reviews::-webkit-scrollbar-track {
   background: rgba(26, 23, 31, 0.952);
 }
- 
+
 .movie-reviews::-webkit-scrollbar-thumb {
   background: rgb(160, 63, 240);
 }
 
 //fade magnificpopup
 .mfp-fade.mfp-bg {
-	opacity: 0;
-	-webkit-transition: all 0.15s ease-out; 
-	-moz-transition: all 0.15s ease-out; 
-	transition: all 0.15s ease-out;
+  opacity: 0;
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
 }
 .mfp-fade.mfp-bg.mfp-ready {
-	opacity: 0.9;
+  opacity: 0.9;
 }
 .mfp-fade.mfp-bg.mfp-removing {
-	opacity: 0;
+  opacity: 0;
 }
 
 .mfp-fade.mfp-wrap .mfp-content {
-	opacity: 0;
-	-webkit-transition: all 0.15s ease-out; 
-	-moz-transition: all 0.15s ease-out; 
-	transition: all 0.15s ease-out;
+  opacity: 0;
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
 }
 .mfp-fade.mfp-wrap.mfp-ready .mfp-content {
-	opacity: 1;
+  opacity: 1;
 }
 .mfp-fade.mfp-wrap.mfp-removing .mfp-content {
-	opacity: 0;
+  opacity: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //footer
 footer {
