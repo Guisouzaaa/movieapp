@@ -37,6 +37,7 @@ header {
       -ms-flex-pack: justify;
           justify-content: space-between;
   position: relative;
+  z-index: 100;
 }
 
 header h1 {
@@ -702,32 +703,18 @@ main .movies-filter {
   margin-top: 3%;
 }
 
-.movie-trailer {
-  margin-bottom: 1.5rem;
-}
-
-.movie-trailer a {
-  cursor: pointer;
-  background-color: transparent;
-  color: #eee1f8;
-  padding: 0.6rem 2rem;
-  border: none;
-  margin-top: 1rem;
-  letter-spacing: 1px;
-  color: #e6cff5;
-  letter-spacing: 2px;
-  font-family: "Bebas Neue", cursive;
-  font-size: 1.3rem;
-  background-image: -webkit-gradient(linear, left top, right bottom, from(#a03ff0), to(rgba(84, 29, 139, 0.788)));
-  background-image: linear-gradient(to bottom right, #a03ff0, rgba(84, 29, 139, 0.788));
+.about-movie {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 #movie-banner {
   width: 100vw;
   margin: 0 auto;
   background-position: top;
-  background-size: 100%;
-  height: 50vh;
+  background-size: cover;
+  min-height: 50vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -741,35 +728,87 @@ main .movies-filter {
   position: relative;
 }
 
+#movie-banner:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(31, 28, 28, 0.705)), to(rgba(19, 19, 17, 0.692)));
+  background-image: linear-gradient(rgba(31, 28, 28, 0.705), rgba(19, 19, 17, 0.692));
+  pointer-events: none;
+}
+
+#movie-banner .movie-trailer {
+  position: absolute;
+  top: 50%;
+  z-index: 100;
+}
+
+#movie-banner .movie-trailer a {
+  font-size: 3rem;
+  color: #9e3dee;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+#movie-banner .movie-trailer a:hover {
+  color: #b772f0;
+}
+
 #movie-banner #searchInput,
 #movie-banner #search {
   display: none;
 }
 
-a {
+.back-home a {
   text-decoration: none;
   color: rgba(230, 207, 245, 0.911);
   letter-spacing: 1px;
   font-family: "Bebas Neue", cursive;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   background-color: transparent;
   background-image: -webkit-gradient(linear, left top, right bottom, from(#a03ff0), to(rgba(84, 29, 139, 0.788)));
   background-image: linear-gradient(to bottom right, #a03ff0, rgba(84, 29, 139, 0.788));
   padding: 0.5rem 1rem;
 }
 
+@media (max-width: 625px) {
+  .back-home a {
+    font-size: 1rem;
+    padding: 0.4rem 0.7rem;
+  }
+}
+
 #movie-detail {
   margin-top: 10%;
-  height: 100vh;
+  margin-bottom: 2rem;
   z-index: 10;
-  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 60%;
+      grid-template-columns: 1fr 60%;
+  grid-gap: 2rem;
+}
+
+@media (max-width: 1150px) {
+  #movie-detail {
+    -ms-grid-columns: 1fr 55%;
+        grid-template-columns: 1fr 55%;
+  }
+}
+
+@media (max-width: 780px) {
+  #movie-detail {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
 }
 
 #movie-detail ul {
@@ -778,6 +817,8 @@ a {
 
 #movie-detail .poster-movie {
   width: 100%;
+  position: relative;
+  padding: 0;
 }
 
 #movie-detail .poster-movie span {
@@ -786,51 +827,135 @@ a {
   right: 50%;
 }
 
+@media (max-width: 780px) {
+  #movie-detail .poster-movie {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
 #movie-detail .poster-movie img {
-  max-width: 80%;
-  width: 500px;
-  position: absolute;
-  top: -80px;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: solid 2px rgba(143, 48, 221, 0.808);
+  margin: 0 auto;
 }
 
-#movie-detail .poster-movie .bgimg {
-  position: absolute;
-  right: 105px;
-  left: 35px;
-  top: -155px;
-  top: -6px;
-  background-color: #9e3dee;
-  border-radius: 0.1rem;
-  background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(167, 70, 247, 0.856)), to(#3c1068));
-  background-image: linear-gradient(to bottom right, rgba(167, 70, 247, 0.856), #3c1068);
-  width: 490px;
-  height: 700px;
-  z-index: -1;
+@media (max-width: 780px) {
+  #movie-detail .poster-movie img {
+    width: 360px;
+  }
 }
 
-#movie-detail .details-container .similar-title {
-  margin-top: 3rem;
-  margin-bottom: -0.5rem;
+#movie-detail .details-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-image: -webkit-gradient(linear, left top, right bottom, from(#0d0d13), to(rgba(20, 14, 22, 0.884)));
+  background-image: linear-gradient(to bottom right, #0d0d13, rgba(20, 14, 22, 0.884));
+  padding: 0.5rem 2rem;
+}
+
+@media (max-width: 625px) {
+  #movie-detail .details-container {
+    padding: 0.2rem 1.3rem;
+  }
+}
+
+#movie-detail .details-container .movie-title {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  border-bottom: none;
+}
+
+@media (max-width: 930px) {
+  #movie-detail .details-container .movie-title {
+    margin-bottom: -1rem;
+  }
+}
+
+#movie-detail .details-container .movie-title span {
+  display: none;
+}
+
+#movie-detail .details-container .movie-title h1 {
+  font-size: 2.5rem;
+  background: -webkit-linear-gradient(rgba(167, 70, 247, 0.856), #5f1ea0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 1096px) {
+  #movie-detail .details-container .movie-title h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 930px) {
+  #movie-detail .details-container .movie-title h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 780px) {
+  #movie-detail .details-container .movie-title h1 {
+    margin-top: 1rem;
+  }
+}
+
+#movie-detail .details-container .title-section {
+  border-bottom: none;
+  margin-top: 0;
 }
 
 #movie-detail .details-container .overview {
   width: 100%;
 }
 
+@media (max-width: 930px) {
+  #movie-detail .details-container .overview {
+    margin-bottom: -1rem;
+  }
+}
+
 #movie-detail .details-container .overview p {
-  width: 520px;
+  width: 100%;
   line-height: 1.3rem;
 }
 
+@media (max-width: 930px) {
+  #movie-detail .details-container .overview p {
+    font-size: 0.9rem;
+  }
+}
+
 #movie-detail .details-container .detail-info {
-  margin-top: 1.5rem;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 930px) {
+  #movie-detail .details-container .detail-info li {
+    font-size: 0.9rem;
+  }
 }
 
 #movie-detail .details-container .detail-info li .contrast {
   text-transform: uppercase;
   font-weight: bold;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   color: #eee1f8;
 }
 
@@ -838,23 +963,25 @@ a {
   margin-top: 3rem;
 }
 
-#movie-detail .details-container .similar-movies {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (minmax(100px, 1fr))[auto-fill];
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  grid-gap: 2rem;
-  width: 520px;
-  margin-top: 0.5rem;
+.similar-section .title-section {
+  border-bottom: none;
+  margin-top: 5rem;
 }
 
-#movie-detail .details-container .similar-movies div p {
+.similar-section .similar-movies {
+  grid-gap: 2rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  margin-bottom: 5rem;
+}
+
+.similar-section .similar-movies div p {
   font-size: 0.8rem;
   text-align: center;
 }
 
-#movie-detail .details-container .similar-movies div img {
-  width: 180px;
+.similar-section .similar-movies div img {
+  max-width: 100%;
 }
 
 .reviews-section .title-section {
@@ -863,8 +990,6 @@ a {
 
 .movie-reviews {
   background-color: #1e1e3d;
-  background-image: -webkit-gradient(linear, left top, right bottom, from(#130c16), to(rgba(46, 18, 80, 0.788)));
-  background-image: linear-gradient(to bottom right, #130c16, rgba(46, 18, 80, 0.788));
   background-image: -webkit-gradient(linear, left top, right bottom, from(#0d0d13), to(rgba(20, 14, 22, 0.884)));
   background-image: linear-gradient(to bottom right, #0d0d13, rgba(20, 14, 22, 0.884));
   border: solid 1px #121218;

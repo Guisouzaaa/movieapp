@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
 
-    <!-- SwiperJS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/swiper/swiper-bundle.min.css"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <!-- FontAwesome -->
     <link
       rel="stylesheet"
@@ -37,23 +33,53 @@
       <div class="container">
         <header>
           <h1>Movix</h1>
-          <div class="search-container">
+          <!-- <div class="search-container"> -->
             <input type="text" id="searchInput" placeholder="Search movie" />
             <button id="search" type="submit">
               <i class="fas fa-search"></i>
             </button>
-          </div>
-          <form>
+          <!-- </div> -->
+          <div class="back-home">
             <a href="index.html">Back to home</a>
-          </form>
+          </div>
         </header>
+      </div>
+
+      <div class = "movie-trailer">
       </div>
     </div>
 
     <main>
       <div id="movies-filter"></div>
 
-      <div id="movie-detail"></div>
+      <div class="about-movie">
+        <div id="movie-detail">
+        </div>
+      </div>
+
+      <!-- <div class="title-section">
+        <span></span>
+        <h1>Similar Movies</h1>
+     </div> -->
+
+      <div class="similar-section">
+        <div class="title-section">
+          <span></span>
+          <h1>Similar Movies</h1>
+       </div>
+       <div class="similar-movies">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+          </div>
+      </div>
+      </div>
+
+      </div>
+
+      <!-- <div class = "movie-trailer">
+      </div> -->
+
+      
 
       <div class="reviews-section">
         <div class="title-section">
@@ -72,11 +98,13 @@
     <script src="js/app.js"></script>
     <script src="js/data.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <script>
       movieData();
 
-      //magnificpopup
-      $(document).magnificPopup({
+
+        //magnificpopup
+        $(document).magnificPopup({
         delegate: ".popup-youtube",
         disableOn: 700,
         type: "iframe",
@@ -86,6 +114,34 @@
 
         fixedContentPos: false,
       });
+
+
+      var swiper = new Swiper('.swiper-container', {
+            observer: true,
+            spaceBetween: 50,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                100: {
+                    slidesPerView: 2,
+                    spaceBetween: 25,
+                },
+                640: {
+                    slidesPerView: 3,
+                    spaceBetween: 25,
+                },
+                768: {
+                    slidesPerView: 4,
+                    spaceBetween: 25,
+                },
+                1024: {
+                    slidesPerView: 7,
+                    spaceBetween: 25,
+                },
+            }
+        });
     </script>
   </body>
 </html>

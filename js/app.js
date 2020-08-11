@@ -149,16 +149,13 @@ function movieDetails(id) {
 
 function getImages(data) {
   const img = data.backdrops
-  document.getElementById('movie-banner').style.backgroundImage = `
-                linear-gradient(rgba(34, 33, 33, 0.425),
-                rgba(30, 18, 37, 0.329)),
-                url('${'https://image.tmdb.org/t/p/original' + img[0].file_path}')`
+  document.getElementById('movie-banner').style.backgroundImage = `url('${'https://image.tmdb.org/t/p/original' + img[0].file_path}')`
 }
 
 //Movie Details output
 const getDetails = (data) => {
   const movie = data;
-  // console.log(movie)
+  console.log(movie)
   const genre = data.genres;
   const genreName = genre.map(e => `<span>${e.name}</span>`).join(", ")
 
@@ -169,12 +166,31 @@ const getDetails = (data) => {
         <div class="bgimg"></div>
         </div>
         <div class= "details-container">
+
+        
+
+        
+        <div class="movie-title">
+        <span></span>
+        <h1>${movie.title}</h1>
+        </div>
+
+
         <div class = "overview">
-            <h1>Movie overview</h1>
+           <div class="title-section">
+             <span></span>
+             <h1>Movie overview</h1>
+           </div>
             <p>${movie.overview}</p>
         </div>
+
+
+        
         <div class = "detail-info">
-        <h1>Details</h1>
+        <div class="title-section">
+             <span></span>
+             <h1>Movie Details</h1>
+        </div>
     
            
            <ul>
@@ -184,21 +200,19 @@ const getDetails = (data) => {
              <li><span class="contrast">Duration:</span> ${movie.runtime} min</li>
              <li><span class="contrast">Rating</span> ${movie.vote_average}</li>
            </ul>
-      
-
-        </div>
-        <div class = "movie-trailer">
-        </div>
         
 
-        <div class="title-section">
-           <span></span>
-           <h1>Similar Movies</h1>
+           
         </div>
-        <div class="similar-movies"></div>
-        </div>
+     
 
 
+
+
+
+
+
+        </div>
 
     `
   document.getElementById("movie-detail").innerHTML = output;
@@ -210,9 +224,14 @@ const getTrailer = (data) => {
   const movie = data.results;
   // console.log(movie)
   let output = `
-      <a class="popup-youtube" href="https://www.youtube.com/watch?v=${movie[0].key}">Trailer</a>
+ 
+  <a class="popup-youtube" href="https://www.youtube.com/watch?v=${movie[0].key}"><i class="far fa-play-circle"></i></a>
+  
+
+      
   `;
   document.querySelector(".movie-trailer").innerHTML = output;
+  // document.getElementById('movie-detail').innerHTML = output;
 }
 
 //Movie Reviews
@@ -242,17 +261,17 @@ function getReviews(data) {
 //Similar movies
 function getSimilarMovies(data) {
   const movies = data.results;
-  movies.length = 4;
+  // movies.length = 5;
   let output = ``
   for (let i in movies){
     if(movies[i].poster_path){
       output += `
-        <div>
+        <div class ="swiper-slide">
            <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
            <p>${movies[i].title}</p>
         </div>
       `
-    document.querySelector(".similar-movies").innerHTML=output
+    document.querySelector(".swiper-wrapper").innerHTML=output
     }
   }
 }
