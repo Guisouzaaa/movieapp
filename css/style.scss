@@ -18,7 +18,8 @@ $select-background: rgba(24, 23, 29, 0.89);
 $select-width: 140px;
 $select-height: 40px;
 
-//Variables
+//Variable
+$largeScreens: 1440px;
 $small-desktop: 1150px;
 $detailsBreakpoint: 1096px;
 $xs-desktop: 930px;
@@ -26,7 +27,7 @@ $tablet: 780px;
 $xs-tablet: 705px;
 $mobile: 625px;
 $sm-mobile: 565px;
-$xs-mobile: 380px;
+$xs-mobile: 390px;
 
 //Media Queries
 @mixin small-desktop {
@@ -34,8 +35,15 @@ $xs-mobile: 380px;
     @content;
   }
 }
+
 @mixin dt-break {
   @media (max-width: #{$detailsBreakpoint}) {
+    @content;
+  }
+}
+
+@mixin lg-screen {
+  @media (max-width: #{$largeScreens}) {
     @content;
   }
 }
@@ -80,14 +88,13 @@ $xs-mobile: 380px;
 body {
   background-color: $bgcolor;
   color: rgba(226, 192, 248, 0.836);
-  width: 100%;
   font-family: "Mulish", sans-serif;
   overflow-x: hidden;
 }
 
 .container {
-  width: 85%;
-  // width: 1200px;
+  // min-width: 85%;
+  width: 1210px;
   margin: 0 auto;
   // white-space: nowrap;
   // white-space: nowrap;
@@ -96,6 +103,9 @@ body {
   // display: flex;
   // justify-content: space-between;
   // flex-direction: column;
+  @include lg-screen{
+    width: 85%;
+  }
 }
 
 //header
@@ -127,6 +137,7 @@ header {
       @include small-desktop {
         width: 120px;
         font-size: 0.8rem;
+        // font-size: 3em;
       }
 
       @include xs-desktop{
@@ -237,8 +248,9 @@ header {
         flex-direction: column;
         width: 85%;
         margin: 0 auto;
+        margin-top: -15rem;
 
-        justify-content: center;
+        // justify-content: center;
         align-items: center;;
       }
     }
@@ -421,6 +433,9 @@ header {
       @include mobile{
         font-size: 1.7rem;
       }
+      @include sm-mobile{
+        font-size: 1.5rem;
+      }
     }
 
     p {
@@ -435,17 +450,24 @@ header {
       @include mobile{
         font-size: 1rem;
       }
+
+      @include sm-mobile{
+        font-size: 0.9rem;
+      }
     }
   }
 }
 
 //Main content
 main {
-  width: 85%;
-  // width: 1200px;
+  // width: 85%;
+  width: 1210px;
   margin: 0 auto;
   margin-bottom: 10%;
   margin-top: -6%;
+  @include lg-screen{
+    width: 85%;
+  }
 
   //movie imgs
   img {
@@ -488,13 +510,18 @@ main {
       font-size: 1rem;
       margin: 0.2rem;
       border-radius: 6rem;
+      // font-family: "Bebas Neue", cursive;
+      // font-weight: bold;
       color: rgba(226, 192, 248, 0.692);
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       width: 40px;
       height: 40px;
       &:hover {
         background-color: rgba(168, 83, 224, 0.356);
         color: rgb(240, 233, 233);
+      }
+      i{
+        pointer-events: none;
       }
     }
   }
@@ -510,6 +537,9 @@ main {
     // img{
     //   width: 100px;
     // }
+    @include tablet{
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
   }
 
   .img-container {
@@ -525,10 +555,7 @@ main {
       position: absolute;
       top: 0;
       bottom: 0;
-      // left: 0;
-      // right: 0;
-      height: 98.8%;
-      // height: 100%;
+      height: 98.9%;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -536,6 +563,9 @@ main {
       opacity: 0;
       pointer-events: none;
       transition: 0.3s ease;
+      @include tablet{
+        height: 99.3%;
+      }
 
       button {
         background-color: rgb(157, 68, 226);
@@ -555,6 +585,11 @@ main {
         font-family: "Bebas Neue", cursive;
         font-size: 1.3rem;
         transition: 0.3s ease;
+
+        @include tablet{
+          padding: 0.5rem 1.5rem;
+
+        }
       }
     }
 
@@ -575,6 +610,8 @@ main {
     flex-direction: column;
     padding: 0 0 1rem 0;
     transition: 0.3s ease;
+
+
 
     .movie-title {
       margin-top: 0.5rem;
@@ -610,6 +647,9 @@ main {
     width: 100%;
     // height: 100%;
     // min-height: 100vh;
+    @include mobile{
+      margin-top: 17%;
+    }
 
     .swiper-slide {
       position: relative;
@@ -640,11 +680,17 @@ main {
   //popular movies
   #popular-container {
     margin-top: 2%;
+    @include mobile{
+      margin-top: 17%;
+    }
   }
 
   //Filtered movies
   #filtered-movies {
     margin-top: 10%;
+    @include sm-mobile{
+      margin-top: 20%;
+    }
 
     #genre {
       margin-right: 0.1rem;
@@ -656,6 +702,9 @@ main {
       width: 100%;
       display: none;
       border-bottom: solid 1px rgba(38, 38, 48, 0.37);
+      @include xs-mobile{
+        border-bottom: none;
+      }
       .title-searched {
         font-family: "Bebas Neue", cursive;
         color: rgb(238, 225, 248);
@@ -668,8 +717,12 @@ main {
         position: absolute;
         left: 215px;
         bottom: 15px;
+        @include sm-mobile{
+          display: none;
+        }
       }
     }
+
 
     #genre,
     #filter,
@@ -688,6 +741,10 @@ main {
         rgb(160, 63, 240),
         rgba(84, 29, 139, 0.788)
       );
+      @include sm-mobile{
+        padding: 5px;
+        font-size: 0.6rem;
+      }
     }
 
     // .title-section{
@@ -702,6 +759,7 @@ main {
 //DETAILS SECTION
 .about-movie{
   display: flex;
+  // margin-top: -10rem;
 }
 
 #movie-banner {
@@ -714,6 +772,7 @@ main {
   flex-direction: column;
   align-items: center;
   position: relative;
+  margin-bottom: 4%;
 
   &:after{
     content: "";

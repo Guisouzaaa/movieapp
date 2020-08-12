@@ -8,6 +8,7 @@ const popularSelect = document.getElementById("filter-movie");
 const displayPopular = document.getElementById('popular-container')
 const popularContainer = document.getElementById('popular-movies')
 const filterSelect = document.getElementById('filter-movie')
+const searchBtn = document.getElementById('search')
 
 //searchMovies/filter
 const renderFilteredMovie = (data) => {
@@ -124,7 +125,7 @@ const handleError = (error) => {
 };
 
 //search button
-document.getElementById('search').addEventListener("click", (e) => {
+searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
   if(inputElement.value){
@@ -139,6 +140,12 @@ document.getElementById('search').addEventListener("click", (e) => {
     inputElement.value = "";
   }
 });
+
+inputElement.addEventListener("keyup", (e) => { 
+  if (e.keyCode === 13) { 
+      searchBtn.click(); 
+  } 
+}); 
 
 //get movies id
 function movieDetails(id) {
@@ -252,26 +259,29 @@ function getReviews(data) {
             <a href = "${movie[i].url}">See the post</a>
         </div>
         `;
+        document.querySelector(".movie-reviews").innerHTML = output;
       }
     }
   }
-  document.querySelector(".movie-reviews").innerHTML = output;
 }
 
 //Similar movies
 function getSimilarMovies(data) {
   const movies = data.results;
-  // movies.length = 5;
   let output = ``
-  for (let i in movies){
-    if(movies[i].poster_path){
-      output += `
-        <div class ="swiper-slide">
-           <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
-           <p>${movies[i].title}</p>
-        </div>
-      `
-    document.querySelector(".swiper-wrapper").innerHTML=output
+  if(movies.length === 0){
+    document.querySelector('.similar-section').style.display = "none"
+  }else{
+    for (let i in movies){
+      if(movies[i].poster_path){
+        output += `
+          <div class ="swiper-slide">
+             <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
+             <p>${movies[i].title}</p>
+          </div>
+        `
+        document.querySelector(".swiper-wrapper").innerHTML=output
+      }
     }
   }
 }

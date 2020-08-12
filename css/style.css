@@ -12,14 +12,19 @@
 body {
   background-color: #0a0a0e;
   color: rgba(226, 192, 248, 0.836);
-  width: 100%;
   font-family: "Mulish", sans-serif;
   overflow-x: hidden;
 }
 
 .container {
-  width: 85%;
+  width: 1210px;
   margin: 0 auto;
+}
+
+@media (max-width: 1440px) {
+  .container {
+    width: 85%;
+  }
 }
 
 header {
@@ -202,9 +207,7 @@ header form .filter-options {
             flex-direction: column;
     width: 85%;
     margin: 0 auto;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    margin-top: -15rem;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -421,6 +424,12 @@ header .nav-active {
   }
 }
 
+@media (max-width: 565px) {
+  #landing-page .landing-txt h2 {
+    font-size: 1.5rem;
+  }
+}
+
 #landing-page .landing-txt p {
   color: #e2c0f8;
   font-size: 1.3rem;
@@ -440,11 +449,23 @@ header .nav-active {
   }
 }
 
+@media (max-width: 565px) {
+  #landing-page .landing-txt p {
+    font-size: 0.9rem;
+  }
+}
+
 main {
-  width: 85%;
+  width: 1210px;
   margin: 0 auto;
   margin-bottom: 10%;
   margin-top: -6%;
+}
+
+@media (max-width: 1440px) {
+  main {
+    width: 85%;
+  }
 }
 
 main img {
@@ -495,7 +516,7 @@ main .pagination button {
   margin: 0.2rem;
   border-radius: 6rem;
   color: rgba(226, 192, 248, 0.692);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   width: 40px;
   height: 40px;
 }
@@ -503,6 +524,10 @@ main .pagination button {
 main .pagination button:hover {
   background-color: rgba(168, 83, 224, 0.356);
   color: #f0e9e9;
+}
+
+main .pagination button i {
+  pointer-events: none;
 }
 
 main .movies-filter,
@@ -516,6 +541,14 @@ main #popular-movies {
   margin-top: 1rem;
 }
 
+@media (max-width: 780px) {
+  main .movies-filter,
+  main #popular-movies {
+    -ms-grid-columns: (minmax(150px, 1fr))[auto-fill];
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
 main .img-container {
   position: relative;
 }
@@ -527,7 +560,7 @@ main .img-container .details-btn {
   position: absolute;
   top: 0;
   bottom: 0;
-  height: 98.8%;
+  height: 98.9%;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -543,6 +576,12 @@ main .img-container .details-btn {
   pointer-events: none;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+}
+
+@media (max-width: 780px) {
+  main .img-container .details-btn {
+    height: 99.3%;
+  }
 }
 
 main .img-container .details-btn button {
@@ -561,6 +600,12 @@ main .img-container .details-btn button {
   font-size: 1.3rem;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+}
+
+@media (max-width: 780px) {
+  main .img-container .details-btn button {
+    padding: 0.5rem 1.5rem;
+  }
 }
 
 main .img-container:hover .details-btn {
@@ -620,6 +665,12 @@ main #upcoming-slide {
   width: 100%;
 }
 
+@media (max-width: 625px) {
+  main #upcoming-slide {
+    margin-top: 17%;
+  }
+}
+
 main #upcoming-slide .swiper-slide {
   position: relative;
   display: -webkit-box;
@@ -656,8 +707,20 @@ main #popular-container {
   margin-top: 2%;
 }
 
+@media (max-width: 625px) {
+  main #popular-container {
+    margin-top: 17%;
+  }
+}
+
 main #filtered-movies {
   margin-top: 10%;
+}
+
+@media (max-width: 565px) {
+  main #filtered-movies {
+    margin-top: 20%;
+  }
 }
 
 main #filtered-movies #genre {
@@ -670,6 +733,13 @@ main #filtered-movies .item-searched {
   width: 100%;
   display: none;
   border-bottom: solid 1px rgba(38, 38, 48, 0.37);
+}
+
+@media (max-width: 390px) {
+  main #filtered-movies .name-value,
+  main #filtered-movies .item-searched {
+    border-bottom: none;
+  }
 }
 
 main #filtered-movies .name-value .title-searched,
@@ -688,6 +758,13 @@ main #filtered-movies .item-searched .texts {
   bottom: 15px;
 }
 
+@media (max-width: 565px) {
+  main #filtered-movies .name-value .texts,
+  main #filtered-movies .item-searched .texts {
+    display: none;
+  }
+}
+
 main #filtered-movies #genre,
 main #filtered-movies #filter,
 main #filtered-movies #movie-name {
@@ -697,6 +774,15 @@ main #filtered-movies #movie-name {
   font-size: 0.9rem;
   background-image: -webkit-gradient(linear, left top, right bottom, from(#a03ff0), to(rgba(84, 29, 139, 0.788)));
   background-image: linear-gradient(to bottom right, #a03ff0, rgba(84, 29, 139, 0.788));
+}
+
+@media (max-width: 565px) {
+  main #filtered-movies #genre,
+  main #filtered-movies #filter,
+  main #filtered-movies #movie-name {
+    padding: 5px;
+    font-size: 0.6rem;
+  }
 }
 
 main .movies-filter {
@@ -726,6 +812,7 @@ main .movies-filter {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
+  margin-bottom: 4%;
 }
 
 #movie-banner:after {
