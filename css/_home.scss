@@ -1,0 +1,289 @@
+main {
+  width: 1210px;
+  margin: 0 auto;
+  margin-bottom: 10%;
+  margin-top: -6%;
+  @include lg-screen {
+    width: 85%;
+  }
+
+  //movie imgs
+  img {
+    max-width: 100%;
+    cursor: pointer;
+  }
+
+  //section titles
+  .title-section {
+    display: flex;
+    border-bottom: solid 1px rgba(38, 38, 48, 0.37);
+    span {
+      background-color: rgb(157, 68, 226);
+      width: 5px;
+      height: 35px;
+      border: solid 1px rgb(157, 68, 226);
+      margin-right: 0.4rem;
+    }
+  }
+
+  h1 {
+    font-family: "Bebas Neue", cursive;
+    font-weight: 100;
+    letter-spacing: 2px;
+    font-size: 3rem;
+    color: rgb(238, 225, 248);
+    font-size: 2rem;
+  }
+
+  //pagination of containers
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    button {
+      cursor: pointer;
+      background-color: transparent;
+      border: solid 2px rgba(168, 83, 224, 0.233);
+      border: solid 2px rgb(142, 51, 211);
+      font-size: 1rem;
+      margin: 0.2rem;
+      border-radius: 6rem;
+      color: rgba(226, 192, 248, 0.692);
+      font-size: 0.9rem;
+      width: 40px;
+      height: 40px;
+      &:hover {
+        background-color: rgba(168, 83, 224, 0.356);
+        color: rgb(240, 233, 233);
+      }
+      i {
+        pointer-events: none;
+      }
+    }
+  }
+
+  //grid of containers
+  .movies-filter,
+  #popular-movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 2rem;
+    grid-row-gap: 2rem;
+    margin-top: 1rem;
+
+    @include tablet {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  }
+
+  .img-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .details-btn {
+      background-color: rgba(158, 61, 238, 0.096);
+      background-image: linear-gradient(
+        rgba(27, 24, 29, 0.342),
+        rgba(30, 25, 32, 0.555)
+      );
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      height: 98.9%;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: end;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease;
+      // @include tablet {
+      //   height: 99.3%;
+      // }
+
+      button {
+        @include btnStyle();
+        padding: 0.8rem 2rem;
+        // position: absolute;
+        // bottom: 0;
+        // left: 50%;
+        // justify-self: flex-end;
+        position: absolute;
+        top: 50%;
+        left: 50%; 
+        transform: translate(-50%, 150%); 
+        margin-bottom: 0;
+        opacity: 0;
+        border-radius: 0.1rem;
+        letter-spacing: 1px;
+        font-size: 1.3rem;
+        transition: 0.3s ease;
+        width: 150px;
+
+        @include tablet {
+          width: 120px;
+        }
+
+        @include xs-mobile{
+          width: 180px;
+          transform: translate(-50%, 220%); 
+        }
+      }
+    }
+
+    &:hover .details-btn {
+      opacity: 1;
+    }
+
+    &:hover button {
+      opacity: 1;
+      transform: translate(-50%, 100%);
+      @include xs-mobile{
+        transform: translate(-50%, 180%);
+      }
+    }
+  }
+
+  //movies style
+  .movie-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 1rem 0;
+    transition: 0.3s ease;
+
+    .movie-title {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      text-align: center;
+      color: rgba(226, 192, 248, 0.836);
+    }
+
+    .movie-rating {
+      display: flex;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: rgba(157, 68, 226, 0.836);
+      padding: 0.3rem;
+      color: rgb(243, 236, 236);
+
+      p {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+      }
+
+      i {
+        margin-right: 0.3rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  //upcoming movies
+  #upcoming-slide {
+    margin-top: 10%;
+    width: 100%;
+    @include mobile {
+      margin-top: 17%;
+    }
+
+    .swiper-slide {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .movie-date {
+        font-weight: 100;
+        margin-top: 0.3rem;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        color: rgb(230, 207, 245);
+      }
+    }
+
+    .swiper-container {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      color: rgb(158, 68, 226);
+    }
+  }
+
+  //popular movies
+  #popular-container {
+    margin-top: 2%;
+    @include mobile {
+      margin-top: 17%;
+    }
+  }
+
+  //Filtered movies
+  #filtered-movies {
+    margin-top: 10%;
+    @include sm-mobile {
+      margin-top: 20%;
+    }
+
+    #genre {
+      margin-right: 0.1rem;
+    }
+
+    .name-value,
+    .item-searched {
+      position: relative;
+      width: 100%;
+      display: none;
+      border-bottom: solid 1px rgba(38, 38, 48, 0.37);
+      @include xs-mobile {
+        border-bottom: none;
+      }
+      .title-searched {
+        font-family: "Bebas Neue", cursive;
+        color: rgb(238, 225, 248);
+        letter-spacing: 1pxs;
+        font-size: 2rem;
+        margin-right: 10px;
+      }
+
+      .texts {
+        position: absolute;
+        left: 215px;
+        bottom: 15px;
+        @include sm-mobile {
+          display: none;
+        }
+      }
+    }
+
+    #genre,
+    #filter,
+    #movie-name {
+      padding: 0.5rem 1rem;
+      border-radius: 3rem;
+      color: rgb(238, 225, 248);
+      font-size: 0.9rem;
+      background-image: linear-gradient(
+        to bottom right,
+        rgb(160, 63, 240),
+        rgba(84, 29, 139, 0.788)
+      );
+      @include sm-mobile {
+        padding: 5px;
+        font-size: 0.6rem;
+      }
+    }
+  }
+  .movies-filter {
+    margin-top: 3%;
+  }
+}

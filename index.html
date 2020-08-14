@@ -19,66 +19,68 @@
 </head>
 
 <body>
-        <div id="landing-page">
-            <div class="container">
-    <header>
-            <!-- <h1>Movix</h1> -->
-            <div class="search-container">
-                <h1>Movix</h1>
-                <input type="text" id="searchInput" placeholder="Search movie">
-                <button id="search" type="submit"><i class="fas fa-search"></i></button>
-            </div>
-            <form>
-                <div class="close-nav">
-                    <div class="line1"></div>
-                    <div class="line2"></div>
-                    <div class="line3"></div>
+    <div id="landing-page">
+        <div class="container">
+            <header>
+                <!-- <h1>Movix</h1> -->
+                <div class="search-container">
+                    <a href="index.html">
+                        <h1>Movix</h1>
+                    </a>
+                    <input type="text" id="searchInput" placeholder="Search movie">
+                    <button id="search" type="submit"><i class="fas fa-search"></i></button>
                 </div>
-                <div class="filter-options">
-                    <span>Order By:</span>
+                <form>
+                    <div class="close-nav">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                    </div>
+                    <div class="filter-options">
+                        <span>Order By:</span>
                         <select name="genres" id="select-genre">
                         </select>
 
-                    <select name="popular" id="filter-movie">
-                        <option value="popularity.desc" selected="true">Popularity</option>
-                        <option value="revenue.desc">Revenue</option>
-                        <option value="vote_count.desc">Most voted</option>
-                        <option value="vote_average.desc">Top Rated</option>
-                        <option value="primary_release_date.desc">Release Date</option>
-                    </select>
+                        <select name="popular" id="filter-movie">
+                            <option value="popularity.desc" selected="true">Popularity</option>
+                            <option value="revenue.desc">Revenue</option>
+                            <option value="vote_count.desc">Most voted</option>
+                            <option value="vote_average.desc">Top Rated</option>
+                            <option value="primary_release_date.desc">Release Date</option>
+                        </select>
 
-                    <button class="filter-btn">Search</button>
+                        <button class="filter-btn">Search</button>
 
-                    <!-- <div class="burger nav">
+                        <!-- <div class="burger nav">
                         <div class="line1"></div>
                         <div class="line2"></div>
                         <div class="line3"></div>
                     </div> -->
+                    </div>
+                </form>
+
+                <div class="burger nav">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
                 </div>
-            </form>
 
-            <div class="burger nav">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-
-    </header>
-</div>
-
-
-    
-
-
-    <div class="container">
-        <div class="landing-txt">
-            <h2>Browse your favorite movie</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-             Nam consequuntur reprehenderit ex a, modi perspiciatis repellat ad quae ea cumque.</p>
+            </header>
         </div>
-    </div>
 
-</div>
+
+
+
+
+        <div class="container">
+            <div class="landing-txt">
+                <h2>Browse your favorite movie</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Nam consequuntur reprehenderit ex a, modi perspiciatis repellat ad quae ea cumque.</p>
+            </div>
+        </div>
+
+    </div>
 
 
     <main>
@@ -90,9 +92,9 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                 </div>
-               
+
                 <div class="swiper-pagination"></div>
-  
+
                 <div class="arrows">
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
@@ -121,14 +123,14 @@
                 <span class="title-searched">You searched for: </span>
                 <div class="texts">
                     <span id="movie-name"></div>
-                </div>
-                
             </div>
-            <div class="movies-filter"></div>
-            <div class="pagination-btn">
-                <button class="filter-prev"><i class="fas fa-chevron-left"></i></button>
-                <button class="filter-next"><i class="fas fa-chevron-right"></i></button>
-            </div>
+
+        </div>
+        <div class="movies-filter"></div>
+        <div class="pagination-btn">
+            <button class="filter-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="filter-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
         </div>
 
         <div id="popular-container">
@@ -141,14 +143,27 @@
 
             <div class="pagination">
                 <button class="previous-page"> <i class="fas fa-chevron-left"></i> </button>
-                <button  class="next-page"> <i class="fas fa-chevron-right"></i> </button>
+                <button class="next-page"> <i class="fas fa-chevron-right"></i> </button>
             </div>
         </div>
     </main>
 
     <footer>
-      <p><span>Movix</span> &copy 2020</p> 
+        <p><span>Movix</span> &copy 2020</p>
     </footer>
+
+    <div class="loader-wrapper">
+        <!-- <span class="loader"><span class="loader-inner"></span></span> -->
+        <div class="lds-default">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
 
     </div>
     <script src="js/apiTransaction.js"></script>
@@ -191,6 +206,9 @@
             }
         });
 
+        $(window).on("load", function () {
+            $(".loader-wrapper").fadeOut("slow");
+        });
     </script>
 </body>
 

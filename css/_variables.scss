@@ -1,0 +1,20 @@
+//Styles
+$bgcolor: rgb(10, 10, 14);
+$contrastColor: rgb(14, 14, 17);
+$mainPurple: rgb(158, 61, 238);
+$gradientBtn: linear-gradient(to bottom right,rgb(160, 63, 240),rgba(84, 29, 139, 0.788));
+$select-color: #fff;
+$select-background: rgba(24, 23, 29, 0.89);
+$select-width: 140px;
+$select-height: 40px;
+
+//Media queries
+$largeScreens: 1440px;
+$small-desktop: 1150px;
+$detailsBreakpoint: 1096px;
+$xs-desktop: 930px;
+$tablet: 780px;
+$xs-tablet: 705px;
+$mobile: 625px;
+$sm-mobile: 565px;
+$xs-mobile: 390px;

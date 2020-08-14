@@ -1,0 +1,65 @@
+//Media Queries
+@mixin small-desktop {
+  @media (max-width: #{$small-desktop}) {
+    @content;
+  }
+}
+
+@mixin dt-break {
+  @media (max-width: #{$detailsBreakpoint}) {
+    @content;
+  }
+}
+
+@mixin lg-screen {
+  @media (max-width: #{$largeScreens}) {
+    @content;
+  }
+}
+
+@mixin xs-desktop {
+  @media (max-width: #{$xs-desktop}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin xs-tablet {
+  @media (max-width: #{$xs-tablet}) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$mobile}) {
+    @content;
+  }
+}
+
+@mixin sm-mobile {
+  @media (max-width: #{$sm-mobile}) {
+    @content;
+  }
+}
+
+@mixin xs-mobile {
+  @media (max-width: #{$xs-mobile}) {
+    @content;
+  }
+}
+
+@mixin btnStyle {
+  text-decoration: none;
+  border: none;
+  color: rgba(230, 207, 245, 0.911);
+  letter-spacing: 1px;
+  font-family: "Bebas Neue", cursive;
+  font-size: 1.1rem;
+  background-color: transparent;
+  background-image: $gradientBtn;
+}
