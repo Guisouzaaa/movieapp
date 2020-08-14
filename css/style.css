@@ -1254,8 +1254,8 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  background-image: -webkit-gradient(linear, left top, right bottom, from(#a03ff0), to(rgba(84, 29, 139, 0.788)));
-  background-image: linear-gradient(to bottom right, #a03ff0, rgba(84, 29, 139, 0.788));
+  background-image: -webkit-gradient(linear, left top, right bottom, from(#19161b), to(#16111b));
+  background-image: linear-gradient(to bottom right, #19161b, #16111b);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1279,7 +1279,7 @@ footer {
   position: absolute;
   width: 6px;
   height: 6px;
-  background: #fcf;
+  background: #9e3dee;
   border-radius: 50%;
   -webkit-animation: lds-default 1.2s linear infinite;
           animation: lds-default 1.2s linear infinite;

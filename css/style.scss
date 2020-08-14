@@ -1055,7 +1055,7 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  background-image: linear-gradient(to bottom right,rgb(160, 63, 240),rgb(84, 29, 139));;
+  background-image: linear-gradient(to bottom right,rgb(25, 22, 27),rgb(22, 17, 27));;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -1072,7 +1072,7 @@ footer {
   position: absolute;
   width: 6px;
   height: 6px;
-  background: #fcf;
+  background: $mainPurple;
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
 }
