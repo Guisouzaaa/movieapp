@@ -73,10 +73,10 @@ header {
         }
       }
   
-      button {
+      a {
         cursor: pointer;
-        width: 75px;
-        padding: 0.5rem;
+        // width: 75px;
+        padding: 0.5rem 0.8rem;
         height: 40px;
         background-color: transparent;
         color: rgba(230, 207, 245, 0.644);
@@ -177,7 +177,7 @@ header {
     }
   
     input:focus {
-      border: solid 1px rgba(158, 61, 238, 0.658);
+      border: solid 1px rgba(158, 61, 238, 0.349);
     }
   
     #search {

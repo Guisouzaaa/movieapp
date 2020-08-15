@@ -1,6 +1,6 @@
 // Getting elements from the dom
 const inputElement = document.getElementById("searchInput");
-const movieFilter = document.querySelector(".movies-filter");
+const movieFilter = document.querySelector("#movies-filter");
 const moviesContainer = document.getElementById("upcoming-movies");
 const similarMovies = document.getElementById("similar-movies");
 const selectBtn = document.getElementById("select-genre");
@@ -35,7 +35,7 @@ const renderFilteredMovie = (data) => {
        </div>
      </div>  
     `
-    document.querySelector(".movies-filter").innerHTML = output;
+    document.querySelector("#movies-filter").innerHTML = output;
 
     }
   }
@@ -337,6 +337,5 @@ function pagination(){
     }
   })
 }
-
 
 

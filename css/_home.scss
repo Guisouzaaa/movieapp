@@ -40,30 +40,27 @@ main {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
-    button {
+    a {
       cursor: pointer;
-      background-color: transparent;
-      border: solid 2px rgba(168, 83, 224, 0.233);
-      border: solid 2px rgb(142, 51, 211);
-      font-size: 1rem;
-      margin: 0.2rem;
       border-radius: 6rem;
-      color: rgba(226, 192, 248, 0.692);
-      font-size: 0.9rem;
-      width: 40px;
-      height: 40px;
+      border: solid 2px rgb(142, 51, 211);
+      margin: 0.2rem;
       &:hover {
         background-color: rgba(168, 83, 224, 0.356);
         color: rgb(240, 233, 233);
       }
       i {
         pointer-events: none;
+        padding: 0.5rem 0.7rem;
+        margin: 0.2rem;
+        color: rgba(226, 192, 248, 0.692);
+        font-size: 0.9rem;
       }
     }
   }
 
   //grid of containers
-  .movies-filter,
+  #movies-filter,
   #popular-movies {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -283,7 +280,7 @@ main {
       }
     }
   }
-  .movies-filter {
+  #movies-filter {
     margin-top: 3%;
   }
 }

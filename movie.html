@@ -29,12 +29,10 @@
         <a href="index.html">
           <h1>Movix</h1>
         </a>
-        <!-- <div class="search-container"> -->
         <input type="text" id="searchInput" placeholder="Search movie" />
         <button id="search" type="submit">
           <i class="fas fa-search"></i>
         </button>
-        <!-- </div> -->
         <div class="back-home">
           <a href="index.html">Back to home</a>
         </div>
@@ -51,10 +49,6 @@
       <div id="movie-detail"></div>
     </div>
 
-    <!-- <div class="title-section">
-        <span></span>
-        <h1>Similar Movies</h1>
-     </div> -->
 
     <div class="similar-section">
       <div class="title-section">
@@ -68,8 +62,6 @@
       </div>
     </div>
 
-    <!-- <div class = "movie-trailer">
-      </div> -->
 
     <div class="reviews-section">
       <div class="title-section">
@@ -82,71 +74,70 @@
 
   <footer>
     <p><span>Movix</span> &copy 2020</p>
+    <div class="socials">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-youtube"></i>
+    </div>
   </footer>
 
   <div class="loader-wrapper">
-    <div class="lds-default">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+    <img src="assets/loader.svg" alt="" srcset="" />
+  </div>
 
-    <script src="js/apiTransaction.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/effects.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="js/apiTransaction.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-    <script>
-      movieData();
+  <script>
+    movieData();
 
-      //magnificpopup
-      $(document).magnificPopup({
-        delegate: ".popup-youtube",
-        type: "iframe",
-        mainClass: "mfp-fade",
-        removalDelay: 160,
-        preloader: false,
+    //magnificpopup
+    $(document).magnificPopup({
+      delegate: ".popup-youtube",
+      type: "iframe",
+      mainClass: "mfp-fade",
+      removalDelay: 160,
+      preloader: false,
 
-        fixedContentPos: false,
-      });
+      fixedContentPos: false,
+    });
 
-      var swiper = new Swiper(".swiper-container", {
-        observer: true,
-        spaceBetween: 50,
-        autoplay: {
-          delay: 2500,
-          disableOnInteraction: false,
+    var swiper = new Swiper(".swiper-container", {
+      observer: true,
+      spaceBetween: 50,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        100: {
+          slidesPerView: 2,
+          spaceBetween: 25,
         },
-        breakpoints: {
-          100: {
-            slidesPerView: 2,
-            spaceBetween: 25,
-          },
-          640: {
-            slidesPerView: 3,
-            spaceBetween: 25,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 25,
-          },
-          1024: {
-            slidesPerView: 7,
-            spaceBetween: 25,
-          },
+        640: {
+          slidesPerView: 3,
+          spaceBetween: 25,
         },
-      });
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 25,
+        },
+        1024: {
+          slidesPerView: 7,
+          spaceBetween: 25,
+        },
+      },
+    });
 
-      $(window).on("load", function () {
-        $(".loader-wrapper").fadeOut("slow");
-      });
-    </script>
+    //loader
+    $(window).on("load", function () {
+      $(".loader-wrapper").fadeOut("slow");
+    });
+  </script>
 </body>
 
 </html>

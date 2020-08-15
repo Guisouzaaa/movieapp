@@ -27,3 +27,21 @@ const closeNav = () => {
 navShow();
 closeNav();
 
+//smooth scroll
+const scroll = new SmoothScroll('[href*="#"]', {
+  speed: 600
+
+});
+
+$("#search").click(function() {
+  $('html,body').animate({
+      scrollTop: $("#filtered-movies").offset().top},
+      'slow');
+});
+
+$(".filter-btn").click(function() {
+  $('html,body').animate({
+      scrollTop: $("#filtered-movies").offset().top},
+      'slow');
+});
+

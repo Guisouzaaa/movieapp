@@ -89,7 +89,7 @@ const getGenres = () => {
 
 const filterMovie = (genre, options, value) => {
     const path = '/discover/movie'
-    const url = `  ${dinamicUrl(path)}&sort_by=${options}&with_genres=${genre}&vote_count.gte=1000&page=${value}`
+    const url = `  ${dinamicUrl(path)}&sort_by=${options}&with_genres=${genre}&vote_count.gte=100&page=${value}`
     // console.log(url)
 
     // const render = renderFilteredMovie.bind({title: 'Similar Movies'})
