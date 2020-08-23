@@ -21,7 +21,7 @@ const renderFilteredMovie = (data) => {
       output += `
       <div class="movie-item">
       <div class ="img-container">
-         <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
+         <img class="movie-poster" src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
       <div class="details-btn">
          <button>Details</button>
        </div>
@@ -74,7 +74,7 @@ function renderUpcoming(data) {
     if(movies[i].poster_path){
       output += `
       <div class ="swiper-slide">
-         <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
+         <img class="movie-poster" src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
          <span class="movie-date">${movies[i].release_date}</span>
       </div>
    `
@@ -85,7 +85,7 @@ function renderUpcoming(data) {
 
 //Movie Details
 document.addEventListener('click', e => {
-  if(e.target.tagName === "IMG"){
+  if(e.target.className == "movie-poster"){
     let movieId = e.target.getAttribute("data-movie-id")
     movieDetails(movieId)
   }
@@ -100,7 +100,7 @@ function renderPopular(data) {
       output += `
         <div class="movie-item">
          <div class ="img-container">
-            <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
+            <img class="movie-poster" src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
          <div class="details-btn">
             <button>Details</button>
           </div>
@@ -169,58 +169,35 @@ const getDetails = (data) => {
 
     let output = `
         <div class = "poster-movie">
-        <img src = "${IMAGE_URL + movie.poster_path}"/>
+          <img src = "${IMAGE_URL + movie.poster_path}"/>
         <div class="bgimg"></div>
         </div>
-        <div class= "details-container">
-
-        
-
-        
-        <div class="movie-title">
-        <span></span>
-        <h1>${movie.title}</h1>
-        </div>
-
-
+        <div class= "details-container">    
+          <div class="movie-title">
+              <span></span>
+              <h1>${movie.title}</h1>
+          </div>
         <div class = "overview">
            <div class="title-section">
              <span></span>
              <h1>Movie overview</h1>
            </div>
-            <p>${movie.overview}</p>
+        <p>${movie.overview}</p>
         </div>
-
-
-        
         <div class = "detail-info">
         <div class="title-section">
              <span></span>
              <h1>Movie Details</h1>
-        </div>
-    
-           
+        </div>    
            <ul>
              <li><span class="contrast">Title:</span> ${movie.title}</li>
              <li><span class="contrast">Release Date:</span> ${movie.release_date}</li>
              <li><span class="contrast">Genre:</span> ${genreName}</li>
              <li><span class="contrast">Duration:</span> ${movie.runtime} min</li>
              <li><span class="contrast">Rating</span> ${movie.vote_average}</li>
-           </ul>
-        
-
-           
+           </ul>    
         </div>
-     
-
-
-
-
-
-
-
         </div>
-
     `
   document.getElementById("movie-detail").innerHTML = output;
 };
@@ -229,16 +206,10 @@ const getDetails = (data) => {
 // Display movie trailer
 const getTrailer = (data) => {
   const movie = data.results;
-  // console.log(movie)
   let output = `
- 
-  <a class="popup-youtube" href="https://www.youtube.com/watch?v=${movie[0].key}"><i class="far fa-play-circle"></i></a>
-  
-
-      
+     <a class="popup-youtube" href="https://www.youtube.com/watch?v=${movie[0].key}"><i class="far fa-play-circle"></i></a>   
   `;
   document.querySelector(".movie-trailer").innerHTML = output;
-  // document.getElementById('movie-detail').innerHTML = output;
 }
 
 //Movie Reviews
@@ -276,7 +247,7 @@ function getSimilarMovies(data) {
       if(movies[i].poster_path){
         output += `
           <div class ="swiper-slide">
-             <img src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
+             <img class="movie-poster" src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
              <p>${movies[i].title}</p>
           </div>
         `
