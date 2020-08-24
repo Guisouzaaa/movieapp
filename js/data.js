@@ -1,23 +1,15 @@
 function movieData() {
-    getMovieDetails();
-    getMovieTrailer();
-    getMovieReviews();
-    getMovieRecommendations();
-    getMovieImages()
-    // getGenres()
+  getMovieDetails();
+  getMovieTrailer();
+  getMovieReviews();
+  getMovieRecommendations();
+  getMovieImages();
+}
 
-  }
-  
-  function homeData() {
-    getUpcomingMovies();
-    getPopularMovies();
-    // getTopRated();
-    getGenres()
-    filterMovie()
-    pagination()
-    // filteredPagination()
-    // navShow();
-    // closeNav();
-
-  }
-  
+function homeData() {
+  getUpcomingMovies();
+  getPopularMovies();
+  getGenres();
+  filterMovie();
+  pagination();
+}

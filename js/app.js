@@ -14,25 +14,21 @@ const searchBtn = document.getElementById('search')
 const renderFilteredMovie = (data) => {
   movieFilter.innerHTML = "";
   const movies = data.results;
-  // console.log(movies)
   let output = ``
   for (let i in movies){
     if (movies[i].poster_path){
       output += `
       <div class="movie-item">
-      <div class ="img-container">
-         <img class="movie-poster" src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
-      <div class="details-btn">
-         <button>Details</button>
-       </div>
-      </div>
-       
-        
-        <span class="movie-title">${movies[i].title}</span>
-          
-       <div class ="movie-rating">
-         <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
-       </div>
+        <div class ="img-container">
+           <img class="movie-poster" src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
+           <div class="details-btn">
+              <button>Details</button>
+           </div>
+        </div>
+        <span class="movie-title">${movies[i].title}</span> 
+        <div class ="movie-rating">
+           <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
+        </div>
      </div>  
     `
     document.querySelector("#movies-filter").innerHTML = output;
@@ -44,7 +40,6 @@ const renderFilteredMovie = (data) => {
   document.querySelector('.filter-btn').addEventListener('click', e => {
     e.preventDefault();
     const genreValue = selectBtn.value
-    // console.log(genreValue)
     const popularValue = popularSelect.value
     const genreTxt = selectBtn.options[selectBtn.selectedIndex].text;
     const filterTxt = filterSelect.options[filterSelect.selectedIndex].text;
@@ -53,7 +48,6 @@ const renderFilteredMovie = (data) => {
 
 
     document.querySelector('form').classList.remove('nav-active')
-    // document.querySelector('.burger').classList.toggle('burgerToggle')
     document.querySelector('.name-value').style.display = "none"
     document.querySelector('.item-searched').style.display = "flex"
     document.getElementById("genre").innerHTML = genreTxt;
@@ -93,7 +87,6 @@ document.addEventListener('click', e => {
 
 function renderPopular(data) {
   const movies = data.results;
-  // console.log(movies)
   let output = ``
   for (let i in movies){
     if(movies[i].poster_path){
@@ -103,15 +96,12 @@ function renderPopular(data) {
             <img class="movie-poster" src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
          <div class="details-btn">
             <button>Details</button>
-          </div>
          </div>
-          
-           
-           <span class="movie-title">${movies[i].title}</span>
-             
-          <div class ="movie-rating">
+         </div>
+         <span class="movie-title">${movies[i].title}</span>    
+         <div class ="movie-rating">
             <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
-          </div>
+         </div>
         </div>  
      `
      document.getElementById("popular-movies").innerHTML = output;
@@ -162,7 +152,6 @@ function getImages(data) {
 //Movie Details output
 const getDetails = (data) => {
   const movie = data;
-  console.log(movie)
   const genre = data.genres;
   const genreName = genre.map(e => `<span>${e.name}</span>`).join(", ")
 
@@ -170,25 +159,25 @@ const getDetails = (data) => {
     let output = `
         <div class = "poster-movie">
           <img src = "${IMAGE_URL + movie.poster_path}"/>
-        <div class="bgimg"></div>
+          <div class="bgimg"></div>
         </div>
         <div class= "details-container">    
           <div class="movie-title">
               <span></span>
               <h1>${movie.title}</h1>
           </div>
-        <div class = "overview">
-           <div class="title-section">
-             <span></span>
-             <h1>Movie overview</h1>
-           </div>
-        <p>${movie.overview}</p>
+          <div class = "overview">
+             <div class="title-section">
+                <span></span>
+                <h1>Movie overview</h1>
+             </div>
+          <p>${movie.overview}</p>
         </div>
         <div class = "detail-info">
-        <div class="title-section">
-             <span></span>
-             <h1>Movie Details</h1>
-        </div>    
+           <div class="title-section">
+              <span></span>
+              <h1>Movie Details</h1>
+           </div>    
            <ul>
              <li><span class="contrast">Title:</span> ${movie.title}</li>
              <li><span class="contrast">Release Date:</span> ${movie.release_date}</li>
@@ -197,7 +186,7 @@ const getDetails = (data) => {
              <li><span class="contrast">Rating</span> ${movie.vote_average}</li>
            </ul>    
         </div>
-        </div>
+        
     `
   document.getElementById("movie-detail").innerHTML = output;
 };
@@ -215,7 +204,6 @@ const getTrailer = (data) => {
 //Movie Reviews
 function getReviews(data) {
   const movie = data.results;
-  console.log(movie)
   let output = ``;
   if(movie.length === 0){
     document.querySelector(".reviews-section").style.display = "none"
@@ -227,7 +215,7 @@ function getReviews(data) {
         <div>
             <h3>By: ${movie[i].author}</h3>
             <p>${movie[i].content}</p>
-            <a href = "${movie[i].url}">See the post</a>
+            <a href = "${movie[i].url}">official review</a>
         </div>
         `;
         document.querySelector(".movie-reviews").innerHTML = output;

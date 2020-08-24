@@ -10,6 +10,7 @@ main {
   //movie imgs
   img {
     max-width: 100%;
+    object-fit: cover;
     cursor: pointer;
   }
 
@@ -78,6 +79,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 2px;
 
     .details-btn {
       background-color: rgba(158, 61, 238, 0.096);
@@ -99,21 +101,14 @@ main {
       opacity: 0;
       pointer-events: none;
       transition: 0.3s ease;
-      // @include tablet {
-      //   height: 99.3%;
-      // }
-
+      
       button {
         @include btnStyle();
         padding: 0.8rem 2rem;
-        // position: absolute;
-        // bottom: 0;
-        // left: 50%;
-        // justify-self: flex-end;
         position: absolute;
         top: 50%;
-        left: 50%; 
-        transform: translate(-50%, 150%); 
+        left: 50%;
+        transform: translate(-50%, 150%);
         margin-bottom: 0;
         opacity: 0;
         border-radius: 0.1rem;
@@ -126,9 +121,9 @@ main {
           width: 120px;
         }
 
-        @include xs-mobile{
+        @include xs-mobile {
           width: 180px;
-          transform: translate(-50%, 220%); 
+          transform: translate(-50%, 220%);
         }
       }
     }
@@ -140,7 +135,7 @@ main {
     &:hover button {
       opacity: 1;
       transform: translate(-50%, 100%);
-      @include xs-mobile{
+      @include xs-mobile {
         transform: translate(-50%, 180%);
       }
     }
@@ -188,6 +183,25 @@ main {
     width: 100%;
     @include mobile {
       margin-top: 17%;
+    }
+    img {
+      height: 240px;
+      object-fit: cover;
+      @include small-desktop {
+        height: 200px;
+      }
+      @include tablet {
+        height: 220px;
+      }
+      @include mobile {
+        height: 250px;
+      }
+      @include sm-mobile {
+        height: 200px;
+      }
+      @include xs-mobile {
+        height: 250px;
+      }
     }
 
     .swiper-slide {

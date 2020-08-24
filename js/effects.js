@@ -1,6 +1,3 @@
-// const navElements = document.querySelectorAll("form");
-// const searchBtn = document.getElementById('search')
-
 //Responsive Nav
 const navShow = () => {
   const burger = document.querySelector(".burger");
@@ -9,39 +6,39 @@ const navShow = () => {
   burger.addEventListener("click", () => {
     //toggle nav
     nav.classList.toggle("nav-active");
-    //Burger animation
-    burger.classList.toggle("burgerToggle");
   });
 };
 
-// // Close Nav
+// Close Nav
 const closeNav = () => {
   const closeBtn = document.querySelector(".close-nav");
   const nav = document.querySelector("form");
 
-  closeBtn.addEventListener('click', () => {
-      nav.classList.remove("nav-active");
-  })
-}
-
+  closeBtn.addEventListener("click", () => {
+    nav.classList.remove("nav-active");
+  });
+};
 navShow();
 closeNav();
 
+//sticky header
+window.addEventListener("scroll", () => {
+  var header = document.querySelector("header");
+  header.classList.toggle("sticky", window.scrollY > 0);
+});
+
 //smooth scroll
 const scroll = new SmoothScroll('[href*="#"]', {
-  speed: 600
-
+  speed: 600,
+  offset: 40,
+  header: '[data-scroll-header]'
 });
 
-$("#search").click(function() {
-  $('html,body').animate({
-      scrollTop: $("#filtered-movies").offset().top},
-      'slow');
+$("#search, .filter-btn").click(function () {
+  $("html,body").animate(
+    {
+      scrollTop: $("#filtered-movies").offset().top - 150,
+    },
+    "slow"
+  );
 });
-
-$(".filter-btn").click(function() {
-  $('html,body').animate({
-      scrollTop: $("#filtered-movies").offset().top},
-      'slow');
-});
-

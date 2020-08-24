@@ -1,254 +1,273 @@
 //header
 header {
-    background-color: rgba(24, 23, 29, 0.863);
+  background-color: rgba(24, 23, 29, 0.863);
+  display: flex;
+  align-items: center;
+  padding: 2rem 1.3rem 1.3rem 1.3rem;
+  border-radius: 0 0 0.1rem 0.1rem;
+  width: 100%;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 1210px;
+  z-index: 100;
+  transition: 0.3s ease;
+
+  @include lg-screen {
+    width: 85%;
+  }
+
+  @include sm-mobile {
+    width: 100%;
+    left: 0;
+  }
+
+  h1 {
+    font-family: "Black Han Sans", sans-serif;
+    font-weight: 100;
+    color: $mainPurple;
+  }
+
+  form {
     display: flex;
     align-items: center;
-    padding: 2rem 1.3rem 1.3rem 1.3rem;
-    border-radius: 0 0 0.1rem 0.1rem;
-    width: 100%;
-    justify-content: space-between;
-    position: relative;
-    z-index: 100;
-  
-    h1 {
-      font-family: "Black Han Sans", sans-serif;
-      font-weight: 100;
-      color: $mainPurple;
-    }
-  
-    form {
-      display: flex;
-      align-items: center;
-      span {
-        color: rgba(230, 207, 245, 0.658);
-        letter-spacing: 1px;
-        @include small-desktop {
-          width: 120px;
-          font-size: 0.8rem;
-        }
-  
-        @include xs-desktop {
-          font-size: 1.3rem;
-          margin-bottom: 1rem;
-          margin: 0 auto;
-        }
-      }
-  
-      @include xs-desktop {
-        display: none;
-      }
-  
-      select {
-        cursor: pointer;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-image: url("data:image/svg+xml;utf8,<svg fill='rgba(165, 160, 187, 0.795)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
-        background-repeat: no-repeat;
-        background-position-x: 100%;
-        background-position-y: 5px;
-        background-color: rgba(24, 23, 29, 0.89);
-        border: solid 1px rgba(53, 50, 66, 0.863);
-        letter-spacing: 1px;
-        color: rgba(230, 207, 245, 0.644);
-        border-radius: 0.1rem;
-        padding: 0.5rem;
-        width: 140px;
-        margin: 1px;
-        height: 40px;
-        transition: 0.1s ease-in-out;
-        &:hover {
-          border: solid 1px rgb(111, 65, 148);
-          color: rgba(226, 192, 248, 0.959);
-          transition: 0.2s ease;
-        }
-        @include small-desktop {
-          width: 120px;
-          font-size: 0.7rem;
-        }
-        @include xs-desktop {
-          width: 80%;
-          margin: 0;
-          margin-top: 0.7rem;
-          font-size: 0.9rem;
-        }
-      }
-  
-      a {
-        cursor: pointer;
-        // width: 75px;
-        padding: 0.5rem 0.8rem;
-        height: 40px;
-        background-color: transparent;
-        color: rgba(230, 207, 245, 0.644);
-        letter-spacing: 1px;
-        margin-left: 3px;
-        border: none;
-        color: rgb(230, 207, 245);
-        border-radius: 0.1rem;
-        letter-spacing: 1px;
-        font-weight: 100;
-        font-size: 1.1rem;
-        font-family: "Bebas Neue", cursive;
-        background-image: linear-gradient(
-          to bottom right,
-          rgb(160, 63, 240),
-          rgba(84, 29, 139, 0.788)
-        );
-        @include xs-desktop {
-          margin-top: 0.7rem;
-          width: 40%;
-        }
-      }
-  
-      //responsive menu
-      @include xs-desktop {
-        position: fixed;
-        right: 0px;
-        height: 100vh;
-        width: 50%;
-        top: 0;
-        display: flex;
-        z-index: 100;
-        opacity: 0;
-        transform: translateX(100%);
-        transition: transform 0.5s ease-in;
-        background-color: rgba(24, 23, 29, 0.925);
-        color: rgb(139, 136, 136);
-      }
-  
-      @include tablet {
-        width: 70%;
-      }
-  
-      @include sm-mobile {
-        width: 100%;
-      }
-  
-      .filter-options {
-        position: relative;
-        @include xs-desktop {
-          display: flex;
-          flex-direction: column;
-          width: 85%;
-          margin: 0 auto;
-          // margin-top: -15rem;
-  
-          align-items: center;
-        }
-      }
-    }
-  
-    .search-container {
-      display: flex;
-      position: relative;
-      width: 50%;
+    span {
+      color: rgba(230, 207, 245, 0.658);
+      letter-spacing: 1px;
       @include small-desktop {
-        width: 45%;
+        width: 120px;
+        font-size: 0.8rem;
+      }
+
+      @include xs-desktop {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        margin: 0 auto;
+      }
+    }
+
+    @include xs-desktop {
+      display: none;
+    }
+
+    select {
+      cursor: pointer;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='rgba(165, 160, 187, 0.795)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+      background-repeat: no-repeat;
+      background-position-x: 100%;
+      background-position-y: 5px;
+      background-color: rgba(24, 23, 29, 0.89);
+      border: solid 1px rgba(53, 50, 66, 0.863);
+      letter-spacing: 1px;
+      color: rgba(230, 207, 245, 0.644);
+      border-radius: 0.1rem;
+      padding: 0.5rem;
+      width: 140px;
+      margin: 1px;
+      height: 40px;
+      transition: 0.1s ease-in-out;
+      &:hover {
+        border: solid 1px rgb(111, 65, 148);
+        color: rgba(226, 192, 248, 0.959);
+        transition: 0.2s ease;
+      }
+      @include small-desktop {
+        width: 120px;
+        font-size: 0.7rem;
       }
       @include xs-desktop {
         width: 80%;
-        justify-content: space-between;
-      }
-      @include mobile {
-        flex-direction: column;
-        width: 100%;
+        margin: 0;
+        margin-top: 0.7rem;
+        font-size: 0.9rem;
       }
     }
-  
-    input {
-      background-color: rgb(44, 43, 51);
-      background-color: transparent;
-      border: solid 1px rgba(53, 50, 66, 0.863);
-      padding: 0.6rem;
-      border-radius: 0.1rem;
-      width: 100%;
-      color: rgba(222, 220, 231, 0.849);
-      transition: 0.1s ease-in-out;
+
+    a {
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
       height: 40px;
-      margin-left: 1.2rem;
-      @include xs-desktop {
-        height: 100%;
-        margin-left: 3.5rem;
-      }
-      @include mobile {
-        margin-top: 0.3rem;
-        margin-left: 0;
-      }
-    }
-  
-    input:focus {
-      border: solid 1px rgba(158, 61, 238, 0.349);
-    }
-  
-    #search {
-      cursor: pointer;
-      position: absolute;
       background-color: transparent;
+      color: rgba(230, 207, 245, 0.644);
+      letter-spacing: 1px;
+      margin-left: 3px;
       border: none;
-      top: 7px;
-      right: 10px;
-      font-size: 1.2rem;
-      color: rgba(78, 69, 85, 0.644);
-      @include mobile {
-        top: 51px;
-      }
-    }
-  
-    //burgers
-    .close-nav,
-    .burger {
-      cursor: pointer;
-      display: none;
-      position: absolute;
-      right: 1rem;
-      top: 2.4rem;
+      color: rgb(230, 207, 245);
+      border-radius: 0.1rem;
+      letter-spacing: 1px;
+      font-weight: 100;
+      font-size: 1.1rem;
+      font-family: "Bebas Neue", cursive;
+      background-image: linear-gradient(
+        to bottom right,
+        rgb(160, 63, 240),
+        rgba(84, 29, 139, 0.788)
+      );
       @include xs-desktop {
-        display: block;
-      }
-    //   @include mobile {
-    //     margin-top: -2.6rem;
-    //   }
-    }
-  
-    .close-nav {
-      @include mobile {
-        margin-top: 0;
+        margin-top: 0.7rem;
+        width: 40%;
       }
     }
-  
-    .burger div {
-      width: 30px;
-      height: 2px;
-      background-color: $mainPurple;
-      margin: 5px;
-    }
-  
-    .close-nav {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      .line1 {
-        transform: rotate(-45deg) translate(-5px, 5px);
-      }
-      .line2 {
-        opacity: 0;
-      }
-      .line3 {
-        transform: rotate(45deg) translate(-5px, -5px);
-      }
-    }
-  
-    .close-nav div {
-      width: 30px;
-      height: 2px;
-      background-color: $mainPurple;
-      margin: 5px;
-      transition: all 0.3s ease;
-    }
-  
-    .nav-active {
-      transform: translateX(0%) !important;
+
+    //responsive menu
+    @include xs-desktop {
+      position: fixed;
+      right: 0px;
+      height: 100vh;
+      width: 50%;
+      top: 0;
+      display: flex;
       z-index: 100;
-      opacity: 1;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform 0.5s ease-in;
+      background-color: rgba(24, 23, 29, 0.925);
+      color: rgb(139, 136, 136);
+    }
+
+    @include tablet {
+      width: 70%;
+    }
+
+    @include sm-mobile {
+      width: 100%;
+    }
+
+    .filter-options {
+      position: relative;
+      @include xs-desktop {
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        margin: 0 auto;
+        align-items: center;
+      }
     }
   }
+
+  .search-container {
+    display: flex;
+    position: relative;
+    width: 50%;
+    @include small-desktop {
+      width: 45%;
+    }
+    @include xs-desktop {
+      width: 80%;
+      justify-content: space-between;
+    }
+    @include mobile {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  input {
+    background-color: rgb(44, 43, 51);
+    background-color: transparent;
+    border: solid 1px rgba(53, 50, 66, 0.863);
+    padding: 0.6rem;
+    border-radius: 0.1rem;
+    width: 100%;
+    color: rgba(222, 220, 231, 0.849);
+    transition: 0.1s ease-in-out;
+    height: 40px;
+    margin-left: 1.2rem;
+    @include xs-desktop {
+      height: 100%;
+      margin-left: 3.5rem;
+    }
+    @include mobile {
+      margin-top: 0.3rem;
+      margin-left: 0;
+    }
+  }
+
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-text-fill-color: rgba(222, 220, 231, 0.849) !important;
+  }
+
+  input:focus {
+    border: solid 1px rgba(158, 61, 238, 0.616);
+  }
+
+  #search {
+    cursor: pointer;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    top: 7px;
+    right: 10px;
+    font-size: 1.2rem;
+    color: rgba(78, 69, 85, 0.644);
+    @include mobile {
+      top: 51px;
+    }
+  }
+
+  //burgers
+  .close-nav,
+  .burger {
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    right: 1rem;
+    top: 2.4rem;
+    @include xs-desktop {
+      display: block;
+    }
+  }
+
+  .close-nav {
+    @include mobile {
+      margin-top: 0;
+    }
+  }
+
+  .burger div {
+    width: 30px;
+    height: 2px;
+    background-color: $mainPurple;
+    margin: 5px;
+  }
+
+  .close-nav {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    .line1 {
+      transform: rotate(-45deg) translate(-5px, 5px);
+    }
+    .line2 {
+      opacity: 0;
+    }
+    .line3 {
+      transform: rotate(45deg) translate(-5px, -5px);
+    }
+  }
+
+  .close-nav div {
+    width: 30px;
+    height: 2px;
+    background-color: $mainPurple;
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-active {
+    transform: translateX(0%) !important;
+    z-index: 100;
+    opacity: 1;
+  }
+}
+
+.sticky {
+  background-color: rgba(24, 23, 29, 0.973);
+}
