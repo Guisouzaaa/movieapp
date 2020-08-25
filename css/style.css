@@ -122,6 +122,10 @@ header form select:hover {
   }
 }
 
+header form select option {
+  padding: 5rem;
+}
+
 header form a {
   cursor: pointer;
   padding: 0.5rem 0.8rem;
