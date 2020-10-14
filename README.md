@@ -5,7 +5,6 @@ Projeto tem como objetivo fornecer um catálogo de filmes para aquelas pessoas q
 ## Feito com
 * HTML
 * JavaScript
-* JQuery 
 * SCSS
 * FontAwesome (https://fontawesome.com)
 * SmoothScroll (https://github.com/cferdinandi/smooth-scroll)
