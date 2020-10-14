@@ -98,6 +98,7 @@ header {
       margin-left: 3px;
       border: none;
       color: rgb(230, 207, 245);
+      text-align: center;
       border-radius: 0.1rem;
       letter-spacing: 1px;
       font-weight: 100;
@@ -110,7 +111,9 @@ header {
       );
       @include xs-desktop {
         margin-top: 0.7rem;
-        width: 40%;
+        width: 35%;
+        font-size: 1.2rem;
+        letter-spacing: 2px;
       }
     }
 
@@ -206,10 +209,13 @@ header {
     position: absolute;
     background-color: transparent;
     border: none;
-    top: 7px;
+    top: 9px;
     right: 10px;
     font-size: 1.2rem;
     color: rgba(78, 69, 85, 0.644);
+    @include xs-desktop{
+      top: 7px;
+    }
     @include mobile {
       top: 51px;
     }

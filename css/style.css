@@ -136,6 +136,7 @@ header form a {
   margin-left: 3px;
   border: none;
   color: #e6cff5;
+  text-align: center;
   border-radius: 0.1rem;
   letter-spacing: 1px;
   font-weight: 100;
@@ -148,7 +149,9 @@ header form a {
 @media (max-width: 930px) {
   header form a {
     margin-top: 0.7rem;
-    width: 40%;
+    width: 35%;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
   }
 }
 
@@ -287,10 +290,16 @@ header #search {
   position: absolute;
   background-color: transparent;
   border: none;
-  top: 7px;
+  top: 9px;
   right: 10px;
   font-size: 1.2rem;
   color: rgba(78, 69, 85, 0.644);
+}
+
+@media (max-width: 930px) {
+  header #search {
+    top: 7px;
+  }
 }
 
 @media (max-width: 625px) {
