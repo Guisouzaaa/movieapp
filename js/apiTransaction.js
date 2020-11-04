@@ -1,11 +1,14 @@
 // API
 const API_KEY = '4a5e130486cb63a2caff652d783f6a36'
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w500/'
+const region = 'pt-BR'
+//const language = '&language=pt-BR'
+const language = ''
 
-const url = 'https://api.themoviedb.org/3/search/movie?api_key=4a5e130486cb63a2caff652d783f6a36'
+const url = `https://api.themoviedb.org/3/search/movie?api_key=4a5e130486cb63a2caff652d783f6a36${language}`
 
 const dynamicUrl = path => {
-    const url = `https://api.themoviedb.org/3${path}?api_key=4a5e130486cb63a2caff652d783f6a36`
+    const url = `https://api.themoviedb.org/3${path}?api_key=4a5e130486cb63a2caff652d783f6a36${language}`
     return url
 }
 
@@ -38,6 +41,13 @@ const getPopularMovies = (value) => {
     requestMovies(url, renderPopular, handleError)
 }
 
+const getPopularSeries = (value) => {
+    const path = '/tv/popular'
+    const url =  `${dynamicUrl(path)}&page=${value}&region=US`
+
+    requestMovies(url, renderPopularSeries, handleError)
+}
+
 
 //get movie detail
 const getMovieDetails = () => {
@@ -48,6 +58,14 @@ const getMovieDetails = () => {
     requestMovies(url, getDetails, handleError)
 }
 
+//get tv show details
+const getTvShowDetails = () => {
+    let seriesId = sessionStorage.getItem("seriesId");
+    const path = `/tv/${seriesId}`
+    const url = dynamicUrl(path);
+
+    requestMovies(url, getSeriesDetails, handleError)
+}
 
 // Get movie trailer
 const getMovieTrailer = () => {
@@ -67,6 +85,15 @@ const getMovieReviews = () => {
     requestMovies(url, getReviews, handleError)
 }
 
+//get tv show Reviews
+const getTvShowReviews = () => {
+    let seriesId = sessionStorage.getItem("seriesId");
+    const path = `/tv/${seriesId}/reviews`;
+    const url = dynamicUrl(path);
+
+    requestMovies(url, getSeriesReviews, handleError)
+}
+
 //get recommendations
 const getMovieRecommendations = () => {
     let movieId = sessionStorage.getItem("movieId");
@@ -74,6 +101,16 @@ const getMovieRecommendations = () => {
     const url = dynamicUrl(path);
 
     const render = getSimilarMovies.bind({title: 'Similar Movies'})
+    requestMovies(url, render, handleError)
+}
+
+//get recommendations
+const getSeriesRecommendations = () => {
+    let seriesId = sessionStorage.getItem("seriesId");
+    const path = `/tv/${seriesId}/recommendations`
+    const url = dynamicUrl(path);
+
+    const render = getSimilarSeries.bind({title: 'Similar Series'})
     requestMovies(url, render, handleError)
 }
 
@@ -100,4 +137,13 @@ const getMovieImages = () => {
     const url = dynamicUrl(path);
 
     requestMovies(url, getImages, handleError)
+}
+
+//get tv show images
+const getTvShowImages = () => {
+    let seriesId = sessionStorage.getItem("seriesId");
+    const path = `/tv/${seriesId}/images`
+    const url = dynamicUrl(path);
+
+    requestMovies(url, getSeriesImages, handleError)
 }

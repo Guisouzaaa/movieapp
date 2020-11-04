@@ -36,7 +36,6 @@ const renderFilteredMovie = (data) => {
     }
   }
 
-
   document.querySelector('.filter-btn').addEventListener('click', e => {
     e.preventDefault();
     const genreValue = selectBtn.value
@@ -122,12 +121,17 @@ searchBtn.addEventListener("click", (e) => {
     const value = inputElement.value;
     searchMovie(value);
   
+    movieFilter.style.display = "flex"
     document.querySelector('.item-searched').style.display = 'none'
     document.querySelector('.name-value').style.display = "flex"
     document.getElementById("movie-name").innerHTML = value;
     displayPopular.classList.add('hide')
-  
-    inputElement.value = "";
+    displayPopularSeries.classList.add('hide')
+  }else{
+    document.querySelector('.name-value').style.display = "none"
+    movieFilter.style.display = "none"
+    displayPopular.classList.remove('hide')
+    displayPopularSeries.classList.remove('hide')
   }
 });
 
@@ -190,7 +194,6 @@ const getDetails = (data) => {
     `
   document.getElementById("movie-detail").innerHTML = output;
 };
-
 
 // Display movie trailer
 const getTrailer = (data) => {

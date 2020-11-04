@@ -9,7 +9,9 @@ function movieData() {
 function homeData() {
   getUpcomingMovies();
   getPopularMovies();
+  getPopularSeries();
   getGenres();
   filterMovie();
   pagination();
+  seriesPagination();
 }
