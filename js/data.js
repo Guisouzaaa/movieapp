@@ -8,6 +8,7 @@ function movieData() {
 
 function homeData() {
   getUpcomingMovies();
+  getTrending();
   getPopularMovies();
   getPopularSeries();
   getGenres();

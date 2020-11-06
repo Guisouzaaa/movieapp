@@ -72,14 +72,14 @@ const getSeriesDetails = (data) => {
             <div class = "overview">
                <div class="title-section">
                   <span></span>
-                  <h1>Movie overview</h1>
+                  <h1>Series overview</h1>
                </div>
             <p>${series.overview}</p>
           </div>
           <div class = "detail-info">
              <div class="title-section">
                 <span></span>
-                <h1>Movie Details</h1>
+                <h1>Series Details</h1>
              </div>    
              <ul>
                <li><span class="contrast">Title:</span> ${series.name}</li>

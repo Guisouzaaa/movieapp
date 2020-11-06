@@ -20,7 +20,7 @@ const requestMovies = (url, onComplete, onError) => {
 }
 
 const searchMovie = value => {
-    const path = '/search/movie'
+    const path = '/search/multi'
     const url =  `${dynamicUrl(path)}&query=${value}`
 
     requestMovies(url, renderFilteredMovie, handleError)
@@ -31,6 +31,14 @@ const getUpcomingMovies = () => {
     const path = '/movie/upcoming'
     const url =  `${dynamicUrl(path)}&region=US`
     const render = renderUpcoming.bind({title: 'Upcoming Movies'})
+    requestMovies(url, render, handleError)
+}
+
+//render trending content
+const getTrending = () => {
+    const path = '/trending/all/day'
+    const url =  `${dynamicUrl(path)}&region=US`
+    const render = renderTrending.bind({title: 'Trending'})
     requestMovies(url, render, handleError)
 }
 

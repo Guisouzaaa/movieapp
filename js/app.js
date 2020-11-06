@@ -13,27 +13,44 @@ const searchBtn = document.getElementById('search')
 //searchMovies/filter
 const renderFilteredMovie = (data) => {
   movieFilter.innerHTML = "";
-  const movies = data.results;
+  movieFilter.style.display = "grid";
+  const results = data.results;
   let output = ``
-  for (let i in movies){
-    if (movies[i].poster_path){
+  for (let i in results) {
+    if (!results[i].media_type || results[i].media_type === "movie") {
+      if (results[i].poster_path) {
+        output += `
+        <div class="movie-item">
+          <div class ="img-container">
+             <img class="movie-poster" src ="${IMAGE_URL + results[i].poster_path}" data-movie-id="${results[i].id}"/>
+             <div class="details-btn">
+                <button>Details</button>
+             </div>
+          </div>
+          <span class="movie-title">${results[i].title}</span> 
+          <div class ="movie-rating">
+             <i class="far fa-star"></i><p>${results[i].vote_average}</p>
+          </div>
+       </div>  
+      `
+      }
+    } else if (results[i].media_type === "tv" && results[i].poster_path) {
       output += `
-      <div class="movie-item">
-        <div class ="img-container">
-           <img class="movie-poster" src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
-           <div class="details-btn">
-              <button>Details</button>
-           </div>
-        </div>
-        <span class="movie-title">${movies[i].title}</span> 
-        <div class ="movie-rating">
-           <i class="far fa-star"></i><p>${movies[i].vote_average}</p>
-        </div>
-     </div>  
-    `
-    document.querySelector("#movies-filter").innerHTML = output;
-
+    <div class="movie-item">
+      <div class ="img-container">
+         <img class="movie-poster series-poster" id="series-poster" src ="${IMAGE_URL + results[i].poster_path}" data-series-id="${results[i].id}"/>
+         <div class="details-btn">
+            <button>Details</button>
+         </div>
+      </div>
+      <span class="movie-title">${results[i].name}</span> 
+      <div class ="movie-rating">
+         <i class="far fa-star"></i><p>${results[i].vote_average}</p>
+      </div>
+   </div>  
+  `
     }
+    document.querySelector("#movies-filter").innerHTML = output;
   }
 
   document.querySelector('.filter-btn').addEventListener('click', e => {
@@ -43,7 +60,7 @@ const renderFilteredMovie = (data) => {
     const genreTxt = selectBtn.options[selectBtn.selectedIndex].text;
     const filterTxt = filterSelect.options[filterSelect.selectedIndex].text;
 
-    filterMovie(genreValue,popularValue)
+    filterMovie(genreValue, popularValue)
 
 
     document.querySelector('form').classList.remove('nav-active')
@@ -53,42 +70,65 @@ const renderFilteredMovie = (data) => {
     document.getElementById("filter").innerHTML = filterTxt;
 
     document.querySelector('.pagination-btn').classList.add('show', 'pagination')
-    displayPopular.classList.add('hide')
   })
-  
-};
 
+};
 
 //render movies
 function renderUpcoming(data) {
   const movies = data.results;
   let output = ``
-  for (let i in movies){
-    if(movies[i].poster_path){
+  for (let i in movies) {
+    if (movies[i].poster_path) {
       output += `
       <div class ="swiper-slide">
          <img class="movie-poster" src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/>
          <span class="movie-date">${movies[i].release_date}</span>
       </div>
    `
-    document.querySelector(".swiper-wrapper").innerHTML = output;
+      document.querySelector(".swiper-wrapper").innerHTML = output;
     }
+  }
+}
+
+//render trending results
+function renderTrending(data) {
+  const results = data.results;
+  let output = ``
+  for (let i in results) {
+    if (results[i].media_type === "movie") {
+      output += `
+      <div class ="swiper-slide">
+         <img class="movie-poster" src ="${IMAGE_URL + results[i].poster_path}" data-movie-id="${results[i].id}"/>
+         <span class="movie-date">${results[i].release_date}</span>
+      </div>
+   `
+    } else if (results[i].media_type === "tv") {
+      output += `
+    <div class ="swiper-slide">
+    <img class="movie-poster series-poster" id="series-poster" src ="${IMAGE_URL + results[i].poster_path}" data-series-id="${results[i].id}"/>
+    <span class="movie-date">${results[i].first_air_date}</span>
+    </div>
+    `
+    }
+    document.querySelector("#trending-wrapper").innerHTML = output;
   }
 }
 
 //Movie Details
 document.addEventListener('click', e => {
-  if(e.target.className == "movie-poster"){
+  if (e.target.className == "movie-poster") {
     let movieId = e.target.getAttribute("data-movie-id")
     movieDetails(movieId)
   }
 })
 
+// render popular movies
 function renderPopular(data) {
   const movies = data.results;
   let output = ``
-  for (let i in movies){
-    if(movies[i].poster_path){
+  for (let i in movies) {
+    if (movies[i].poster_path) {
       output += `
         <div class="movie-item">
          <div class ="img-container">
@@ -103,7 +143,7 @@ function renderPopular(data) {
          </div>
         </div>  
      `
-     document.getElementById("popular-movies").innerHTML = output;
+      document.getElementById("popular-movies").innerHTML = output;
     }
   }
 }
@@ -117,29 +157,32 @@ const handleError = (error) => {
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
-  if(inputElement.value){
+  if (inputElement.value) {
     const value = inputElement.value;
     searchMovie(value);
-  
-    movieFilter.style.display = "flex"
+
+    movieFilter.style.display = "grid"
     document.querySelector('.item-searched').style.display = 'none'
     document.querySelector('.name-value').style.display = "flex"
     document.getElementById("movie-name").innerHTML = value;
     displayPopular.classList.add('hide')
     displayPopularSeries.classList.add('hide')
-  }else{
-    document.querySelector('.name-value').style.display = "none"
-    movieFilter.style.display = "none"
-    displayPopular.classList.remove('hide')
-    displayPopularSeries.classList.remove('hide')
+  } else {
+    movieFilter.style.display = "none";
+    document.querySelector('.pagination-btn').classList.remove('show', 'pagination')
+    document.querySelector('.name-value').style.display = "none";
+    document.querySelector('.item-searched').style.display = 'none';
+    displayPopular.classList.remove('hide');
+    displayPopularSeries.classList.remove('hide');
+    getPopularMovies(1);
   }
 });
 
-inputElement.addEventListener("keyup", (e) => { 
-  if (e.keyCode === 13) { 
-      searchBtn.click(); 
-  } 
-}); 
+inputElement.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    searchBtn.click();
+  }
+});
 
 //get movies id
 function movieDetails(id) {
@@ -148,6 +191,7 @@ function movieDetails(id) {
   return false;
 }
 
+//get movie images
 function getImages(data) {
   const img = data.backdrops
   document.getElementById('movie-banner').style.backgroundImage = `url('${'https://image.tmdb.org/t/p/original' + img[0].file_path}')`
@@ -160,7 +204,7 @@ const getDetails = (data) => {
   const genreName = genre.map(e => `<span>${e.name}</span>`).join(", ")
 
 
-    let output = `
+  let output = `
         <div class = "poster-movie">
           <img src = "${IMAGE_URL + movie.poster_path}"/>
           <div class="bgimg"></div>
@@ -208,12 +252,12 @@ const getTrailer = (data) => {
 function getReviews(data) {
   const movie = data.results;
   let output = ``;
-  if(movie.length === 0){
+  if (movie.length === 0) {
     document.querySelector(".reviews-section").style.display = "none"
 
-  }else{
+  } else {
     for (let i in movie) {
-      if(movie[i].content){
+      if (movie[i].content) {
         output += `
         <div>
             <h3>By: ${movie[i].author}</h3>
@@ -227,29 +271,30 @@ function getReviews(data) {
   }
 }
 
+
 //Similar movies
 function getSimilarMovies(data) {
   const movies = data.results;
   let output = ``
-  if(movies.length === 0){
+  if (movies.length === 0) {
     document.querySelector('.similar-section').style.display = "none"
-  }else{
-    for (let i in movies){
-      if(movies[i].poster_path){
+  } else {
+    for (let i in movies) {
+      if (movies[i].poster_path) {
         output += `
           <div class ="swiper-slide">
              <img class="movie-poster" src ="${IMAGE_URL + movies[i].poster_path}" data-movie-id="${movies[i].id}"/> 
              <p>${movies[i].title}</p>
           </div>
         `
-        document.querySelector(".swiper-wrapper").innerHTML=output
+        document.querySelector(".swiper-wrapper").innerHTML = output
       }
     }
   }
 }
 
 //Filter genre
-function selectGenres(data){
+function selectGenres(data) {
   const genreOptions = data.genres
   let output = `<option value = "" selected="true">All</option>`
   for (let i in genreOptions) {
@@ -261,39 +306,39 @@ function selectGenres(data){
 }
 
 //Pagination of popular Movies
-function pagination(){
+function pagination() {
   var value = 1
-  document.addEventListener('click', e =>{
+  document.addEventListener('click', e => {
     e.preventDefault()
-    if(e.target.className==='next-page'){
-      if(value < 1000){
+    if (e.target.className === 'next-page') {
+      if (value < 1000) {
         value++
         getPopularMovies(value)
         popularContainer.innerHTML = ""
       }
 
-    } else if (e.target.className === 'previous-page'){
-      if(value !== 1 ){
+    } else if (e.target.className === 'previous-page') {
+      if (value !== 1) {
         value--
         getPopularMovies(value)
         popularContainer.innerHTML = ""
       }
 
-    } else if (e.target.className === 'filter-next'){
-      if(value < 1000){
+    } else if (e.target.className === 'filter-next') {
+      if (value < 1000) {
         value++
         const genreValue = selectBtn.value
         const popularValue = popularSelect.value
-        filterMovie(genreValue,popularValue, value)
+        filterMovie(genreValue, popularValue, value)
         popularContainer.innerHTML = ""
       }
 
-    }else if (e.target.className === 'filter-prev'){
-      if(value !== 1 ){
+    } else if (e.target.className === 'filter-prev') {
+      if (value !== 1) {
         value--
         const genreValue = selectBtn.value
         const popularValue = popularSelect.value
-        filterMovie(genreValue,popularValue, value)
+        filterMovie(genreValue, popularValue, value)
         popularContainer.innerHTML = ""
       }
     }
