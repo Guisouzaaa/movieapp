@@ -3,6 +3,7 @@ function seriesData() {
     getTvShowReviews();
     getSeriesRecommendations();
     getTvShowImages();
+    getSeriesTrailer();
 }
 
 const seriesFilter = document.querySelector("#movies-filter");
@@ -27,7 +28,7 @@ function renderPopularSeries(data) {
            <div class ="img-container">
               <img class="movie-poster series-poster" id="series-poster" src ="${IMAGE_URL + series[i].poster_path}" data-series-id="${series[i].id}"/>
            <div class="details-btn">
-              <button>Details</button>
+              <button>Detalhes</button>
            </div>
            </div>
            <span class="movie-title">${series[i].name}</span>    
@@ -40,6 +41,15 @@ function renderPopularSeries(data) {
         }
     }
 }
+
+// Display series trailer
+const getTvShowTrailer = (data) => {
+    const series = data.results;
+    let output = `
+       <a class="popup-youtube" href="https://www.youtube.com/watch?v=${series[0].key}"><i class="far fa-play-circle"></i></a>   
+    `;
+    document.querySelector(".movie-trailer").innerHTML = output;
+  }
 
 //get series id
 function seriesDetails(id) {
@@ -56,8 +66,7 @@ function getSeriesImages(data) {
 const getSeriesDetails = (data) => {
     const series = data;
     const genre = data.genres;
-    const genreName = genre.map(e => `<span>${e.name}</span>`).join(", ")
-
+    const genreName = genre.map(e => `<span>${e.name}</span>`).join(", ");
 
     let output = `
           <div class = "poster-movie">
@@ -72,20 +81,20 @@ const getSeriesDetails = (data) => {
             <div class = "overview">
                <div class="title-section">
                   <span></span>
-                  <h1>Series overview</h1>
+                  <h1>Sinopse</h1>
                </div>
             <p>${series.overview}</p>
           </div>
           <div class = "detail-info">
              <div class="title-section">
                 <span></span>
-                <h1>Series Details</h1>
+                <h1>Detalhes</h1>
              </div>    
              <ul>
-               <li><span class="contrast">Title:</span> ${series.name}</li>
-               <li><span class="contrast">Release Date:</span> ${series.first_air_date}</li>
-               <li><span class="contrast">Genre:</span> ${genreName}</li>
-               <li><span class="contrast">Rating</span> ${series.vote_average}</li>
+               <li><span class="contrast">Título:</span> ${series.name}</li>
+               <li><span class="contrast">Data do lançamento:</span> ${series.first_air_date}</li>
+               <li><span class="contrast">Gênero:</span> ${genreName}</li>
+               <li><span class="contrast">Nota:</span> ${series.vote_average}</li>
              </ul>    
           </div>
           
@@ -107,7 +116,7 @@ function getSeriesReviews(data) {
           <div>
               <h3>By: ${series[i].author}</h3>
               <p>${series[i].content}</p>
-              <a href = "${series[i].url}">official review</a>
+              <a href = "${series[i].url}">Avaliação oficial</a>
           </div>
           `;
                 document.querySelector(".movie-reviews").innerHTML = output;

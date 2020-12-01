@@ -3,11 +3,11 @@ const API_KEY = '4a5e130486cb63a2caff652d783f6a36'
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w500/'
 const region = 'pt-BR'
 //const language = '&language=pt-BR'
-const language = ''
+const languagePt_BR = '&language=pt-BR'
 
-const url = `https://api.themoviedb.org/3/search/movie?api_key=4a5e130486cb63a2caff652d783f6a36${language}`
+const url = `https://api.themoviedb.org/3/search/movie?api_key=4a5e130486cb63a2caff652d783f6a36${languagePt_BR}`
 
-const dynamicUrl = path => {
+const dynamicUrl = (path, language) => {
     const url = `https://api.themoviedb.org/3${path}?api_key=4a5e130486cb63a2caff652d783f6a36${language}`
     return url
 }
@@ -21,7 +21,7 @@ const requestMovies = (url, onComplete, onError) => {
 
 const searchMovie = value => {
     const path = '/search/multi'
-    const url =  `${dynamicUrl(path)}&query=${value}`
+    const url =  `${dynamicUrl(path, languagePt_BR)}&query=${value}`
 
     requestMovies(url, renderFilteredMovie, handleError)
 }
@@ -29,7 +29,7 @@ const searchMovie = value => {
 //renderMovies
 const getUpcomingMovies = () => {
     const path = '/movie/upcoming'
-    const url =  `${dynamicUrl(path)}&region=US`
+    const url =  `${dynamicUrl(path, languagePt_BR)}&region=US`
     const render = renderUpcoming.bind({title: 'Upcoming Movies'})
     requestMovies(url, render, handleError)
 }
@@ -37,21 +37,21 @@ const getUpcomingMovies = () => {
 //render trending content
 const getTrending = () => {
     const path = '/trending/all/day'
-    const url =  `${dynamicUrl(path)}&region=US`
+    const url =  `${dynamicUrl(path, languagePt_BR)}&region=US`
     const render = renderTrending.bind({title: 'Trending'})
     requestMovies(url, render, handleError)
 }
 
 const getPopularMovies = (value) => {
     const path = '/movie/popular'
-    const url =  `${dynamicUrl(path)}&page=${value}&region=US`
+    const url =  `${dynamicUrl(path, languagePt_BR)}&page=${value}&region=US`
 
     requestMovies(url, renderPopular, handleError)
 }
 
 const getPopularSeries = (value) => {
     const path = '/tv/popular'
-    const url =  `${dynamicUrl(path)}&page=${value}&region=US`
+    const url =  `${dynamicUrl(path, languagePt_BR)}&page=${value}&region=US`
 
     requestMovies(url, renderPopularSeries, handleError)
 }
@@ -61,7 +61,7 @@ const getPopularSeries = (value) => {
 const getMovieDetails = () => {
     let movieId = sessionStorage.getItem("movieId");
     const path = `/movie/${movieId}`
-    const url = dynamicUrl(path);
+    const url = dynamicUrl(path, languagePt_BR);
 
     requestMovies(url, getDetails, handleError)
 }
@@ -70,7 +70,7 @@ const getMovieDetails = () => {
 const getTvShowDetails = () => {
     let seriesId = sessionStorage.getItem("seriesId");
     const path = `/tv/${seriesId}`
-    const url = dynamicUrl(path);
+    const url = dynamicUrl(path, languagePt_BR);
 
     requestMovies(url, getSeriesDetails, handleError)
 }
@@ -79,16 +79,25 @@ const getTvShowDetails = () => {
 const getMovieTrailer = () => {
     let movieId = sessionStorage.getItem("movieId");
     const path = `/movie/${movieId}/videos`;
-    const url = dynamicUrl(path);
+    const url = dynamicUrl(path, "");
 
     requestMovies(url, getTrailer, handleError)
+}
+
+// Get series trailer
+const getSeriesTrailer = () => {
+    let seriesId = sessionStorage.getItem("seriesId");
+    const path = `/tv/${seriesId}/videos`;
+    const url = dynamicUrl(path, "");
+
+    requestMovies(url, getTvShowTrailer, handleError)
 }
 
 //get movie Reviews
 const getMovieReviews = () => {
     let movieId = sessionStorage.getItem("movieId");
     const path = `/movie/${movieId}/reviews`;
-    const url = dynamicUrl(path);
+    const url = dynamicUrl(path, languagePt_BR);
 
     requestMovies(url, getReviews, handleError)
 }
@@ -97,7 +106,7 @@ const getMovieReviews = () => {
 const getTvShowReviews = () => {
     let seriesId = sessionStorage.getItem("seriesId");
     const path = `/tv/${seriesId}/reviews`;
-    const url = dynamicUrl(path);
+    const url = dynamicUrl(path, languagePt_BR);
 
     requestMovies(url, getSeriesReviews, handleError)
 }
@@ -106,7 +115,7 @@ const getTvShowReviews = () => {
 const getMovieRecommendations = () => {
     let movieId = sessionStorage.getItem("movieId");
     const path = `/movie/${movieId}/recommendations`
-    const url = dynamicUrl(path);
+    const url = dynamicUrl(path, languagePt_BR);
 
     const render = getSimilarMovies.bind({title: 'Similar Movies'})
     requestMovies(url, render, handleError)
@@ -116,7 +125,7 @@ const getMovieRecommendations = () => {
 const getSeriesRecommendations = () => {
     let seriesId = sessionStorage.getItem("seriesId");
     const path = `/tv/${seriesId}/recommendations`
-    const url = dynamicUrl(path);
+    const url = dynamicUrl(path, languagePt_BR);
 
     const render = getSimilarSeries.bind({title: 'Similar Series'})
     requestMovies(url, render, handleError)
@@ -126,14 +135,14 @@ const getSeriesRecommendations = () => {
 //get genres
 const getGenres = () => {
     const path = '/genre/movie/list'
-    const url = dynamicUrl(path)
+    const url = dynamicUrl(path, languagePt_BR)
 
     requestMovies(url, selectGenres, handleError)
 }
 
 const filterMovie = (genre, options, value) => {
     const path = '/discover/movie'
-    const url = `  ${dynamicUrl(path)}&sort_by=${options}&with_genres=${genre}&vote_count.gte=100&page=${value}`
+    const url = `  ${dynamicUrl(path, languagePt_BR)}&sort_by=${options}&with_genres=${genre}&vote_count.gte=100&page=${value}`
 
     requestMovies(url, renderFilteredMovie, handleError)
 }
@@ -142,7 +151,7 @@ const filterMovie = (genre, options, value) => {
 const getMovieImages = () => {
     let movieId = sessionStorage.getItem("movieId");
     const path = `/movie/${movieId}/images`
-    const url = dynamicUrl(path);
+    const url = dynamicUrl(path, "");
 
     requestMovies(url, getImages, handleError)
 }
@@ -151,7 +160,7 @@ const getMovieImages = () => {
 const getTvShowImages = () => {
     let seriesId = sessionStorage.getItem("seriesId");
     const path = `/tv/${seriesId}/images`
-    const url = dynamicUrl(path);
+    const url = dynamicUrl(path, "");
 
     requestMovies(url, getSeriesImages, handleError)
 }

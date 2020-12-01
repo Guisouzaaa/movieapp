@@ -217,21 +217,21 @@ const getDetails = (data) => {
           <div class = "overview">
              <div class="title-section">
                 <span></span>
-                <h1>Movie overview</h1>
+                <h1>Sinopse</h1>
              </div>
           <p>${movie.overview}</p>
         </div>
         <div class = "detail-info">
            <div class="title-section">
               <span></span>
-              <h1>Movie Details</h1>
+              <h1>Mais Detalhes</h1>
            </div>    
            <ul>
-             <li><span class="contrast">Title:</span> ${movie.title}</li>
-             <li><span class="contrast">Release Date:</span> ${movie.release_date}</li>
-             <li><span class="contrast">Genre:</span> ${genreName}</li>
-             <li><span class="contrast">Duration:</span> ${movie.runtime} min</li>
-             <li><span class="contrast">Rating</span> ${movie.vote_average}</li>
+             <li><span class="contrast">Título:</span> ${movie.title}</li>
+             <li><span class="contrast">Data de lançamento:</span> ${movie.release_date}</li>
+             <li><span class="contrast">Gênero:</span> ${genreName}</li>
+             <li><span class="contrast">Duração:</span> ${movie.runtime} min</li>
+             <li><span class="contrast">Nota:</span> ${movie.vote_average}</li>
            </ul>    
         </div>
         
@@ -262,7 +262,7 @@ function getReviews(data) {
         <div>
             <h3>By: ${movie[i].author}</h3>
             <p>${movie[i].content}</p>
-            <a href = "${movie[i].url}">official review</a>
+            <a href = "${movie[i].url}">Avaliação oficial</a>
         </div>
         `;
         document.querySelector(".movie-reviews").innerHTML = output;
@@ -296,7 +296,7 @@ function getSimilarMovies(data) {
 //Filter genre
 function selectGenres(data) {
   const genreOptions = data.genres
-  let output = `<option value = "" selected="true">All</option>`
+  let output = `<option value = "" selected="true">Todos</option>`
   for (let i in genreOptions) {
     output += `
          <option value="${genreOptions[i].id}">${genreOptions[i].name}</option>
